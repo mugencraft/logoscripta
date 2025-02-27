@@ -1,0 +1,25 @@
+{
+	"output": {
+		"filePath": "ai/code-infrastructure.md",
+		"headerText": "LogoScripta Infrastructure Layer Analysis"
+	},
+	"include": [
+		// "*config.*",
+		// "tailwind.config.ts",,
+		// ".gitignore",
+		// ".dependency-cruiser.cjs",
+		// "CODING_STANDARDS.md",
+		// "components.json",
+		// "index.html",
+		// "knip.ts",
+		// "package.json",
+		// "README.md",
+		"src/infrastructure/**/*"
+		// TESTS
+		// "test/fixtures/**/*",
+		// "test/helpers/**/*",
+		// "test/mocks/domain/**/*",
+		// "test/mocks/infrastructure/**/*",
+		// "test/unit/infrastructure/**/*"
+	]
+}

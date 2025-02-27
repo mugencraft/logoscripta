@@ -1,0 +1,40 @@
+{
+	"output": {
+		"filePath": "ai/code-domain.md",
+		"headerText": "LogoScripta Domain Layer Analysis"
+	},
+	"include": [
+		// "*config.*",
+		// "CODING_STANDARDS.md",
+		// "package.json",
+		// "README.md",
+		// CORE
+		// "src/core/**/*",
+		// "src/core/serialization/**/*",
+		// DOMAIN
+		"src/domain/**/*",
+		// "src/domain/models/**/*",
+		// "src/domain/ports/**/*",
+		// "src/domain/services/**/*",
+		// "src/domain/value-objects/**/*",
+		// APPLICATION
+		// "src/application/**/*"
+		// "src/application/integration/**/*",
+		// SHARED
+		"src/shared/**/*"
+		// Infrastructure
+		// "src/infrastructure/**/*",
+		// "src/infrastructure/persistence/**/*",
+		// Interfaces
+		// "src/interfaces/cli/**/*",
+		// "src/interfaces/cli/commands/**/*"
+		// "src/interfaces/cli/commands/github/**/*",
+		// TESTS
+		// "test/fixtures/**/*",
+		// "test/fixtures/entities/**/*",
+		// "test/helpers/**/*",
+		// "test/mocks/domain/**/*",
+		// "test/mocks/domain/**/*"
+		// "test/unit/domain/**/*"
+	]
+}

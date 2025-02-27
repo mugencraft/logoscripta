@@ -1,0 +1,27 @@
+import type { Repository } from "@/domain/models/repository";
+
+export const sampleRepository: Repository = {
+	id: 1,
+	name: "repo",
+	fullName: "test/repo",
+	ownerId: 1,
+	description: "Test repository",
+	createdAt: new Date("2024-01-01"),
+	updatedAt: new Date("2024-01-02"),
+	pushedAt: new Date("2024-01-02"),
+	homepage: "https://example.com",
+	size: 1000,
+	stargazersCount: 100,
+	subscribersCount: 50,
+	language: "TypeScript",
+	forksCount: 25,
+	openIssuesCount: 10,
+	licenseName: "MIT",
+	topics: ["typescript", "testing"],
+	visibility: "public",
+	defaultBranch: "main",
+	isArchived: false,
+	isDisabled: false,
+	isPrivate: false,
+	snapshotDate: "2024-01-02",
+};

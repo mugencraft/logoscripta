@@ -1,0 +1,48 @@
+# Dist
+node_modules
+dist/
+.vinxi
+.output
+.vercel
+.netlify
+.wrangler
+
+# Local
+.DS_Store
+*.local
+*.log*
+
+# Dependencies
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+# .vscode/
+
+## Drizzle ORM
+drizzle/
+
+# Test coverage
+coverage/
+.coverage/
+
+# Cache
+.cache/
+.npm/
+
+
+# Project specific
+ai/
+data/
+!test/**/data/
+!/**/domain/data/
+docs/
+logoscripta.json
+digital-humanities

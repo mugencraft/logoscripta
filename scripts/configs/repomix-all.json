@@ -1,0 +1,17 @@
+{
+	"output": {
+		"filePath": "ai/code-all-directory-structure.md",
+		"headerText": "LogoScripta Directory Structure"
+	},
+	"include": [],
+	"ignore": {
+		"customPatterns": [
+			"scripts/**/*",
+			// "src/interfaces/server/**/*",
+			// "src/interfaces/cli/**/*",
+			"src/sources/digital-humanities/**/*",
+			"src/ui/components/core/**/*"
+			// "src/ui/components/extra/**/*"
+		]
+	}
+}
