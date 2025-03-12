@@ -1,8 +1,11 @@
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const getListItems = (row: any) => {
+import type {
+	ListItemExtended,
+	RepositoryExtended,
+} from "@/interfaces/server-client";
+
+export const getListItems = (row: RepositoryExtended) => {
 	return (
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		row.repositoryListItems?.map((item: any) => ({
+		row.repositoryListItems?.map((item: ListItemExtended) => ({
 			id: item.listId,
 			name: item.list.name,
 		})) ?? undefined

@@ -1,10 +1,10 @@
-import type { DashboardData } from "@/interfaces/backend/hooks/useDashboardData";
 import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle,
 } from "@/ui/components/core/card";
+import type { DashboardData } from "./ActivityChart";
 
 interface LanguageChartProps {
 	languages: DashboardData["languages"];

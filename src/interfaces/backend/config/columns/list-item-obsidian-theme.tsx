@@ -1,9 +1,3 @@
-import {
-	baseTableFeatures,
-	controlColumnGroup,
-	getListSelection,
-	getSystemTimestampColumns,
-} from "@/interfaces/backend/config/columns/common";
 import type { ListItemObsidianTheme } from "@/interfaces/server-client";
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
 import { BaseCell } from "@/ui/components/table/cells/BaseCell";
@@ -14,14 +8,17 @@ import { ImageCell } from "@/ui/components/table/cells/ImageCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import _ from "lodash";
 import { Bug, Eye, GitFork, GitMerge, Star } from "lucide-react";
+import {
+	baseTableFeatures,
+	controlColumnGroup,
+	getListSelection,
+	getSystemTimestampColumns,
+} from "./common";
 
 const getPreviewUrl = (themeName: string, fullName: string) =>
 	`https://raw.githubusercontent.com/${fullName}/HEAD/${themeName}`;
 
-export const obsidianThemeConfig: TableConfiguration<
-	ListItemObsidianTheme,
-	string
-> = {
+export const obsidianThemeConfig: TableConfiguration<ListItemObsidianTheme> = {
 	columns: [
 		controlColumnGroup,
 		{

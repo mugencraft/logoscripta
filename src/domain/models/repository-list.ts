@@ -1,7 +1,8 @@
-import { type repositoryListItems, repositoryLists } from "@/shared/schema";
+import { repositoryListItems, repositoryLists } from "@/shared/schema";
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
-import { z } from "zod";
+import type { z } from "zod";
 
+// Types from Drizzle
 export type RepositoryList = typeof repositoryLists.$inferSelect;
 export type NewRepositoryList = typeof repositoryLists.$inferInsert;
 export type RepositoryListItem = typeof repositoryListItems.$inferSelect;
@@ -10,7 +11,13 @@ export type NewRepositoryListItem = typeof repositoryListItems.$inferInsert;
 // Zod schemas derived from Drizzle
 export const listInsertSchema = createInsertSchema(repositoryLists);
 export const listUpdateSchema = createUpdateSchema(repositoryLists);
-// export const listItemInsertSchema = createInsertSchema(repositoryListItems);
+export const listItemInsertSchema = createInsertSchema(repositoryListItems);
+// export const listItemUpdateSchema = createUpdateSchema(repositoryListItems);
+
+// export type ListInsertInput = z.infer<typeof listInsertSchema>;
+export type ListUpdateInput = z.infer<typeof listUpdateSchema>;
+export type ListItemInsertInput = z.infer<typeof listItemInsertSchema>;
+// export type ListItemUpdateInput = z.infer<typeof listItemUpdateSchema>;
 
 // System list types
 export const SYSTEM_LIST_TYPES = {
@@ -25,20 +32,3 @@ export type SystemListType =
 // Validate if string is a system list type
 export const isSystemListType = (value: string): value is SystemListType =>
 	Object.values(SYSTEM_LIST_TYPES).includes(value as SystemListType);
-
-// export const saveToListSchema = listItemInsertSchema;
-export const saveToListSchema = z.object({
-	listId: z.number(),
-	fullName: z.string().min(1, "Repository name is required"),
-	metadata: z.union([z.record(z.any()), z.array(z.any())]),
-	repositoryId: z.number().nullable(),
-});
-
-export type SaveToListInput = z.infer<typeof saveToListSchema>;
-
-export const repositoryListValidator = {
-	validateSaveToList: (
-		data: unknown,
-	): z.SafeParseReturnType<unknown, SaveToListInput> =>
-		saveToListSchema.safeParse(data),
-};

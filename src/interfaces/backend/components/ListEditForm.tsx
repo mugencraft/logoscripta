@@ -1,11 +1,11 @@
-import { useListOperations } from "@/interfaces/backend/hooks/useListOperations";
 import { Button } from "@/ui/components/core/button";
 import { Input } from "@/ui/components/core/input";
 import { Label } from "@/ui/components/core/label";
-import type { StepProps } from "@/ui/components/table/types";
+import type { InteractionProps } from "@/ui/components/table/types";
 import { useForm } from "@tanstack/react-form";
+import { useListActions } from "../hooks/useListActions";
 
-interface ListEditFormProps extends StepProps<string> {
+interface ListEditFormProps extends InteractionProps<number> {
 	listId: number;
 	initialName: string;
 	initialDescription?: string;
@@ -17,7 +17,7 @@ export function ListEditForm({
 	initialDescription = "",
 	onCancel,
 }: ListEditFormProps) {
-	const { updateList } = useListOperations();
+	const { handleUpdateList } = useListActions();
 
 	const form = useForm({
 		defaultValues: {
@@ -25,10 +25,7 @@ export function ListEditForm({
 			description: initialDescription,
 		},
 		onSubmit: async ({ value }) => {
-			await updateList({
-				listId,
-				data: value,
-			});
+			await handleUpdateList(listId, value);
 		},
 	});
 

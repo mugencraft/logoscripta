@@ -1,7 +1,7 @@
-import type { TableProps } from "@/ui/components/table/types";
+import type { Table } from "@tanstack/react-table";
 import { useMemo } from "react";
 
-export const PaginationInfo = <TData,>({ table }: TableProps<TData>) => {
+export const PaginationInfo = <TData,>({ table }: { table: Table<TData> }) => {
 	const rowCount = table.getRowCount();
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const pageCount = useMemo(() => table.getPageCount(), [rowCount]);

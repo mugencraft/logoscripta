@@ -1,7 +1,6 @@
-import type { DashboardData } from "@/interfaces/backend/hooks/useDashboardData";
-import { ActivityChart } from "@/ui/components/dashboard/ActivityChart";
-import { LanguageChart } from "@/ui/components/dashboard/LanguageChart";
-import { StatCard } from "@/ui/components/dashboard/StatCard";
+import { ActivityChart, type DashboardData } from "./ActivityChart";
+import { LanguageChart } from "./LanguageChart";
+import { StatCard } from "./StatCard";
 
 interface DashboardGridProps {
 	data: DashboardData;

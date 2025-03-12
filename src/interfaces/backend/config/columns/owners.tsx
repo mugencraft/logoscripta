@@ -1,14 +1,11 @@
-import {
-	baseTableFeatures,
-	controlColumnGroup,
-} from "@/interfaces/backend/config/columns/common";
 import type { Owner } from "@/interfaces/server-client";
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import { Users } from "lucide-react";
+import { baseTableFeatures, controlColumnGroup } from "./common";
 
-export const ownersConfig: TableConfiguration<Owner, string> = {
+export const ownersConfig: TableConfiguration<Owner> = {
 	columns: [
 		controlColumnGroup,
 		{
@@ -83,6 +80,6 @@ export const ownersConfig: TableConfiguration<Owner, string> = {
 	features: baseTableFeatures,
 	selection: {
 		actions: [],
-		getSelectedIds: (rows) => rows.map((row) => row.id),
+		getSelected: (rows) => rows.map((row) => row.original),
 	},
 };

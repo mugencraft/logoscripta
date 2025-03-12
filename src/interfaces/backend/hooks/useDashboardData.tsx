@@ -1,29 +1,11 @@
 import { trpc } from "@/interfaces/server-client";
+import type {
+	ActivityDataPoint,
+	DashboardData,
+	DashboardStats,
+	LanguageStats,
+} from "@/ui/components/dashboard/ActivityChart";
 import { format } from "date-fns";
-
-interface DashboardStats {
-	repositories: number;
-	customLists: number;
-	owners: number;
-	topics: number;
-}
-
-interface LanguageStats {
-	language: string;
-	count: number;
-	percentage: number;
-}
-
-interface ActivityDataPoint {
-	date: string;
-	updates: number;
-}
-
-export interface DashboardData {
-	stats: DashboardStats;
-	languages: LanguageStats[];
-	activity: ActivityDataPoint[];
-}
 
 export function useDashboardData(): {
 	data: DashboardData;

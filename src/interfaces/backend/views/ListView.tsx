@@ -1,11 +1,10 @@
 import type { SystemListType } from "@/domain/models/repository-list";
-import { DialogStyled } from "@/ui/components/extra/dialog-styled";
+import type { ListItemExtended } from "@/interfaces/server-client";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
-import { AddRepositoriesDialog } from "@/ui/components/lists/AddRepositoriesDialog";
 import { DataTable } from "@/ui/components/table/DataTable";
-import { BookPlus, Pencil, RefreshCw, Trash, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { ListEditForm } from "../forms/ListEditForm";
+import { createExportActions } from "../actions/export";
+import { createListActions } from "../actions/list";
 import { useDataTable } from "../hooks/useDataTable";
 import { useListActions } from "../hooks/useListActions";
 import {
@@ -28,96 +27,56 @@ export function ListView() {
 	);
 
 	const [isLoading, setIsLoading] = useState(true);
-	const [isEditing, setIsEditing] = useState(false);
-	const [isAdding, setIsAdding] = useState(false);
 
 	const data = useMemo(() => (items as AnyListItem[]) || [], [items]);
 
+	const listActions = useMemo(() => {
+		const actions = createListActions({
+			handleSyncRepositoryData,
+			handleRemoveFromList,
+			handleDeleteList,
+		});
+
+		// Filter actions based on edit permissions
+		return actions.filter((action) => {
+			if (!canEdit && action.id !== "sync-data") return false;
+			return true;
+		});
+	}, [
+		canEdit,
+		handleDeleteList,
+		handleRemoveFromList,
+		handleSyncRepositoryData,
+	]);
+
+	const exportActions = useMemo(() => {
+		return createExportActions<ListItemExtended>({
+			fileName: `list_${list.id}_${list.name.replace(/\s+/g, "_")}`,
+		});
+	}, [list.id, list.name]);
+
 	const viewActions = useMemo(() => {
-		const baseAction = [
-			{
-				label: "Sync Repository Data",
-				icon: RefreshCw,
-				onClick: () => {
-					handleSyncRepositoryData({ listIds: [list.id] });
-				},
-			},
-		];
-
-		if (!canEdit) {
-			return baseAction;
-		}
-
 		return [
-			...baseAction,
-			{
-				label: "Edit List Details",
-				icon: Pencil,
-				onClick: () => {
-					setIsEditing(true);
-				},
-			},
-			{
-				label: "Delete List",
-				icon: Trash,
-				onClick: () => {
-					handleDeleteList(list.id);
-				},
-			},
-			{
-				label: "Add Repositories",
-				icon: BookPlus,
-				onClick: () => {
-					// Open dialog to add repositories
-					setIsAdding(true);
-				},
-			},
+			...listActions.filter((a) => a.contexts?.includes("view")),
+			...exportActions.filter((a) => a.contexts?.includes("view")),
 		];
-	}, [handleDeleteList, handleSyncRepositoryData, list.id, canEdit]);
+	}, [listActions, exportActions]);
 
+	// Update table config with row/selection actions
 	const memoizedConfig = useMemo(() => {
 		const config = { ...listConfig };
 
-		// Create a new actions array instead of pushing to the existing one
-		const actions = [...config.selection.actions];
-
-		// Add sync action
-		actions.push({
-			label: "Sync Repository Data",
-			icon: RefreshCw,
-			onClick: async (selectedIds) => {
-				handleSyncRepositoryData({
-					listIds: [list.id],
-					fullNames: selectedIds,
-				});
-			},
-		});
-
-		// Add remove action if editable
-		if (canEdit) {
-			actions.push({
-				label: "Remove Selected",
-				icon: X,
-				onClick: async (selectedIds) => {
-					handleRemoveFromList(list.id, selectedIds);
-				},
-			});
-		}
-
-		return {
-			...config,
-			selection: {
-				...config.selection,
-				actions,
-			},
+		// Set selection actions
+		config.selection = {
+			...config.selection,
+			actions: [
+				...listActions.filter((a) => a.contexts?.includes("selection")),
+				...exportActions.filter((a) => a.contexts?.includes("selection")),
+			],
 		};
-	}, [
-		handleSyncRepositoryData,
-		handleRemoveFromList,
-		listConfig,
-		list.id,
-		canEdit,
-	]);
+
+		return config;
+	}, [listConfig, listActions, exportActions]);
 
 	const dataTable = useDataTable({
 		data,
@@ -136,38 +95,9 @@ export function ListView() {
 			title={list.name}
 			description={list.description || ""}
 			actions={viewActions}
+			data={{ list }}
 		>
 			{isLoading ? "Loading..." : <DataTable {...dataTable} />}
-
-			{/* Edit Dialog */}
-			{canEdit && (
-				<DialogStyled
-					open={isEditing}
-					onOpenChange={setIsEditing}
-					title="Edit List Details"
-				>
-					<ListEditForm
-						listId={list.id}
-						initialName={list.name}
-						initialDescription={list.description || ""}
-						onSuccess={() => setIsEditing(false)}
-						onCancel={() => setIsEditing(false)}
-					/>
-				</DialogStyled>
-			)}
-			{canEdit && (
-				<DialogStyled
-					open={isAdding}
-					onOpenChange={setIsAdding}
-					title="Add Repositories to List"
-				>
-					<AddRepositoriesDialog
-						listId={list.id}
-						onSuccess={() => setIsAdding(false)}
-						onCancel={() => setIsAdding(false)}
-					/>
-				</DialogStyled>
-			)}
 		</ViewContainer>
 	);
 }

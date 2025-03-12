@@ -1,15 +1,14 @@
 import { Input } from "@/ui/components/core/input";
 import { Label } from "@/ui/components/core/label";
 import { ScrollArea } from "@/ui/components/core/scroll-area";
-import { AdaptiveRangerFilter } from "@/ui/components/table/filters/AdaptiveRangerFilter";
-import { BooleanFilter } from "@/ui/components/table/filters/BooleanFilter";
-import { DateRangeFilterPlus } from "@/ui/components/table/filters/DateRangeFilterPlus";
-import { FacetedFilter } from "@/ui/components/table/filters/FacetedFilter";
-import type { TableProps } from "@/ui/components/table/types";
 import type { Column, Table } from "@tanstack/react-table";
 import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
+import { AdaptiveRangerFilter } from "../../filters/AdaptiveRangerFilter";
+import { BooleanFilter } from "../../filters/BooleanFilter";
+import { DateRangeFilterPlus } from "../../filters/DateRangeFilterPlus";
+import { FacetedFilter } from "../../filters/FacetedFilter";
 
 const getFilterType = <TData,>(column: Column<TData>) => {
 	// Special column IDs take precedence
@@ -96,7 +95,7 @@ const renderFilter = <TData,>(table: Table<TData>, column: Column<TData>) => {
 	}
 };
 
-export const Filters = <TData,>({ table }: TableProps<TData>) => {
+export const Filters = <TData,>({ table }: { table: Table<TData> }) => {
 	const filterableColumns = useMemo(
 		() => table.getAllLeafColumns().filter((column) => column.getCanFilter()),
 		[table],

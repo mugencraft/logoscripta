@@ -1,6 +1,6 @@
-import { getListItems } from "@/interfaces/backend/config/accessors/list-items";
 import type { RepositoryExtended } from "@/interfaces/server-client";
 import type { SortingFn } from "@tanstack/react-table";
+import { getListItems } from "../accessors/list-items";
 
 export const listIdsSort: SortingFn<RepositoryExtended> = (rowA, rowB) => {
 	const a = getListItems(rowA.original);
@@ -15,12 +15,10 @@ export const listIdsSort: SortingFn<RepositoryExtended> = (rowA, rowB) => {
 
 	// If same number of lists, compare by list names alphabetically
 	const aNames = a
-		// @ts-expect-error
 		.map((item) => item.name)
 		.sort()
 		.join("|");
 	const bNames = b
-		// @ts-expect-error
 		.map((item) => item.name)
 		.sort()
 		.join("|");

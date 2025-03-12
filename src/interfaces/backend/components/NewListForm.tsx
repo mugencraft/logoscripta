@@ -1,14 +1,14 @@
-import { useListOperations } from "@/interfaces/backend/hooks/useListOperations";
 import { Button } from "@/ui/components/core/button";
 import { Input } from "@/ui/components/core/input";
 import { Label } from "@/ui/components/core/label";
-import type { StepProps } from "@/ui/components/table/types";
+import type { InteractionProps } from "@/ui/components/table/types";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { useListActions } from "../hooks/useListActions";
 
-export function NewListForm({ onSuccess, onCancel }: StepProps) {
-	const { createList } = useListOperations();
+export function NewListForm({ onSuccess, onCancel }: InteractionProps<number>) {
+	const { handleCreateList } = useListActions({ onSuccess });
 	const navigate = useNavigate();
 
 	const form = useForm({
@@ -17,7 +17,7 @@ export function NewListForm({ onSuccess, onCancel }: StepProps) {
 			description: "",
 		},
 		onSubmit: async ({ value }) => {
-			const list = await createList(value);
+			const list = await handleCreateList(value.name, value.description);
 			if (!list) {
 				toast.error("Failed to create list");
 				onCancel?.();

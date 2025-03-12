@@ -1,10 +1,3 @@
-import { getFacetedUniqueValuesCustom } from "@/interfaces/backend/config/faceting/getFacetedUniqueValuesCustom";
-import { dateRangeFilter } from "@/interfaces/backend/config/filters/date-range";
-import { listIdsFilter } from "@/interfaces/backend/config/filters/list-ids";
-import {
-	type PersistedTableState,
-	useTableStateStorage,
-} from "@/interfaces/backend/hooks/useTableStateStorage";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import {
 	type OnChangeFn,
@@ -19,31 +12,38 @@ import {
 } from "@tanstack/react-table";
 import _ from "lodash";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { getFacetedUniqueValuesCustom } from "../config/faceting/getFacetedUniqueValuesCustom";
+import { dateRangeFilter } from "../config/filters/date-range";
+import { listIdsFilter } from "../config/filters/list-ids";
+import {
+	type PersistedTableState,
+	useTableStateStorage,
+} from "./useTableStateStorage";
 
-interface UseDataTableResult<TData, T = string | number> {
+interface UseDataTableResult<TData> {
 	table: Table<TData>;
-	config: TableConfiguration<TData, T>;
+	config: TableConfiguration<TData>;
 }
 
-interface UseDataTableOptions<TData, T = string | number> {
+interface UseDataTableOptions<TData> {
 	data: TData[];
 	tableId: string;
-	config: Partial<TableConfiguration<TData, T>>;
+	config: Partial<TableConfiguration<TData>>;
 	baseConfig?: TableConfiguration<TData>;
 }
 
-export function useDataTable<TData, T = string | number>({
+export function useDataTable<TData>({
 	data,
 	tableId,
 	config: partialConfig,
 	baseConfig,
-}: UseDataTableOptions<TData, T>): UseDataTableResult<TData, T> {
+}: UseDataTableOptions<TData>): UseDataTableResult<TData> {
 	// Merge configurations using useMemo to prevent unnecessary recalculations
 	const config = useMemo(
 		() =>
 			baseConfig
 				? _.merge({}, baseConfig, partialConfig)
-				: (partialConfig as TableConfiguration<TData, T>),
+				: (partialConfig as TableConfiguration<TData>),
 		[baseConfig, partialConfig],
 	);
 

@@ -1,9 +1,8 @@
 import type {
 	ListItem,
-	ListItemWithMetadata,
+	ListItemExtended,
 	Repository,
 } from "@/interfaces/server-client";
-import { ToggleListDialog } from "@/ui/components/lists/AddToListDialog";
 import { CheckableCell } from "@/ui/components/table/cells/CheckableCell";
 import { DateCell } from "@/ui/components/table/cells/DateCell";
 import { RelativeTimeCell } from "@/ui/components/table/cells/RelativeTimeCell";
@@ -12,7 +11,6 @@ import type {
 	SelectionConfiguration,
 	TableConfiguration,
 } from "@/ui/components/table/types";
-import { BookmarkMinus, BookmarkPlus, Download } from "lucide-react";
 
 // Base configurations that can be shared across different table types
 export const baseTableFeatures = {
@@ -40,8 +38,8 @@ export const controlColumnGroup = {
 } as const;
 
 export const getSystemTimestampColumns = <
-	TData extends ListItemWithMetadata,
->(): TableConfiguration<TData, TData>["columns"] => {
+	TData extends ListItemExtended,
+>(): TableConfiguration<TData>["columns"] => {
 	return [
 		{
 			id: "createdAt",
@@ -72,26 +70,9 @@ export const getSystemTimestampColumns = <
 
 export const getListSelection = <
 	T extends ListItem | Repository,
->(): SelectionConfiguration<T, string> => {
+>(): SelectionConfiguration<T> => {
 	return {
-		actions: [
-			{
-				label: "Add to List",
-				icon: BookmarkPlus,
-				dialog: {
-					title: "Add to List",
-					content: (props) => <ToggleListDialog {...props} mode="add" />,
-				},
-			},
-			{
-				label: "Remove from List",
-				icon: BookmarkMinus,
-				dialog: {
-					title: "Remove from List",
-					content: (props) => <ToggleListDialog {...props} mode="remove" />,
-				},
-			},
-		],
-		getSelectedIds: (rows) => rows.map((row) => row.original.fullName),
+		actions: [],
+		getSelected: (rows) => rows.map((row) => row.original),
 	};
 };

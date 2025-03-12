@@ -1,17 +1,14 @@
-import { FiltersActive } from "@/ui/components/table/controls/FiltersActive";
-import { FiltersControl } from "@/ui/components/table/controls/FiltersControl";
-import { Pagination } from "@/ui/components/table/controls/Pagination";
-import { PaginationInfo } from "@/ui/components/table/controls/PaginationInfo";
-import { SelectionControl } from "@/ui/components/table/controls/SelectionControl";
-import { GlobalFilter } from "@/ui/components/table/filters/GlobalFilter";
-import type { DataTableProps } from "@/ui/components/table/types";
 import _ from "lodash";
 import { useMemo } from "react";
+import { GlobalFilter } from "../filters/GlobalFilter";
+import type { DataTableProps } from "../types";
+import { SelectionControl } from "./SelectionControl";
+import { FiltersActive } from "./filters/FiltersActive";
+import { FiltersControl } from "./filters/FiltersControl";
+import { Pagination } from "./pagination/Pagination";
+import { PaginationInfo } from "./pagination/PaginationInfo";
 
-export function TableControls<TData, T = string | number>({
-	table,
-	config,
-}: DataTableProps<TData, T>) {
+export function TableControls<TData>({ table, config }: DataTableProps<TData>) {
 	const { enableGlobalFilter, enableColumnFilters } = config.features || {};
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const filteredModel = useMemo(

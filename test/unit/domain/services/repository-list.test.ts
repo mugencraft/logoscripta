@@ -104,7 +104,21 @@ describe("RepositoryListService", () => {
 				sampleList.id,
 				"test/new-repo",
 			);
-			expect(mocks.commands.createItem).toHaveBeenCalledWith(item);
+			expect(mocks.commands.createItem).toHaveBeenCalledWith(
+				expect.objectContaining({
+					listId: sampleList.id,
+					fullName: "test/new-repo",
+					repositoryId: 456,
+					metadata: expect.objectContaining({
+						base: expect.any(Object),
+						system: expect.objectContaining({
+							systemType: "user-managed",
+							version: "1.0",
+						}),
+						metadataTypes: expect.arrayContaining(["base"]),
+					}),
+				}),
+			);
 		});
 
 		it("should update an existing item", async () => {
@@ -127,7 +141,19 @@ describe("RepositoryListService", () => {
 			expect(mocks.commands.updateItem).toHaveBeenCalledWith(
 				sampleList.id,
 				"test/repo",
-				item,
+				expect.objectContaining({
+					listId: sampleList.id,
+					fullName: "test/repo",
+					repositoryId: 123,
+					metadata: expect.objectContaining({
+						base: expect.any(Object),
+						system: expect.objectContaining({
+							systemType: "user-managed",
+							version: "1.0",
+						}),
+						metadataTypes: expect.arrayContaining(["base"]),
+					}),
+				}),
 			);
 		});
 

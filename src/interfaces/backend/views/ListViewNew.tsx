@@ -1,5 +1,5 @@
-import { NewListForm } from "@/interfaces/backend/forms/NewListForm";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
+import { NewListForm } from "../components/NewListForm";
 
 export function ListViewNew() {
 	return (

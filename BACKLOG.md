@@ -31,14 +31,11 @@ This document tracks known issues, planned features, and technical improvements.
 
 ### Services and API
 
-Bugs:
+Improvements:
 
 - Fix typing issue in `RepositoryQueriesAdapter.getAll<TWith extends RepositoryWithInput>`
   - check TRPCContext: it fails in typing the extended rows as in repositoryRouter.getAll
 - Add missing owner and repositoryListItems in `RouterOutputs["repository"]["getAll"][0]`
-
-Improvements:
-
 - Rename interfaces/server to api
 - Create a factory for the list service in TRPCContext
 
@@ -53,7 +50,6 @@ Improvements:
 
 Bugs:
 
-- Resolve duplication in useListOperations and useListActions (toast duplication)
 - Fix dark mode `--mono-` variable issues in globals.css
 - Fix prettier formatter for globals.css
 
@@ -61,6 +57,12 @@ Features:
 
 - Enhance Dashboard functionality
 - Persist useLayout values in localStorage
+
+#### Components
+
+Improvements:
+
+- ToggleListDialog: improve handleAction use of handleAddToList,
 
 ### DataTable Component
 
@@ -70,7 +72,6 @@ Features:
 
 Improvements:
 
-- Review type propagation in useDataTable (T = string | number)
 - Check colspan calculation logic: `config.features?.enableRowSelection ? 2 : 0`
 
 #### Cells
@@ -102,25 +103,21 @@ Features:
 
 Bugs:
 
-- Improve AddRepositoriesDialog error handling
 - Fix Pagination SelectContent width is not as SelectTrigger
 
 Features:
 
-- Enhance AddRepositoriesDialog with counts and additional parsing (packages.json, pyproject.toml, cargo.toml)
+- Enhance AddRepositories with counts and additional parsing (packages.json, pyproject.toml, cargo.toml)
 - Improve ColumnVisibilityControl functionality: set sticky columns, hide Obsidian columns
-- Add export capabilities (clipboard, CSV, XLS, SQL)
 - Enhance Active Filters visualization for multiple values, allow partial removing.
 - Implement saved filters
+- Implement negative filters
 - Improve FacetedFilter styling and functionality
 - Add Row Controls: set line-clamp height
 - SortableHeaders: add sort or filter by checked
 
 Improvements:
 
-- Consolidate ViewAction and ActionButtons components
-  - improve link and element handling
-  - include dialog in component element
 - Address ToggleListDialog missing selectedIds
 
 ### Forms
@@ -169,9 +166,7 @@ Improvements:
 
 - Standardize configuration and option handling
 - Improve update of ListItem fullName on repository fullName change
-- Enhance ListItem metadata handling (check ListItemCommands, ListItemProcessor, RepositoryListCommandsAdapter.update)
-  - add default metadata to custom list items (system.updatedAt, etc)
-  - implement baseSystemMetadataSchema, obsidianPluginSchema, obsidianThemeSchema
+- Implement baseSystemMetadataSchema, obsidianPluginSchema, obsidianThemeSchema
 
 ## Infrastructure Layer
 

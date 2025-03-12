@@ -36,24 +36,29 @@ export type ListItem = RouterOutputs["list"]["getItems"][0];
 export type Owner = RouterOutputs["repository"]["getAllOwners"][0];
 export type Topic = RouterOutputs["repository"]["getAllTopics"][0];
 
-export interface ListItemWithMetadata extends ListItem {
+export interface ListItemExtended extends ListItem {
 	metadata: ListItemMetadata;
 	repository: Repository;
+	list: List;
 }
 
-export interface ListItemArchived extends ListItemWithMetadata {
+export interface ListExtended extends List {
+	items: ListItemExtended[];
+}
+
+export interface ListItemArchived extends ListItemExtended {
 	metadata: ArchivedListItemMetadata;
 }
 
-export interface ListItemObsidianPlugin extends ListItemWithMetadata {
+export interface ListItemObsidianPlugin extends ListItemExtended {
 	metadata: ObsidianPluginMetadata;
 }
 
-export interface ListItemObsidianTheme extends ListItemWithMetadata {
+export interface ListItemObsidianTheme extends ListItemExtended {
 	metadata: ObsidianThemeMetadata;
 }
 
 export interface RepositoryExtended extends Repository {
 	owner: Owner;
-	repositoryListItems: ListItemWithMetadata[];
+	repositoryListItems: ListItemExtended[];
 }

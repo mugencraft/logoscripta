@@ -1,30 +1,41 @@
-import { listsConfig } from "@/interfaces/backend/config/columns/lists";
-import { useDataTable } from "@/interfaces/backend/hooks/useDataTable";
-import { useListActions } from "@/interfaces/backend/hooks/useListActions";
-import { Route } from "@/interfaces/backend/routes/lists";
-import type { List } from "@/interfaces/server-client";
+import type { ListExtended } from "@/interfaces/server-client";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
 import { DataTable } from "@/ui/components/table/DataTable";
-import { Link } from "@tanstack/react-router";
-import { BookUp, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
+import { createExportActions } from "../actions/export";
+import { createListsActions } from "../actions/lists";
+import { listsConfig } from "../config/columns/lists";
+import { useDataTable } from "../hooks/useDataTable";
+import { useListActions } from "../hooks/useListActions";
+import { Route } from "../routes/lists";
 
 export function ListsView() {
-	const { handleDeleteList, handleSyncRepositoryData } = useListActions();
-
-	const lists = Route.useLoaderData();
+	const lists = Route.useLoaderData() as ListExtended[];
+	const data = useMemo(() => lists || [], [lists]);
 
 	const [isLoading, setIsLoading] = useState(true);
 
-	const data = useMemo(() => lists || [], [lists]);
+	const { handleDeleteList, handleSyncRepositoryData } = useListActions();
+	const listsActions = useMemo(() => {
+		return createListsActions({
+			handleSyncRepositoryData,
+			handleDeleteList,
+		});
+	}, [handleSyncRepositoryData, handleDeleteList]);
 
-	const viewActions = [
-		{
-			element: <Link to="/lists/new">Create New List</Link>,
-			label: "new-list",
-		},
-	];
+	const exportActions = useMemo(() => {
+		return createExportActions<ListExtended>({
+			fileName: "lists",
+		});
+	}, []);
+
+	const viewActions = useMemo(
+		() => [
+			...listsActions.filter((a) => a.contexts?.includes("view")),
+			...exportActions.filter((a) => a.contexts?.includes("view")),
+		],
+		[listsActions, exportActions],
+	);
 
 	const memoizedConfig = useMemo(() => {
 		return {
@@ -32,35 +43,14 @@ export function ListsView() {
 			selection: {
 				...listsConfig.selection,
 				actions: [
-					...listsConfig.selection.actions,
-					{
-						label: "Delete Selected",
-						icon: X,
-						onClick: (selectedElements) => {
-							for (const list of selectedElements) {
-								if (list.readOnly) {
-									toast.error("Cannot delete read-only list");
-									continue;
-								}
-								handleDeleteList(list.id);
-							}
-						},
-					},
-					{
-						label: "Sync Repository Data",
-						icon: BookUp,
-						onClick: (selectedElements) => {
-							handleSyncRepositoryData({
-								listIds: selectedElements.map((row) => row.id),
-							});
-						},
-					},
+					...listsActions.filter((a) => a.contexts?.includes("selection")),
+					...exportActions.filter((a) => a.contexts?.includes("selection")),
 				],
 			},
 		};
-	}, [handleDeleteList, handleSyncRepositoryData]);
+	}, [listsActions, exportActions]);
 
-	const dataTable = useDataTable<List, List>({
+	const dataTable = useDataTable<ListExtended>({
 		data,
 		tableId: "lists-table",
 		config: memoizedConfig,

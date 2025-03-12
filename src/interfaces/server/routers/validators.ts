@@ -2,8 +2,8 @@ import {
 	SYSTEM_LIST_TYPES,
 	isSystemListType,
 	listInsertSchema,
+	listItemInsertSchema,
 	listUpdateSchema,
-	saveToListSchema,
 } from "@/domain/models/repository-list";
 import { z } from "zod";
 
@@ -21,19 +21,9 @@ export const repositoryListsValidation = {
 	getItems: z.number(),
 	create: listInsertSchema,
 	delete: z.number(),
-	update: z.object({
-		listId: z.number(),
-		data: listUpdateSchema,
-	}),
-	saveToList: z.object({
-		data: saveToListSchema,
-	}),
+	update: z.object({ listId: z.number(), data: listUpdateSchema }),
+	saveToList: listItemInsertSchema,
 	removeFromList: z.object({ listId: z.number(), fullName: z.string() }),
-	validateItemMetadata: (
-		data?: string,
-	): z.SafeParseReturnType<string, string | undefined> => {
-		return { success: true, data };
-	},
 	syncRepositoryData: z.object({
 		listIds: z.array(z.number()).optional(),
 		fullNames: z.array(z.string()).optional(),

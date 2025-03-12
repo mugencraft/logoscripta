@@ -12,16 +12,19 @@
 		// "src/core/**/*",
 		// "src/core/serialization/**/*",
 		// DOMAIN
-		"src/domain/**/*",
+		// "src/domain/**/*",
 		// "src/domain/models/**/*",
-		// "src/domain/ports/**/*",
+		"src/domain/models/errors.ts",
+		"src/domain/ports/**/*",
+		"src/domain/ports/repository-list/*",
 		// "src/domain/services/**/*",
-		// "src/domain/value-objects/**/*",
+		"src/domain/services/repository-list.ts*",
+		"src/domain/value-objects/**/*",
 		// APPLICATION
 		// "src/application/**/*"
 		// "src/application/integration/**/*",
 		// SHARED
-		"src/shared/**/*"
+		// "src/shared/**/*"
 		// Infrastructure
 		// "src/infrastructure/**/*",
 		// "src/infrastructure/persistence/**/*",
@@ -32,9 +35,11 @@
 		// TESTS
 		// "test/fixtures/**/*",
 		// "test/fixtures/entities/**/*",
+		"test/fixtures/entities/repository-lists.ts",
 		// "test/helpers/**/*",
 		// "test/mocks/domain/**/*",
-		// "test/mocks/domain/**/*"
+		"test/mocks/domain/ports/repository-list/*",
 		// "test/unit/domain/**/*"
+		"test/unit/domain/services/*"
 	]
 }

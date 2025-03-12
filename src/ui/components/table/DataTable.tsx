@@ -5,19 +5,16 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/ui/components/core/table";
-import { ColumnVisibilityControl } from "@/ui/components/table/controls/ColumnVisibilityControl";
-import { TableControls } from "@/ui/components/table/controls/TableControls";
-import { ResizableHeader } from "@/ui/components/table/headers/ResizableHeader";
-import { SelectableRow } from "@/ui/components/table/rows/SelectableRow";
-import type { DataTableProps } from "@/ui/components/table/types";
 import { cn } from "@/ui/utils";
 import { flexRender } from "@tanstack/react-table";
 import { memo, useMemo } from "react";
+import { TableControls } from "./controls/TableControls";
+import { ColumnVisibilityControl } from "./controls/column-visibility/ColumnVisibilityControl";
+import { ResizableHeader } from "./headers/ResizableHeader";
+import { SelectableRow } from "./rows/SelectableRow";
+import type { DataTableProps } from "./types";
 
-export function DataTable<TData, T>({
-	table,
-	config,
-}: DataTableProps<TData, T>) {
+export function DataTable<TData>({ table, config }: DataTableProps<TData>) {
 	/**
 	 * Instead of calling `column.getSize()` on every render for every header
 	 * and especially every data cell (very expensive),
@@ -135,10 +132,7 @@ export function DataTable<TData, T>({
 	);
 }
 
-const DataTableBody = <TData, T>({
-	table,
-	config,
-}: DataTableProps<TData, T>) => {
+const DataTableBody = <TData,>({ table, config }: DataTableProps<TData>) => {
 	return (
 		<TableBody>
 			{table.getRowModel().rows?.length ? (

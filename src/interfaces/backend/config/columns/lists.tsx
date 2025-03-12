@@ -1,8 +1,4 @@
-import {
-	baseTableFeatures,
-	controlColumnGroup,
-} from "@/interfaces/backend/config/columns/common";
-import type { List } from "@/interfaces/server-client";
+import type { ListExtended } from "@/interfaces/server-client";
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
 import { BaseCell } from "@/ui/components/table/cells/BaseCell";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
@@ -10,8 +6,9 @@ import { RelativeTimeCell } from "@/ui/components/table/cells/RelativeTimeCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import { Link } from "@tanstack/react-router";
 import { Calendar, Lock } from "lucide-react";
+import { baseTableFeatures, controlColumnGroup } from "./common";
 
-export const listsConfig: TableConfiguration<List, List> = {
+export const listsConfig: TableConfiguration<ListExtended> = {
 	columns: [
 		controlColumnGroup,
 		{
@@ -20,7 +17,6 @@ export const listsConfig: TableConfiguration<List, List> = {
 				{
 					id: "itemCount",
 					header: "Items",
-					// @ts-expect-error
 					accessorFn: (row) => row.items?.length || 0,
 					cell: (info) => <DigitCell value={info.getValue()} />,
 					filterFn: "inNumberRange",
@@ -120,6 +116,6 @@ export const listsConfig: TableConfiguration<List, List> = {
 	features: baseTableFeatures,
 	selection: {
 		actions: [],
-		getSelectedIds: (rows) => rows.map((row) => row.original),
+		getSelected: (rows) => rows.map((row) => row.original),
 	},
 };

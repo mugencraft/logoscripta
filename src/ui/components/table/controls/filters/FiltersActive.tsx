@@ -1,12 +1,12 @@
 import { Badge } from "@/ui/components/core/badge";
 import { Button } from "@/ui/components/core/button";
-import type { TableProps } from "@/ui/components/table/types";
 import { cn } from "@/ui/utils";
-import type { ColumnFiltersState } from "@tanstack/react-table";
+import type { ColumnFiltersState, Table } from "@tanstack/react-table";
 import { X } from "lucide-react";
 
-interface FiltersActiveProps<TData> extends TableProps<TData> {
+interface FiltersActiveProps<TData> {
 	activeFilters: ColumnFiltersState;
+	table: Table<TData>;
 }
 
 export const FiltersActive = <TData,>({

@@ -22,10 +22,10 @@ export const listRouter = router({
 
 	getById: publicProcedure
 		.input(repositoryListsValidation.getById)
-		.query(async ({ ctx, input: listId }) => {
-			const list = await ctx.listQueries.findById(listId);
+		.query(async ({ ctx, input }) => {
+			const list = await ctx.listQueries.findById(input);
 			if (!list) {
-				throw new Error(`List ${listId} not found`);
+				throw new Error(`List ${input} not found`);
 			}
 
 			return list;
@@ -48,31 +48,24 @@ export const listRouter = router({
 	update: publicProcedure
 		.input(repositoryListsValidation.update)
 		.mutation(async ({ ctx, input }) => {
-			const { listId, data } = input;
-			return await ctx.listService.update(listId, data);
+			return await ctx.listService.update(input.listId, input.data);
 		}),
 
 	saveToList: publicProcedure
 		.input(repositoryListsValidation.saveToList)
 		.mutation(async ({ ctx, input }) => {
-			const { data } = input;
-			return await ctx.listService.saveToList(data);
+			return await ctx.listService.saveToList(input);
 		}),
 
 	removeFromList: publicProcedure
 		.input(repositoryListsValidation.removeFromList)
 		.mutation(async ({ ctx, input }) => {
-			const { listId, fullName } = input;
-			return await ctx.listService.removeFromList(listId, fullName);
+			return await ctx.listService.removeFromList(input.listId, input.fullName);
 		}),
 
 	syncRepositoryData: publicProcedure
 		.input(repositoryListsValidation.syncRepositoryData)
 		.mutation(async ({ ctx, input }) => {
-			return ctx.listProcessor.syncRepositoryData({
-				listIds: input.listIds,
-				fullNames: input.fullNames,
-				skipIntegrateNew: input.skipIntegrateNew,
-			});
+			return ctx.listProcessor.syncRepositoryData(input);
 		}),
 });

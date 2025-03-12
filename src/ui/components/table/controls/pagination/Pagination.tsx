@@ -6,20 +6,20 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/ui/components/core/select";
-import type { DataTableProps } from "@/ui/components/table/types";
 import {
 	ChevronLeft,
 	ChevronRight,
 	ChevronsLeft,
 	ChevronsRight,
 } from "lucide-react";
+import type { DataTableProps } from "../../types";
 
 const PAGE_SIZES = [10, 20, 30, 50, 100];
 
-export const Pagination = <TData, T>({
+export const Pagination = <TData,>({
 	table,
 	config,
-}: DataTableProps<TData, T>) => {
+}: DataTableProps<TData>) => {
 	const { pageSize } = table.getState().pagination;
 
 	const pageSizes = config.paginationSizes || PAGE_SIZES;

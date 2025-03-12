@@ -1,9 +1,9 @@
 import { Button } from "@/ui/components/core/button";
 import { DialogStyled } from "@/ui/components/extra/dialog-styled";
-import { Filters } from "@/ui/components/table/controls/Filters";
 import type { Table } from "@tanstack/react-table";
 import { SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
+import { Filters } from "./Filters";
 
 interface FiltersControlProps<TData> {
 	table: Table<TData>;

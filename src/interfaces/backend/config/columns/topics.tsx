@@ -1,12 +1,9 @@
-import {
-	baseTableFeatures,
-	controlColumnGroup,
-} from "@/interfaces/backend/config/columns/common";
 import type { Topic } from "@/interfaces/server-client";
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import { Hash } from "lucide-react";
+import { baseTableFeatures, controlColumnGroup } from "./common";
 
 export const topicsConfig: TableConfiguration<Topic> = {
 	columns: [
@@ -54,6 +51,6 @@ export const topicsConfig: TableConfiguration<Topic> = {
 	features: baseTableFeatures,
 	selection: {
 		actions: [],
-		getSelectedIds: (rows) => rows.map((row) => row.id),
+		getSelected: (rows) => rows.map((row) => row.original),
 	},
 };

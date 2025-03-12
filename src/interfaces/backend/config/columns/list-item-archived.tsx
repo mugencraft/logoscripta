@@ -1,15 +1,15 @@
-import {
-	baseTableFeatures,
-	controlColumnGroup,
-	getListSelection,
-} from "@/interfaces/backend/config/columns/common";
 import type { ListItemArchived } from "@/interfaces/server-client";
 import { DateCell } from "@/ui/components/table/cells/DateCell";
 import { GithubCell } from "@/ui/components/table/cells/GithubCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import _ from "lodash";
+import {
+	baseTableFeatures,
+	controlColumnGroup,
+	getListSelection,
+} from "./common";
 
-export const archivedConfig: TableConfiguration<ListItemArchived, string> = {
+export const archivedConfig: TableConfiguration<ListItemArchived> = {
 	columns: [
 		controlColumnGroup,
 		{

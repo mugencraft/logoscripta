@@ -1,9 +1,9 @@
-import { topicsConfig } from "@/interfaces/backend/config/columns/topics";
-import { useDataTable } from "@/interfaces/backend/hooks/useDataTable";
-import { Route } from "@/interfaces/backend/routes/topics";
 import type { Topic } from "@/interfaces/server-client";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
 import { DataTable } from "@/ui/components/table/DataTable";
+import { topicsConfig } from "../config/columns/topics";
+import { useDataTable } from "../hooks/useDataTable";
+import { Route } from "../routes/topics";
 
 export function TopicsView() {
 	const topics = Route.useLoaderData();

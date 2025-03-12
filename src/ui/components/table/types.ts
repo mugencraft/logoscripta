@@ -1,3 +1,4 @@
+import type { ActionConfig } from "@/ui/components/actions/types";
 import type {
 	ColumnDef,
 	Row,
@@ -5,58 +6,45 @@ import type {
 	Updater,
 	VisibilityState,
 } from "@tanstack/react-table";
-import type { LucideIcon } from "lucide-react";
-import type { ComponentType, ReactNode } from "react";
 
-export interface TableProps<TData> {
+export interface DataTableProps<TData> {
+	config: TableConfiguration<TData>;
 	table: Table<TData>;
 }
 
-export interface DataTableProps<TData, T = string | number>
-	extends TableProps<TData> {
-	config: TableConfiguration<TData, T>;
-}
-
-export interface TableConfiguration<TData, T = string | number> {
+export interface TableConfiguration<TData> {
 	columns: ColumnDef<TData>[];
-	visibilityPresets: VisibilityPreset[];
+	features?: TableFeatures;
 	paginationSizes?: number[];
-	selection: SelectionConfiguration<TData, T>;
-	features?: {
-		enableRowSelection?: boolean;
-		enableColumnFilters?: boolean;
-		enableColumnResizing?: boolean;
-		enableGlobalFilter?: boolean;
-		enableSorting?: boolean;
-		enableMultiSort?: boolean;
-	};
+	selection: SelectionConfiguration<TData>;
+	visibilityPresets: VisibilityPreset[];
 }
 
-export interface SelectionConfiguration<TData, T = string | number> {
-	actions: SelectionAction<T>[];
-	// ids can be either fullName or id
-	getSelectedIds: (rows: Row<TData>[]) => T[];
+interface TableFeatures {
+	enableColumnFilters?: boolean;
+	enableColumnResizing?: boolean;
+	enableGlobalFilter?: boolean;
+	enableMultiSort?: boolean;
+	enableRowSelection?: boolean;
+	enableSorting?: boolean;
+}
+
+export interface SelectionConfiguration<TData> {
+	actions: ActionConfig<TData>[];
+	getSelected: (rows: Row<TData>[]) => TData[];
 	onActionComplete?: () => void;
-}
-
-export interface SelectionAction<T = string | number> {
-	label: string;
-	icon?: LucideIcon;
-	onClick?: (selectedElements: T[]) => void;
-	component?: ComponentType<StepProps<T>>;
-	dialog?: {
-		title: string;
-		content: (props: StepProps<T>) => ReactNode;
-	};
-}
-
-export interface StepProps<T> {
-	selectedIds?: T[];
-	onSuccess?: () => void;
-	onCancel?: () => void;
 }
 
 export interface VisibilityPreset {
 	name: string;
 	columns: Updater<VisibilityState>;
+}
+
+export interface InteractionProps<TData> {
+	data?: TData;
+	row?: TData;
+	selected?: TData[];
+	table?: Table<TData>;
+	onSuccess?: () => void;
+	onCancel?: () => void;
 }

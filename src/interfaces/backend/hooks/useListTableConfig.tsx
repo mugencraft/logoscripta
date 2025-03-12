@@ -1,9 +1,9 @@
 import type { SystemListType } from "@/domain/models/repository-list";
 import type {
 	ListItemArchived,
+	ListItemExtended,
 	ListItemObsidianPlugin,
 	ListItemObsidianTheme,
-	ListItemWithMetadata,
 } from "@/interfaces/server-client";
 import type { TableConfiguration } from "@/ui/components/table/types";
 import { listItemsConfig } from "../config/columns/list-item";
@@ -12,14 +12,14 @@ import { obsidianPluginConfig } from "../config/columns/list-item-obsidian-plugi
 import { obsidianThemeConfig } from "../config/columns/list-item-obsidian-theme";
 
 export type AnyListItem =
-	| ListItemWithMetadata
+	| ListItemExtended
 	| ListItemArchived
 	| ListItemObsidianPlugin
 	| ListItemObsidianTheme;
 
 export function useListTableConfig(
 	type: SystemListType | number,
-): TableConfiguration<AnyListItem, string> {
+): TableConfiguration<AnyListItem> {
 	// Handle system lists with specialized configurations
 	if (typeof type === "string") {
 		const systemConfigs = {
@@ -33,7 +33,7 @@ export function useListTableConfig(
 			throw new Error(`Unknown system list type: ${type}`);
 		}
 
-		return config as unknown as TableConfiguration<AnyListItem, string>;
+		return config as unknown as TableConfiguration<AnyListItem>;
 	}
 
 	return listItemsConfig;

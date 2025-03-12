@@ -1,20 +1,22 @@
-import { useListActions } from "@/interfaces/backend/hooks/useListActions";
-import { trpc } from "@/interfaces/server-client";
+import {
+	type ListItem,
+	type Repository,
+	trpc,
+} from "@/interfaces/server-client";
 import { Button } from "@/ui/components/core/button";
-import { ListSelection } from "@/ui/components/lists/ListSelection";
-import type { StepProps } from "@/ui/components/table/types";
+import type { InteractionProps } from "@/ui/components/table/types";
 import { useState } from "react";
+import { useListActions } from "../../hooks/useListActions";
+import { ListSelection } from "./ListSelection";
 
-interface ToggleListDialogProps extends StepProps<string> {
-	mode: "add" | "remove";
-}
-
-export function ToggleListDialog({
-	selectedIds,
+export function ToggleList<T extends ListItem | Repository>({
+	selected,
 	onSuccess,
 	onCancel,
 	mode = "add",
-}: ToggleListDialogProps) {
+}: InteractionProps<T> & {
+	mode: "add" | "remove";
+}) {
 	const { data: lists = [] } = trpc.list.getAll.useQuery();
 	const [selectedListId, setSelectedListId] = useState<number>();
 	const { handleAddToList, handleCreateList, handleRemoveFromList } =
@@ -22,7 +24,9 @@ export function ToggleListDialog({
 			onSuccess,
 		});
 
-	if (!selectedIds?.length) return null;
+	if (!selected?.length) return null;
+
+	const selectedIds = selected.map((item) => item.fullName);
 
 	const handleAction = () => {
 		if (!selectedListId) return;
@@ -43,7 +47,7 @@ export function ToggleListDialog({
 					onSelectList={setSelectedListId}
 					onCreateList={
 						mode === "add"
-							? (name) => handleCreateList(name, selectedIds)
+							? (name) => handleCreateList(name, "", selectedIds)
 							: undefined
 					}
 					mode={mode}

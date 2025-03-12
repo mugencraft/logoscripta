@@ -1,4 +1,3 @@
-import type { DashboardData } from "@/interfaces/backend/hooks/useDashboardData";
 import {
 	Card,
 	CardContent,
@@ -13,6 +12,30 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
+
+export interface DashboardStats {
+	repositories: number;
+	customLists: number;
+	owners: number;
+	topics: number;
+}
+
+export interface LanguageStats {
+	language: string;
+	count: number;
+	percentage: number;
+}
+
+export interface ActivityDataPoint {
+	date: string;
+	updates: number;
+}
+
+export interface DashboardData {
+	stats: DashboardStats;
+	languages: LanguageStats[];
+	activity: ActivityDataPoint[];
+}
 
 interface ActivityChartProps {
 	activity: DashboardData["activity"];

@@ -12,7 +12,7 @@ interface ListSelectionProps {
 	onSelectList: (id: number) => void;
 	onCreateList?: (name: string) => void;
 	mode: "add" | "remove";
-	selectedItems: string[]; // Array of item IDs being added/removed
+	selectedItems: string[];
 }
 
 export function ListSelection({

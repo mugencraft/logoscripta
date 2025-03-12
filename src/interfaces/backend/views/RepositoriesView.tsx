@@ -1,21 +1,41 @@
-import { repositoryConfig } from "@/interfaces/backend/config/columns/repository";
-import { useDataTable } from "@/interfaces/backend/hooks/useDataTable";
-import { useListActions } from "@/interfaces/backend/hooks/useListActions";
-import { Route } from "@/interfaces/backend/routes/repos";
-import type { Repository } from "@/interfaces/server-client";
+import type { RepositoryExtended } from "@/interfaces/server-client";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
 import { DataTable } from "@/ui/components/table/DataTable";
-import { Link, RefreshCcwDot, RefreshCw } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { createExportActions } from "../actions/export";
+import { createRepositoryActions } from "../actions/repository";
+import { repositoryConfig } from "../config/columns/repository";
+import { useDataTable } from "../hooks/useDataTable";
+import { useListActions } from "../hooks/useListActions";
+import { Route } from "../routes/repos";
 
 export const RepositoriesView = () => {
-	const { handleSyncRepositoryData, handleSaveRepository } = useListActions();
-
-	const repositories = Route.useLoaderData();
+	const repositories = Route.useLoaderData() as RepositoryExtended[];
+	const data = useMemo(() => repositories || [], [repositories]);
 
 	const [isLoading, setIsLoading] = useState(true);
 
-	const data = useMemo(() => repositories || [], [repositories]);
+	const { handleSyncRepositoryData, handleSaveRepository } = useListActions();
+	const repositoryActions = useMemo(() => {
+		return createRepositoryActions({
+			handleSyncRepositoryData,
+			handleSaveRepository,
+		});
+	}, [handleSyncRepositoryData, handleSaveRepository]);
+
+	const exportActions = useMemo(() => {
+		return createExportActions<RepositoryExtended>({
+			fileName: "lists",
+		});
+	}, []);
+
+	const viewActions = useMemo(
+		() => [
+			...repositoryActions.filter((a) => a.contexts?.includes("view")),
+			...exportActions.filter((a) => a.contexts?.includes("view")),
+		],
+		[repositoryActions, exportActions],
+	);
 
 	const memoizedConfig = useMemo(() => {
 		return {
@@ -23,29 +43,14 @@ export const RepositoriesView = () => {
 			selection: {
 				...repositoryConfig.selection,
 				actions: [
-					...repositoryConfig.selection.actions,
-					{
-						label: "Sync Repository Data",
-						icon: Link,
-						onClick: (fullNames) => {
-							handleSyncRepositoryData({ fullNames });
-						},
-					},
-					{
-						label: "Refresh Repository Data",
-						icon: RefreshCw,
-						onClick: async (fullNames) => {
-							for (const fullName of fullNames) {
-								await handleSaveRepository(fullName);
-							}
-						},
-					},
+					...repositoryActions.filter((a) => a.contexts?.includes("selection")),
+					...exportActions.filter((a) => a.contexts?.includes("selection")),
 				],
 			},
 		};
-	}, [handleSyncRepositoryData, handleSaveRepository]);
+	}, [repositoryActions, exportActions]);
 
-	const dataTable = useDataTable<Repository, string>({
+	const dataTable = useDataTable<RepositoryExtended>({
 		data,
 		tableId: "repositories",
 		config: memoizedConfig,
@@ -61,6 +66,7 @@ export const RepositoriesView = () => {
 		<ViewContainer
 			title="All Repositories"
 			description="View and manage all tracked repositories"
+			actions={viewActions}
 		>
 			{isLoading ? "Loading..." : <DataTable {...dataTable} />}
 		</ViewContainer>

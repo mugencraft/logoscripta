@@ -1,19 +1,19 @@
-import { ActionButtons } from "@/ui/components/table/controls/ActionButtons";
-import type { SelectionConfiguration } from "@/ui/components/table/types";
 import { cn } from "@/ui/utils";
 import type { Table } from "@tanstack/react-table";
+import type { SelectionConfiguration } from "../types";
+import { ActionButtons } from "./ActionButtons";
 
-interface SelectionControlProps<TData, T> {
+interface SelectionControlProps<TData> {
 	table: Table<TData>;
 	totalRows: number;
-	selection?: SelectionConfiguration<TData, T>;
+	selection?: SelectionConfiguration<TData>;
 }
 
-export const SelectionControl = <TData, T>({
+export const SelectionControl = <TData,>({
 	table,
 	totalRows,
 	selection,
-}: SelectionControlProps<TData, T>) => {
+}: SelectionControlProps<TData>) => {
 	const selectedRows = table.getSelectedRowModel().rows;
 
 	if (!selectedRows.length || !selection) return null;
@@ -35,9 +35,9 @@ export const SelectionControl = <TData, T>({
 			</span>
 			<div className="flex items-center gap-2">
 				<ActionButtons
-					table={table}
-					selection={selection}
+					actions={selection.actions}
 					selectedRows={selectedRows}
+					table={table}
 				/>
 			</div>
 		</div>

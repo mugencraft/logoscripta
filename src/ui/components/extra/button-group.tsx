@@ -44,6 +44,7 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
 
 		return (
 			<ButtonGroupContext.Provider value={{ variant, size }}>
+				{/* biome-ignore lint/a11y/useSemanticElements: <explanation> */}
 				<div className={groupClassName} ref={ref} role="group" {...props}>
 					{Children.map(children, (child, index) => {
 						if (isValidElement(child) && child.type === Button) {
@@ -52,6 +53,7 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
 							const isMiddle = !isFirst && !isLast;
 
 							const childClassName = cn(
+								// @ts-expect-error
 								child.props.className,
 								orientation === "horizontal"
 									? {
@@ -69,7 +71,9 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
 							);
 
 							return cloneElement(child, {
+								// @ts-expect-error
 								variant: child.props.variant ?? variant,
+								// @ts-expect-error
 								size: child.props.size ?? size,
 								className: childClassName,
 							});

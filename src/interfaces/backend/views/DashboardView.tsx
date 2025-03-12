@@ -1,6 +1,6 @@
-import { useDashboardData } from "@/interfaces/backend/hooks/useDashboardData";
 import { DashboardGrid } from "@/ui/components/dashboard/DashboardGrid";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
+import { useDashboardData } from "../hooks/useDashboardData";
 
 export function DashboardView() {
 	const { data, isLoading } = useDashboardData();

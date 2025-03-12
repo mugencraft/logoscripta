@@ -9,18 +9,15 @@ import {
 } from "@/ui/components/core/dropdown-menu";
 import { Label } from "@/ui/components/core/label";
 import { ScrollArea } from "@/ui/components/core/scroll-area";
-import { getTableColumnGroups } from "@/ui/components/table/controls/column-visibility-helpers";
-import type {
-	DataTableProps,
-	VisibilityPreset,
-} from "@/ui/components/table/types";
 import _ from "lodash";
 import { EllipsisVertical } from "lucide-react";
+import type { DataTableProps, VisibilityPreset } from "../../types";
+import { getTableColumnGroups } from "./column-visibility-helpers";
 
-export function ColumnVisibilityControl<TData, T = string | number>({
+export function ColumnVisibilityControl<TData>({
 	table,
 	config,
-}: DataTableProps<TData, T>) {
+}: DataTableProps<TData>) {
 	const { visibilityPresets: presets = [] } = config;
 	const columns = table.getAllLeafColumns();
 	const columnGroups = getTableColumnGroups(table);
