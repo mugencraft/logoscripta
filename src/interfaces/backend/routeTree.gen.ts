@@ -8,62 +8,331 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as TaggingIndexRouteImport } from './routes/tagging/index'
+import { Route as ContentIndexRouteImport } from './routes/content/index'
+import { Route as GithubTopicsRouteImport } from './routes/github/topics'
+import { Route as GithubReposRouteImport } from './routes/github/repos'
+import { Route as GithubOwnersRouteImport } from './routes/github/owners'
+import { Route as TaggingTagsIndexRouteImport } from './routes/tagging/tags/index'
+import { Route as TaggingSystemsIndexRouteImport } from './routes/tagging/systems/index'
+import { Route as TaggingGroupsIndexRouteImport } from './routes/tagging/groups/index'
+import { Route as TaggingCategoriesIndexRouteImport } from './routes/tagging/categories/index'
+import { Route as GithubListsIndexRouteImport } from './routes/github/lists/index'
+import { Route as ContentItemsIndexRouteImport } from './routes/content/items/index'
+import { Route as ContentCollectionsIndexRouteImport } from './routes/content/collections/index'
+import { Route as TaggingTagsTagIdRouteImport } from './routes/tagging/tags/$tagId'
+import { Route as TaggingSystemsSystemIdRouteImport } from './routes/tagging/systems/$systemId'
+import { Route as TaggingGroupsGroupIdRouteImport } from './routes/tagging/groups/$groupId'
+import { Route as TaggingCategoriesCategoryIdRouteImport } from './routes/tagging/categories/$categoryId'
+import { Route as GithubListsListIdRouteImport } from './routes/github/lists/$listId'
+import { Route as ContentItemsItemIdRouteImport } from './routes/content/items/$itemId'
+import { Route as ContentCollectionsCollectionIdRouteImport } from './routes/content/collections/$collectionId'
+import { Route as ContentCollectionsCollectionIdItemsRouteImport } from './routes/content/collections_/$collectionId.items'
+import { Route as ContentCollectionsCollectionIdAnalysisRouteImport } from './routes/content/collections_/$collectionId.analysis'
+import { Route as ContentCollectionsCollectionIdItemsItemIdRouteImport } from './routes/content/collections_/$collectionId.items_.$itemId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as TopicsImport } from './routes/topics'
-import { Route as ReposImport } from './routes/repos'
-import { Route as OwnersImport } from './routes/owners'
-import { Route as IndexImport } from './routes/index'
-import { Route as ListsIndexImport } from './routes/lists/index'
-import { Route as ListsNewImport } from './routes/lists/new'
-import { Route as ListsIdImport } from './routes/lists/$id'
-
-// Create/Update Routes
-
-const TopicsRoute = TopicsImport.update({
-  id: '/topics',
-  path: '/topics',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ReposRoute = ReposImport.update({
-  id: '/repos',
-  path: '/repos',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const OwnersRoute = OwnersImport.update({
-  id: '/owners',
-  path: '/owners',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ListsIndexRoute = ListsIndexImport.update({
-  id: '/lists/',
-  path: '/lists/',
-  getParentRoute: () => rootRoute,
+const TaggingIndexRoute = TaggingIndexRouteImport.update({
+  id: '/tagging/',
+  path: '/tagging/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ListsNewRoute = ListsNewImport.update({
-  id: '/lists/new',
-  path: '/lists/new',
-  getParentRoute: () => rootRoute,
+const ContentIndexRoute = ContentIndexRouteImport.update({
+  id: '/content/',
+  path: '/content/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ListsIdRoute = ListsIdImport.update({
-  id: '/lists/$id',
-  path: '/lists/$id',
-  getParentRoute: () => rootRoute,
+const GithubTopicsRoute = GithubTopicsRouteImport.update({
+  id: '/github/topics',
+  path: '/github/topics',
+  getParentRoute: () => rootRouteImport,
 } as any)
+const GithubReposRoute = GithubReposRouteImport.update({
+  id: '/github/repos',
+  path: '/github/repos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GithubOwnersRoute = GithubOwnersRouteImport.update({
+  id: '/github/owners',
+  path: '/github/owners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingTagsIndexRoute = TaggingTagsIndexRouteImport.update({
+  id: '/tagging/tags/',
+  path: '/tagging/tags/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingSystemsIndexRoute = TaggingSystemsIndexRouteImport.update({
+  id: '/tagging/systems/',
+  path: '/tagging/systems/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingGroupsIndexRoute = TaggingGroupsIndexRouteImport.update({
+  id: '/tagging/groups/',
+  path: '/tagging/groups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingCategoriesIndexRoute = TaggingCategoriesIndexRouteImport.update({
+  id: '/tagging/categories/',
+  path: '/tagging/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GithubListsIndexRoute = GithubListsIndexRouteImport.update({
+  id: '/github/lists/',
+  path: '/github/lists/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContentItemsIndexRoute = ContentItemsIndexRouteImport.update({
+  id: '/content/items/',
+  path: '/content/items/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContentCollectionsIndexRoute = ContentCollectionsIndexRouteImport.update({
+  id: '/content/collections/',
+  path: '/content/collections/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingTagsTagIdRoute = TaggingTagsTagIdRouteImport.update({
+  id: '/tagging/tags/$tagId',
+  path: '/tagging/tags/$tagId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingSystemsSystemIdRoute = TaggingSystemsSystemIdRouteImport.update({
+  id: '/tagging/systems/$systemId',
+  path: '/tagging/systems/$systemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingGroupsGroupIdRoute = TaggingGroupsGroupIdRouteImport.update({
+  id: '/tagging/groups/$groupId',
+  path: '/tagging/groups/$groupId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaggingCategoriesCategoryIdRoute =
+  TaggingCategoriesCategoryIdRouteImport.update({
+    id: '/tagging/categories/$categoryId',
+    path: '/tagging/categories/$categoryId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GithubListsListIdRoute = GithubListsListIdRouteImport.update({
+  id: '/github/lists/$listId',
+  path: '/github/lists/$listId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContentItemsItemIdRoute = ContentItemsItemIdRouteImport.update({
+  id: '/content/items/$itemId',
+  path: '/content/items/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContentCollectionsCollectionIdRoute =
+  ContentCollectionsCollectionIdRouteImport.update({
+    id: '/content/collections/$collectionId',
+    path: '/content/collections/$collectionId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContentCollectionsCollectionIdItemsRoute =
+  ContentCollectionsCollectionIdItemsRouteImport.update({
+    id: '/content/collections_/$collectionId/items',
+    path: '/content/collections/$collectionId/items',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContentCollectionsCollectionIdAnalysisRoute =
+  ContentCollectionsCollectionIdAnalysisRouteImport.update({
+    id: '/content/collections_/$collectionId/analysis',
+    path: '/content/collections/$collectionId/analysis',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContentCollectionsCollectionIdItemsItemIdRoute =
+  ContentCollectionsCollectionIdItemsItemIdRouteImport.update({
+    id: '/content/collections_/$collectionId/items_/$itemId',
+    path: '/content/collections/$collectionId/items/$itemId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/github/owners': typeof GithubOwnersRoute
+  '/github/repos': typeof GithubReposRoute
+  '/github/topics': typeof GithubTopicsRoute
+  '/content': typeof ContentIndexRoute
+  '/tagging': typeof TaggingIndexRoute
+  '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
+  '/content/items/$itemId': typeof ContentItemsItemIdRoute
+  '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
+  '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
+  '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
+  '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/content/collections': typeof ContentCollectionsIndexRoute
+  '/content/items': typeof ContentItemsIndexRoute
+  '/github/lists': typeof GithubListsIndexRoute
+  '/tagging/categories': typeof TaggingCategoriesIndexRoute
+  '/tagging/groups': typeof TaggingGroupsIndexRoute
+  '/tagging/systems': typeof TaggingSystemsIndexRoute
+  '/tagging/tags': typeof TaggingTagsIndexRoute
+  '/content/collections/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
+  '/content/collections/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/collections/$collectionId/items/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/github/owners': typeof GithubOwnersRoute
+  '/github/repos': typeof GithubReposRoute
+  '/github/topics': typeof GithubTopicsRoute
+  '/content': typeof ContentIndexRoute
+  '/tagging': typeof TaggingIndexRoute
+  '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
+  '/content/items/$itemId': typeof ContentItemsItemIdRoute
+  '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
+  '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
+  '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
+  '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/content/collections': typeof ContentCollectionsIndexRoute
+  '/content/items': typeof ContentItemsIndexRoute
+  '/github/lists': typeof GithubListsIndexRoute
+  '/tagging/categories': typeof TaggingCategoriesIndexRoute
+  '/tagging/groups': typeof TaggingGroupsIndexRoute
+  '/tagging/systems': typeof TaggingSystemsIndexRoute
+  '/tagging/tags': typeof TaggingTagsIndexRoute
+  '/content/collections/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
+  '/content/collections/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/collections/$collectionId/items/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/github/owners': typeof GithubOwnersRoute
+  '/github/repos': typeof GithubReposRoute
+  '/github/topics': typeof GithubTopicsRoute
+  '/content/': typeof ContentIndexRoute
+  '/tagging/': typeof TaggingIndexRoute
+  '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
+  '/content/items/$itemId': typeof ContentItemsItemIdRoute
+  '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
+  '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
+  '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
+  '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/content/collections/': typeof ContentCollectionsIndexRoute
+  '/content/items/': typeof ContentItemsIndexRoute
+  '/github/lists/': typeof GithubListsIndexRoute
+  '/tagging/categories/': typeof TaggingCategoriesIndexRoute
+  '/tagging/groups/': typeof TaggingGroupsIndexRoute
+  '/tagging/systems/': typeof TaggingSystemsIndexRoute
+  '/tagging/tags/': typeof TaggingTagsIndexRoute
+  '/content/collections_/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
+  '/content/collections_/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/collections_/$collectionId/items_/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/github/owners'
+    | '/github/repos'
+    | '/github/topics'
+    | '/content'
+    | '/tagging'
+    | '/content/collections/$collectionId'
+    | '/content/items/$itemId'
+    | '/github/lists/$listId'
+    | '/tagging/categories/$categoryId'
+    | '/tagging/groups/$groupId'
+    | '/tagging/systems/$systemId'
+    | '/tagging/tags/$tagId'
+    | '/content/collections'
+    | '/content/items'
+    | '/github/lists'
+    | '/tagging/categories'
+    | '/tagging/groups'
+    | '/tagging/systems'
+    | '/tagging/tags'
+    | '/content/collections/$collectionId/analysis'
+    | '/content/collections/$collectionId/items'
+    | '/content/collections/$collectionId/items/$itemId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/github/owners'
+    | '/github/repos'
+    | '/github/topics'
+    | '/content'
+    | '/tagging'
+    | '/content/collections/$collectionId'
+    | '/content/items/$itemId'
+    | '/github/lists/$listId'
+    | '/tagging/categories/$categoryId'
+    | '/tagging/groups/$groupId'
+    | '/tagging/systems/$systemId'
+    | '/tagging/tags/$tagId'
+    | '/content/collections'
+    | '/content/items'
+    | '/github/lists'
+    | '/tagging/categories'
+    | '/tagging/groups'
+    | '/tagging/systems'
+    | '/tagging/tags'
+    | '/content/collections/$collectionId/analysis'
+    | '/content/collections/$collectionId/items'
+    | '/content/collections/$collectionId/items/$itemId'
+  id:
+    | '__root__'
+    | '/'
+    | '/github/owners'
+    | '/github/repos'
+    | '/github/topics'
+    | '/content/'
+    | '/tagging/'
+    | '/content/collections/$collectionId'
+    | '/content/items/$itemId'
+    | '/github/lists/$listId'
+    | '/tagging/categories/$categoryId'
+    | '/tagging/groups/$groupId'
+    | '/tagging/systems/$systemId'
+    | '/tagging/tags/$tagId'
+    | '/content/collections/'
+    | '/content/items/'
+    | '/github/lists/'
+    | '/tagging/categories/'
+    | '/tagging/groups/'
+    | '/tagging/systems/'
+    | '/tagging/tags/'
+    | '/content/collections_/$collectionId/analysis'
+    | '/content/collections_/$collectionId/items'
+    | '/content/collections_/$collectionId/items_/$itemId'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  GithubOwnersRoute: typeof GithubOwnersRoute
+  GithubReposRoute: typeof GithubReposRoute
+  GithubTopicsRoute: typeof GithubTopicsRoute
+  ContentIndexRoute: typeof ContentIndexRoute
+  TaggingIndexRoute: typeof TaggingIndexRoute
+  ContentCollectionsCollectionIdRoute: typeof ContentCollectionsCollectionIdRoute
+  ContentItemsItemIdRoute: typeof ContentItemsItemIdRoute
+  GithubListsListIdRoute: typeof GithubListsListIdRoute
+  TaggingCategoriesCategoryIdRoute: typeof TaggingCategoriesCategoryIdRoute
+  TaggingGroupsGroupIdRoute: typeof TaggingGroupsGroupIdRoute
+  TaggingSystemsSystemIdRoute: typeof TaggingSystemsSystemIdRoute
+  TaggingTagsTagIdRoute: typeof TaggingTagsTagIdRoute
+  ContentCollectionsIndexRoute: typeof ContentCollectionsIndexRoute
+  ContentItemsIndexRoute: typeof ContentItemsIndexRoute
+  GithubListsIndexRoute: typeof GithubListsIndexRoute
+  TaggingCategoriesIndexRoute: typeof TaggingCategoriesIndexRoute
+  TaggingGroupsIndexRoute: typeof TaggingGroupsIndexRoute
+  TaggingSystemsIndexRoute: typeof TaggingSystemsIndexRoute
+  TaggingTagsIndexRoute: typeof TaggingTagsIndexRoute
+  ContentCollectionsCollectionIdAnalysisRoute: typeof ContentCollectionsCollectionIdAnalysisRoute
+  ContentCollectionsCollectionIdItemsRoute: typeof ContentCollectionsCollectionIdItemsRoute
+  ContentCollectionsCollectionIdItemsItemIdRoute: typeof ContentCollectionsCollectionIdItemsItemIdRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
@@ -71,178 +340,194 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/owners': {
-      id: '/owners'
-      path: '/owners'
-      fullPath: '/owners'
-      preLoaderRoute: typeof OwnersImport
-      parentRoute: typeof rootRoute
+    '/tagging/': {
+      id: '/tagging/'
+      path: '/tagging'
+      fullPath: '/tagging'
+      preLoaderRoute: typeof TaggingIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/repos': {
-      id: '/repos'
-      path: '/repos'
-      fullPath: '/repos'
-      preLoaderRoute: typeof ReposImport
-      parentRoute: typeof rootRoute
+    '/content/': {
+      id: '/content/'
+      path: '/content'
+      fullPath: '/content'
+      preLoaderRoute: typeof ContentIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/topics': {
-      id: '/topics'
-      path: '/topics'
-      fullPath: '/topics'
-      preLoaderRoute: typeof TopicsImport
-      parentRoute: typeof rootRoute
+    '/github/topics': {
+      id: '/github/topics'
+      path: '/github/topics'
+      fullPath: '/github/topics'
+      preLoaderRoute: typeof GithubTopicsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/lists/$id': {
-      id: '/lists/$id'
-      path: '/lists/$id'
-      fullPath: '/lists/$id'
-      preLoaderRoute: typeof ListsIdImport
-      parentRoute: typeof rootRoute
+    '/github/repos': {
+      id: '/github/repos'
+      path: '/github/repos'
+      fullPath: '/github/repos'
+      preLoaderRoute: typeof GithubReposRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/lists/new': {
-      id: '/lists/new'
-      path: '/lists/new'
-      fullPath: '/lists/new'
-      preLoaderRoute: typeof ListsNewImport
-      parentRoute: typeof rootRoute
+    '/github/owners': {
+      id: '/github/owners'
+      path: '/github/owners'
+      fullPath: '/github/owners'
+      preLoaderRoute: typeof GithubOwnersRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/lists/': {
-      id: '/lists/'
-      path: '/lists'
-      fullPath: '/lists'
-      preLoaderRoute: typeof ListsIndexImport
-      parentRoute: typeof rootRoute
+    '/tagging/tags/': {
+      id: '/tagging/tags/'
+      path: '/tagging/tags'
+      fullPath: '/tagging/tags'
+      preLoaderRoute: typeof TaggingTagsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/systems/': {
+      id: '/tagging/systems/'
+      path: '/tagging/systems'
+      fullPath: '/tagging/systems'
+      preLoaderRoute: typeof TaggingSystemsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/groups/': {
+      id: '/tagging/groups/'
+      path: '/tagging/groups'
+      fullPath: '/tagging/groups'
+      preLoaderRoute: typeof TaggingGroupsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/categories/': {
+      id: '/tagging/categories/'
+      path: '/tagging/categories'
+      fullPath: '/tagging/categories'
+      preLoaderRoute: typeof TaggingCategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/github/lists/': {
+      id: '/github/lists/'
+      path: '/github/lists'
+      fullPath: '/github/lists'
+      preLoaderRoute: typeof GithubListsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/items/': {
+      id: '/content/items/'
+      path: '/content/items'
+      fullPath: '/content/items'
+      preLoaderRoute: typeof ContentItemsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/collections/': {
+      id: '/content/collections/'
+      path: '/content/collections'
+      fullPath: '/content/collections'
+      preLoaderRoute: typeof ContentCollectionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/tags/$tagId': {
+      id: '/tagging/tags/$tagId'
+      path: '/tagging/tags/$tagId'
+      fullPath: '/tagging/tags/$tagId'
+      preLoaderRoute: typeof TaggingTagsTagIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/systems/$systemId': {
+      id: '/tagging/systems/$systemId'
+      path: '/tagging/systems/$systemId'
+      fullPath: '/tagging/systems/$systemId'
+      preLoaderRoute: typeof TaggingSystemsSystemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/groups/$groupId': {
+      id: '/tagging/groups/$groupId'
+      path: '/tagging/groups/$groupId'
+      fullPath: '/tagging/groups/$groupId'
+      preLoaderRoute: typeof TaggingGroupsGroupIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagging/categories/$categoryId': {
+      id: '/tagging/categories/$categoryId'
+      path: '/tagging/categories/$categoryId'
+      fullPath: '/tagging/categories/$categoryId'
+      preLoaderRoute: typeof TaggingCategoriesCategoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/github/lists/$listId': {
+      id: '/github/lists/$listId'
+      path: '/github/lists/$listId'
+      fullPath: '/github/lists/$listId'
+      preLoaderRoute: typeof GithubListsListIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/items/$itemId': {
+      id: '/content/items/$itemId'
+      path: '/content/items/$itemId'
+      fullPath: '/content/items/$itemId'
+      preLoaderRoute: typeof ContentItemsItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/collections/$collectionId': {
+      id: '/content/collections/$collectionId'
+      path: '/content/collections/$collectionId'
+      fullPath: '/content/collections/$collectionId'
+      preLoaderRoute: typeof ContentCollectionsCollectionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/collections_/$collectionId/items': {
+      id: '/content/collections_/$collectionId/items'
+      path: '/content/collections/$collectionId/items'
+      fullPath: '/content/collections/$collectionId/items'
+      preLoaderRoute: typeof ContentCollectionsCollectionIdItemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/collections_/$collectionId/analysis': {
+      id: '/content/collections_/$collectionId/analysis'
+      path: '/content/collections/$collectionId/analysis'
+      fullPath: '/content/collections/$collectionId/analysis'
+      preLoaderRoute: typeof ContentCollectionsCollectionIdAnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content/collections_/$collectionId/items_/$itemId': {
+      id: '/content/collections_/$collectionId/items_/$itemId'
+      path: '/content/collections/$collectionId/items/$itemId'
+      fullPath: '/content/collections/$collectionId/items/$itemId'
+      preLoaderRoute: typeof ContentCollectionsCollectionIdItemsItemIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
-}
-
-// Create and export the route tree
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/owners': typeof OwnersRoute
-  '/repos': typeof ReposRoute
-  '/topics': typeof TopicsRoute
-  '/lists/$id': typeof ListsIdRoute
-  '/lists/new': typeof ListsNewRoute
-  '/lists': typeof ListsIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/owners': typeof OwnersRoute
-  '/repos': typeof ReposRoute
-  '/topics': typeof TopicsRoute
-  '/lists/$id': typeof ListsIdRoute
-  '/lists/new': typeof ListsNewRoute
-  '/lists': typeof ListsIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/owners': typeof OwnersRoute
-  '/repos': typeof ReposRoute
-  '/topics': typeof TopicsRoute
-  '/lists/$id': typeof ListsIdRoute
-  '/lists/new': typeof ListsNewRoute
-  '/lists/': typeof ListsIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/owners'
-    | '/repos'
-    | '/topics'
-    | '/lists/$id'
-    | '/lists/new'
-    | '/lists'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/owners'
-    | '/repos'
-    | '/topics'
-    | '/lists/$id'
-    | '/lists/new'
-    | '/lists'
-  id:
-    | '__root__'
-    | '/'
-    | '/owners'
-    | '/repos'
-    | '/topics'
-    | '/lists/$id'
-    | '/lists/new'
-    | '/lists/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  OwnersRoute: typeof OwnersRoute
-  ReposRoute: typeof ReposRoute
-  TopicsRoute: typeof TopicsRoute
-  ListsIdRoute: typeof ListsIdRoute
-  ListsNewRoute: typeof ListsNewRoute
-  ListsIndexRoute: typeof ListsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  OwnersRoute: OwnersRoute,
-  ReposRoute: ReposRoute,
-  TopicsRoute: TopicsRoute,
-  ListsIdRoute: ListsIdRoute,
-  ListsNewRoute: ListsNewRoute,
-  ListsIndexRoute: ListsIndexRoute,
+  GithubOwnersRoute: GithubOwnersRoute,
+  GithubReposRoute: GithubReposRoute,
+  GithubTopicsRoute: GithubTopicsRoute,
+  ContentIndexRoute: ContentIndexRoute,
+  TaggingIndexRoute: TaggingIndexRoute,
+  ContentCollectionsCollectionIdRoute: ContentCollectionsCollectionIdRoute,
+  ContentItemsItemIdRoute: ContentItemsItemIdRoute,
+  GithubListsListIdRoute: GithubListsListIdRoute,
+  TaggingCategoriesCategoryIdRoute: TaggingCategoriesCategoryIdRoute,
+  TaggingGroupsGroupIdRoute: TaggingGroupsGroupIdRoute,
+  TaggingSystemsSystemIdRoute: TaggingSystemsSystemIdRoute,
+  TaggingTagsTagIdRoute: TaggingTagsTagIdRoute,
+  ContentCollectionsIndexRoute: ContentCollectionsIndexRoute,
+  ContentItemsIndexRoute: ContentItemsIndexRoute,
+  GithubListsIndexRoute: GithubListsIndexRoute,
+  TaggingCategoriesIndexRoute: TaggingCategoriesIndexRoute,
+  TaggingGroupsIndexRoute: TaggingGroupsIndexRoute,
+  TaggingSystemsIndexRoute: TaggingSystemsIndexRoute,
+  TaggingTagsIndexRoute: TaggingTagsIndexRoute,
+  ContentCollectionsCollectionIdAnalysisRoute:
+    ContentCollectionsCollectionIdAnalysisRoute,
+  ContentCollectionsCollectionIdItemsRoute:
+    ContentCollectionsCollectionIdItemsRoute,
+  ContentCollectionsCollectionIdItemsItemIdRoute:
+    ContentCollectionsCollectionIdItemsItemIdRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/owners",
-        "/repos",
-        "/topics",
-        "/lists/$id",
-        "/lists/new",
-        "/lists/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/owners": {
-      "filePath": "owners.tsx"
-    },
-    "/repos": {
-      "filePath": "repos.tsx"
-    },
-    "/topics": {
-      "filePath": "topics.tsx"
-    },
-    "/lists/$id": {
-      "filePath": "lists/$id.tsx"
-    },
-    "/lists/new": {
-      "filePath": "lists/new.tsx"
-    },
-    "/lists/": {
-      "filePath": "lists/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

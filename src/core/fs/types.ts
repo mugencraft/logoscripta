@@ -1,4 +1,4 @@
 export type SaveOptions = {
-	overwrite?: boolean;
-	createFolders?: boolean;
+  overwrite?: boolean;
+  createFolders?: boolean;
 };

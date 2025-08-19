@@ -1,9 +1,9 @@
 import { Badge } from "@/ui/components/core/badge";
 
 interface ArchivedCellProps {
-	value: string;
+  value: string;
 }
 
 export const ArchivedCell = ({ value }: ArchivedCellProps) => (
-	<Badge variant="default">{value || "-"}</Badge>
+  <Badge variant="default">{value || "-"}</Badge>
 );

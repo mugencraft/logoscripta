@@ -5,13 +5,13 @@ import { afterEach, beforeEach, vi } from "vitest";
 
 // Global test cleanup
 beforeEach(() => {
-	vi.clearAllMocks(); // Clear mock usage data
-	vi.resetAllMocks(); // Reset mock state
-	vi.useRealTimers(); // Restore real timers
+  vi.clearAllMocks(); // Clear mock usage data
+  vi.resetAllMocks(); // Reset mock state
+  vi.useRealTimers(); // Restore real timers
 });
 
 afterEach(() => {
-	vi.clearAllMocks(); // Clear mock usage data
-	vi.resetAllMocks(); // Reset mock state
-	vi.useRealTimers(); // Restore real timers
+  vi.clearAllMocks(); // Clear mock usage data
+  vi.resetAllMocks(); // Reset mock state
+  vi.useRealTimers(); // Restore real timers
 });

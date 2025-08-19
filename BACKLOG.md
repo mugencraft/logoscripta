@@ -1,198 +1,123 @@
-# Project Backlog
+# Backlog
 
-This document tracks known issues, planned features, and technical improvements. Items will be moved to GitHub Projects for formal tracking and assignment.
+## Areas
 
-## Project Features
+### Dev
 
-- Full-Stack Development Extensions:
-  - Static Site Generation (SSG/SSR): Next.js/Astro
-  - Content management patterns
-  - SEO optimization
-  - Mobile Development: React Native
+- fix knip once  writCsv, useTagValidation, date-picker and calendar are implemented
 
-- Browser & Platform Integration:
-  - Browser Extensions
-  - VS Code Extensions
-  - Obsidian Plugin
-  - Desktop Apps: Electron/Tauri implementation
-  - AI/ML Integration
+### Server
 
-- patterns:
-  - WebSocket/SSE implementation
-  - Push notifications
-  - Live collaboration
-  - Microservices Architecture
-    - Service decomposition
-    - API gateway patterns
-    - Message queues
-    - Service discovery
-
-## Interfaces Layer
-
-### Services and API
-
-Improvements:
-
-- Fix typing issue in `RepositoryQueriesAdapter.getAll<TWith extends RepositoryWithInput>`
-  - check TRPCContext: it fails in typing the extended rows as in repositoryRouter.getAll
-- Add missing owner and repositoryListItems in `RouterOutputs["repository"]["getAll"][0]`
 - Rename interfaces/server to api
-- Create a factory for the list service in TRPCContext
+- TRPCContext: review and consolidate naming
 
-### CLI
+### Content
 
-Improvements:
+- check getAnalysisSelectedTags in getFacetedUniqueValuesCustom, should work with columns which id is tags
+- views:
+  - CollectionDetailView: review
+  - ItemDetailView:
+    - fix multiple renderings
+    - make a backend component for TagSystemSelector, move to @ui if possible
+- model:
+  - ItemTagOperations: implement bulkUpdateTags
+- services:
+  - ContentCommandsAdapter: check deleteCollection, there is no error handling
+  - ContentQueriesAdapter:
+    - review and split in several Adapters and maybe services
+    - refactor: getItemsByTags, searchItems
+    - check: getOverallStatistics, getTagUsageAcrossSystems, getCollectionStatistics
+  - ContentImportExportService: implement preserveStructure, see ImportOptions
+- server:
+  - contentItemRouter: implement SEARCH AND FILTERING routes
+  - taggingSystemRouter: implement TAG VALIDATION routes
+- ui:
+  - ItemForm:
+    - rawTags: should be validated as a comma-separated list
+    - implement: collectionId, tagIds (get collectionId to tag to filter tags by collection)
+  - ItemPreview: getPreviewUrl should be an helper, we should rethink metadata.content about images and thumbs, there could be a local image handling and a remote image handling, and there could be a resize service which will get the needed image from the same image path (instead of item.metadata.content.thumbnail)
+  - ItemDetails: implement linkToCollection
+  - ItemsGrid: fix handleItemClick noStaticElementInteractions
 
-- Make `-v`, `-F`, `-S` options shared options across commands (check app config options)
-- Simplify metadataCommand by delegating logic to command and factory
+### Tagging
 
-### UI
+- views:
+  - ItemDetailView:add groups navigation, also get selected group state from local storage
+  - implement tagging/systems/$systemId
+- getItemsActions: implement handleRemoveDuplicateTags
+ui:
+  - TagButton: remove item if not needed
+  - BaseTaggingProps: remove systemId if not needed
 
-Bugs:
+#### TagManager
 
-- Fix dark mode `--mono-` variable issues in globals.css
-- Fix prettier formatter for globals.css
+- implement collection toggle trigger
+  - tags that toggles categories should be highlighted and the tooltip should show what lists will be showed if selected
+- TagLayouts: improve, check also gridClass
+- TagGroupForm: check if we need to pass onUpdate to TagGroupVisualizerManager, remove if unneeded
+- TagGroupVisualizerManager: fix bugs and improve
+  - check why we have to set metadata.display defaults, if it's needed then better to use an helper function for consistency
+  - ImagePreview:
+    - fix label and buttons for top aligned elements
+    - fix area selector for overlapping areas
+  - useVisualizerConfig: addMapping, get color from helper
+  - TagImageMapping, TagCombinationSelector: be DRY and consistent with the Badge
+- RawTagsAnalysis bulkAddToSystem: use bulk action
 
-Features:
+#### System Editing
 
-- Enhance Dashboard functionality
-- Persist useLayout values in localStorage
-
-#### Components
-
-Improvements:
-
-- ToggleListDialog: improve handleAction use of handleAddToList,
-
-### DataTable Component
-
-Features:
-
-- Make headerStyle sticky (currently only columns are sticky)
-
-Improvements:
-
-- Check colspan calculation logic: `config.features?.enableRowSelection ? 2 : 0`
-
-#### Cells
-
-Bugs:
-
-- Fix OwnerCell filter behavior and alignment issues:
-  - on toggle, if no Owner is selected, remove the whole filter
-  - button content should align to start
-
-Features:
-
-- Enhance LanguageCell with icons library
-- Add Obsidian resource linking to pluginName and themeName
-- In owners and topics tables, add links to repository, and active filter by entity, to single cells and to rows actions.
-
-#### Resizing
-
-Bugs:
-
-- Fix popup visibility in TopicsCell and ListIdsCell
-- Fix incorrect resizing in SizeCell
-
-Features:
-
-- Improve ResizableHeader double-click behavior
-
-#### Controls
-
-Bugs:
-
-- Fix Pagination SelectContent width is not as SelectTrigger
-
-Features:
-
-- Enhance AddRepositories with counts and additional parsing (packages.json, pyproject.toml, cargo.toml)
-- Improve ColumnVisibilityControl functionality: set sticky columns, hide Obsidian columns
-- Enhance Active Filters visualization for multiple values, allow partial removing.
-- Implement saved filters
-- Implement negative filters
-- Improve FacetedFilter styling and functionality
-- Add Row Controls: set line-clamp height
-- SortableHeaders: add sort or filter by checked
-
-Improvements:
-
-- Address ToggleListDialog missing selectedIds
-
-### Forms
-
-Improvements:
-
-- Review default handling approach
-- Consider zod for validation
-- Explore DRY principles in form generation
-
-## Core Layer
-
-Bugs:
-
-- Fix ChangeDetector.createChange to track diffs only (not the whole `entity`)
-- Enhance Logger implementation and progress tracking
-
-Features:
-
-- Integrate changelog analysis
-- Move changelog recording to database
-
-## Application Layer
-
-Improvements:
-
-- Create list service factory (check TRPCContext)
-- Standardize configuration options (check ProcessingOptionsBase, ProcessingOptions, GithubIntegratorOptions and SyncRepositoryOptions)
-- Find better location for SyncSummaryResult like interfaces
-- Improve operation result type handling
-- Split commands into isolated files
-
-## Domain Layer
-
-Bugs:
-
-- Fix snapshot not updated in GithubProcessor.saveRepository
-
-Features:
-
-- Add Drizzle dump and load scripts
-- Implement metadata type filtering in RepositorySystemListService.getItems
-- Extend Repository model with removal and fullNames history tracking
-
-Improvements:
-
-- Standardize configuration and option handling
-- Improve update of ListItem fullName on repository fullName change
-- Implement baseSystemMetadataSchema, obsidianPluginSchema, obsidianThemeSchema
-
-## Infrastructure Layer
-
-Features:
-
-- Add support for GitLab and other systems
-
-Improvements:
-
-- Fix infrastructure/persistence/db singleton importing from domain/config
+- Forms: improve tag selection (group by groups and categories)
+- TagValidationService: implement and check also useTagValidation, implement actual relationship checking in tagConflicts, and TagCategoryGrid
+- Tag System Forms: Checkbox indeterminate state: on category partial selected the select all checkbox should show partial selection
+- tagSystemDataSchema: add types to metadata, maybe move to another file, and test
 
 ### Github
 
-Bugs:
+- RepositoryListCommandsPort: convert return, remove undefined throwing errors
+- metadata: check handling
+- useGithubActions: use new useCrudActions
+- ListForm:
+  - update to include metadata
+  - check validators: in content and tagging forms we do it differently
+- ToggleList: check handleCreateList, maybe we have to get listId and call handleAddToList
+- ListView: fix use of any in useListTableConfig
+- obsidian-plugin.test, obsidian-theme.test: fix findItem, system list should not use ListQueries or it should not return a generic ListItem, this has a different  metadata
 
-- Verify last update tracking functionality, is it last commit date?
+## UI
 
-## Dev
+- Fix dark mode `--mono-` variable issues in globals.css
+- implement date-picker and calendar
+- Action: review onSuccess, it seems to be called too many times
+- FileUploadDropzone: fix noStaticElementInteractions, use draggable component
 
-Improvements:
+### Forms
 
-- Review Vite config server and preview proxies
-- Standardize file naming conventions
+- add select and multiselect with search component
+- Checkbox indeterminate state
+- check validators onChangeAsync, in every form we do as any but in ListForm we do newRepositoryListSchema.required()
+- BaseFormProps:
+  - mode: is not really used to change the handler but it's still required
+  - data: we are using data to determine if is create or edit/update mode, check this ambiguity
+- SubmitButton: improve isDisabled, should be disabled if dirty but with no real changes
 
-## Tests
+### Table
 
-Features:
+- Make headerStyle sticky (currently only columns are sticky)
+- useDataTable: check baseConfig merge, it was using lodash merge
+- fix table scrolling areas
+- add a special order cell, it will let to be drag and dropped, on drop items order change to reflect current tanstack table ordering
+- improve getFacetedUniqueValuesCustom:
+  - customizations by column IDs it's not solid and clean, it's not clear what kind of customizations are in place
+- ExportMenu, SelectionControl, TableControls: exportOptions, check that these options are used, implement customOptions in defaultOptions
+- getFilterType: using the column.id here bound the filtering system to the schema implementation, this should at least be well documented
+- SortableHeader: fix noStaticElementInteractions
+- Check colspan calculation logic: `config.features?.enableRowSelection ? 2 : 0`
 
-- Implement skipped tests for GitHub utils and repository list
+## Other
+
+- check youtube command and YoutubeAdapter
+- implement CategoryPanel as metadata.user field
+- improve components organization (entity related, features, extra)
+- improve models/**/types.ts
+
+## UI Upgrade Shadcn + use Sidebar

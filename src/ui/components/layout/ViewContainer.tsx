@@ -1,53 +1,62 @@
+import { type PropsWithChildren, useEffect } from "react";
+
 import { ActionGroup } from "@/ui/components/actions/ActionGroup";
 import type { ActionConfig } from "@/ui/components/actions/types";
-import { type PropsWithChildren, useEffect } from "react";
-import { useLayout } from "./useLayout";
 
-interface ViewContainerProps<TData> extends PropsWithChildren {
-	title: string;
-	description?: string;
-	actions?: ActionConfig<TData>[];
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	data?: any;
+import { useLayout } from "../../hooks/useLayout";
+
+interface ViewContainerProps<TData, TTableData extends TData = TData>
+  extends PropsWithChildren {
+  title: string;
+  description?: string;
+  actions?: ActionConfig<TData>[];
+  selected?: TTableData[];
+  data?: TData;
 }
 
-export const ViewContainer = <TData,>({
-	title,
-	description,
-	actions = [],
-	data,
-	children,
-}: ViewContainerProps<TData>) => {
-	const { setHeaderContent, setHeaderButtons } = useLayout();
+export const ViewContainer = <TData, TTableData extends TData = TData>({
+  title,
+  description,
+  actions = [],
+  selected,
+  data,
+  children,
+}: ViewContainerProps<TData, TTableData>) => {
+  const { setHeaderContent, setHeaderButtons } = useLayout();
 
-	useEffect(() => {
-		const headerContent = (
-			<div className="ml-4 flex gap-2">
-				<p className="font-bold">{title}</p>
-				<p className="text-muted-foreground">{description}</p>
-			</div>
-		);
-		setHeaderContent(headerContent);
+  useEffect(() => {
+    const headerContent = (
+      <div className="ml-4 flex gap-2">
+        <p className="font-bold">{title}</p>
+        <p className="text-muted-foreground">{description}</p>
+      </div>
+    );
+    setHeaderContent(headerContent);
 
-		return () => {
-			setHeaderContent(null);
-		};
-	}, [title, description, setHeaderContent]);
+    return () => {
+      setHeaderContent(null);
+    };
+  }, [title, description, setHeaderContent]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: setHeaderButtons
-	useEffect(() => {
-		if (!actions || actions.length === 0) return;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: setHeaderButtons is not needed
+  useEffect(() => {
+    if (actions.length === 0) return;
 
-		const headerButtons = (
-			<ActionGroup actions={actions} context="view" data={data} />
-		);
+    const headerButtons = (
+      <ActionGroup
+        actions={actions}
+        context="view"
+        data={data}
+        selected={selected}
+      />
+    );
 
-		setHeaderButtons(headerButtons);
+    setHeaderButtons(headerButtons);
 
-		return () => {
-			setHeaderButtons(null);
-		};
-	}, [actions, data]);
+    return () => {
+      setHeaderButtons(null);
+    };
+  }, [actions, data, selected]);
 
-	return <div className="space-y-4">{children}</div>;
+  return <div className="space-y-4">{children}</div>;
 };

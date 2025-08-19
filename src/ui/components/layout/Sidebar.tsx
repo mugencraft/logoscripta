@@ -1,179 +1,167 @@
-import { cn } from "@/ui/utils";
-import { Link } from "@tanstack/react-router";
 import {
-	Archive,
-	FolderKanban,
-	Home,
-	List,
-	ListPlus,
-	PackageSearch,
-	Plus,
-	Tags,
-	Users,
-} from "lucide-react";
+  Link,
+  type RegisteredRouter,
+  type ValidateLinkOptions,
+} from "@tanstack/react-router";
 import type React from "react";
 
-interface NavItemProps {
-	to: string;
-	label: string;
-	icon: React.ReactNode;
-	isCollapsed?: boolean;
-	exact?: boolean;
-	params?: Record<string, string>;
+import { ScrollArea } from "@/ui/components/core/scroll-area";
+import { cn } from "@/ui/utils";
+
+/**
+ * Navigation group interface with proper generic constraints
+ * @template TRouter - The router type, defaults to RegisteredRouter
+ * @template TOptions - The link options type for validation
+ */
+export interface NavGroup<
+  TRouter extends RegisteredRouter = RegisteredRouter,
+  TOptions = unknown,
+> {
+  /** Group title displayed in the sidebar */
+  title: string;
+  /** Array of navigation items for this group */
+  items: NavItem<TRouter, TOptions>[];
+  /** Whether the group is in collapsed state */
+  isCollapsed?: boolean;
 }
 
-const NavItem = ({
-	to,
-	label,
-	icon,
-	isCollapsed,
-	exact,
-	params,
-}: NavItemProps) => (
-	<Link
-		to={to}
-		params={params}
-		activeOptions={{ exact: exact ?? false }}
-		className={cn(
-			"flex items-center gap-3 px-3 py-2 rounded-lg transition-colors min-h-[40px]",
-			"hover:bg-secondary hover:text-secondary-foreground",
-			isCollapsed ? "justify-center w-10" : "justify-start",
-		)}
-		activeProps={{ className: "bg-secondary text-secondary-foreground" }}
-	>
-		<div className="flex-shrink-0" title={label}>
-			{icon}
-		</div>
-		<span
-			className={cn("transition-all duration-300", isCollapsed && "hidden")}
-		>
-			{label}
-		</span>
-	</Link>
-);
-
-interface NavGroupProps {
-	title: string;
-	children: React.ReactNode;
-	isCollapsed?: boolean;
+/**
+ * Navigation item interface with validated link options
+ * @template TRouter - The router type, defaults to RegisteredRouter
+ * @template TOptions - The link options type for validation
+ */
+interface NavItem<
+  TRouter extends RegisteredRouter = RegisteredRouter,
+  TOptions = unknown,
+> {
+  /** Type-safe link configuration validated against router */
+  link: ValidateLinkOptions<TRouter, TOptions>;
+  /** Display label for the navigation item */
+  label: string;
+  /** React icon component for the navigation item */
+  icon: React.ReactNode;
+  /** Whether the item is in collapsed state */
+  isCollapsed?: boolean;
 }
 
-const NavGroup = ({ title, children, isCollapsed }: NavGroupProps) => (
-	<div className="space-y-1">
-		{!isCollapsed && (
-			<h3 className="px-3 text-sm font-medium bg-muted uppercase tracking-wider">
-				{title}
-			</h3>
-		)}
-		<nav className="space-y-1">{children}</nav>
-	</div>
-);
-
-interface SidebarNavigationProps {
-	isCollapsed?: boolean;
+/**
+ * Navigation group component with proper overloads
+ * Renders a group of navigation items with optional title
+ */
+export function NavGroup<TRouter extends RegisteredRouter, TOptions>({
+  title,
+  items,
+  isCollapsed,
+}: NavGroup<TRouter, TOptions>): React.ReactNode;
+export function NavGroup({
+  title,
+  items,
+  isCollapsed,
+}: NavGroup): React.ReactNode {
+  return (
+    <div className="space-y-1">
+      {!isCollapsed && (
+        <h3 className="px-3 text-sm font-medium bg-muted uppercase tracking-wider">
+          {title}
+        </h3>
+      )}
+      <nav className="space-y-1">
+        {items.map((item) => (
+          <NavItemElement
+            key={item.label}
+            label={item.label}
+            link={item.link}
+            icon={item.icon}
+            isCollapsed={isCollapsed}
+          />
+        ))}
+      </nav>
+    </div>
+  );
 }
 
-export const SidebarNavigation = ({ isCollapsed }: SidebarNavigationProps) => {
-	return (
-		<aside
-			className={cn(
-				"h-full border-r p-4 bg-muted",
-				isCollapsed ? "w-16" : "w-64",
-			)}
-		>
-			<div className="space-y-6">
-				{/* Dashboard */}
-				<NavGroup title="Overview" isCollapsed={isCollapsed}>
-					<NavItem
-						to="/"
-						label="Dashboard"
-						icon={<Home className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-				</NavGroup>
+/**
+ * Navigation item component with proper overloads
+ * Renders a single navigation link with icon and label
+ */
+export function NavItemElement<TRouter extends RegisteredRouter, TOptions>({
+  label,
+  link,
+  icon,
+  isCollapsed,
+}: NavItem<TRouter, TOptions>): React.ReactNode;
+export function NavItemElement({
+  label,
+  link,
+  icon,
+  isCollapsed,
+}: NavItem): React.ReactNode {
+  return (
+    <Link
+      {...link}
+      className={cn(
+        "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors min-h-[40px]",
+        "hover:bg-secondary hover:text-secondary-foreground",
+        isCollapsed ? "justify-center w-10" : "justify-start",
+      )}
+      activeProps={{ className: "bg-secondary text-secondary-foreground" }}
+    >
+      <div className="flex-shrink-0" title={label}>
+        {icon}
+      </div>
+      <span
+        className={cn("transition-all duration-300", isCollapsed && "hidden")}
+      >
+        {label}
+      </span>
+    </Link>
+  );
+}
 
-				{/* Main Navigation */}
-				<NavGroup title="Browse" isCollapsed={isCollapsed}>
-					<NavItem
-						to="/repos"
-						label="Repositories"
-						icon={<PackageSearch className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-					<NavItem
-						to="/owners"
-						label="Owners"
-						icon={<Users className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-					<NavItem
-						to="/topics"
-						label="Topics"
-						icon={<Tags className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-				</NavGroup>
+/**
+ * Sidebar navigation props interface
+ * @template TRouter - The router type, defaults to RegisteredRouter
+ * @template TOptions - The link options type for validation
+ */
+interface SidebarNavigationProps<
+  TRouter extends RegisteredRouter = RegisteredRouter,
+  TOptions = unknown,
+> {
+  /** Array of navigation groups to display */
+  groups: NavGroup<TRouter, TOptions>[];
+  /** Whether the sidebar is in collapsed state */
+  isCollapsed?: boolean;
+}
 
-				{/* Lists */}
-				<NavGroup title="Lists" isCollapsed={isCollapsed}>
-					<NavItem
-						to="/lists"
-						label="All Lists"
-						icon={<List className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-					<NavItem
-						to="/lists/$id"
-						params={{ id: "obsidian-plugin" }}
-						label="Obsidian Plugins"
-						icon={<FolderKanban className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-					/>
-					<NavItem
-						to="/lists/$id"
-						params={{ id: "obsidian-theme" }}
-						label="Obsidian Themes"
-						icon={<FolderKanban className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-					/>
-					<NavItem
-						to="/lists/$id"
-						params={{ id: "archived" }}
-						label="Archived Items"
-						icon={<Archive className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-					/>
-					<NavItem
-						to="/lists/new"
-						label="New List"
-						icon={<ListPlus className="w-5 h-5" />}
-						isCollapsed={isCollapsed}
-						exact
-					/>
-				</NavGroup>
-
-				{/* Quick Actions */}
-				{!isCollapsed && (
-					<div className="pt-4 border-t">
-						<Link
-							to="/lists/new"
-							className={cn(
-								"flex items-center justify-center gap-2 w-full",
-								"px-4 py-2 bg-primary text-primary-foreground rounded-lg",
-								"hover:bg-primary/90 transition-colors",
-							)}
-						>
-							<Plus className="w-4 h-4" />
-							<span>Create New List</span>
-						</Link>
-					</div>
-				)}
-			</div>
-		</aside>
-	);
-};
+/**
+ * Main sidebar navigation component with proper overloads
+ * Provides navigation to all application sections with type-safe routing
+ */
+export function SidebarNavigation<TRouter extends RegisteredRouter, TOptions>({
+  groups,
+  isCollapsed,
+}: SidebarNavigationProps<TRouter, TOptions>): React.ReactNode;
+export function SidebarNavigation({
+  groups,
+  isCollapsed,
+}: SidebarNavigationProps): React.ReactNode {
+  return (
+    <ScrollArea
+      className={cn(
+        "h-full border-r p-4 bg-muted",
+        isCollapsed ? "w-16" : "w-64",
+      )}
+    >
+      <div className="space-y-6  mb-8">
+        {groups.map((group) => (
+          <NavGroup
+            key={group.title}
+            title={group.title}
+            items={group.items}
+            isCollapsed={isCollapsed}
+          />
+        ))}
+      </div>
+    </ScrollArea>
+  );
+}

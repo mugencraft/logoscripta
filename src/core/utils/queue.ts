@@ -17,46 +17,46 @@
  * ]);
  */
 export class AsyncQueue {
-	private queue: (() => Promise<void>)[] = [];
-	private running = false;
+  private queue: (() => Promise<void>)[] = [];
+  private running = false;
 
-	/**
-	 * Adds a task to the queue and returns a promise that resolves when the task completes.
-	 * Tasks are executed in the order they were added.
-	 * If a task throws an error, it is rejected but does not stop the queue.
-	 *
-	 * @param task - An async function to be executed
-	 * @returns Promise that resolves when the task completes or rejects if it fails
-	 * @throws Propagates any error thrown by the task
-	 */
-	async add(task: () => Promise<void>) {
-		return new Promise<void>((resolve, reject) => {
-			this.queue.push(async () => {
-				try {
-					await task();
-					resolve();
-				} catch (error) {
-					reject(error);
-				}
-			});
+  /**
+   * Adds a task to the queue and returns a promise that resolves when the task completes.
+   * Tasks are executed in the order they were added.
+   * If a task throws an error, it is rejected but does not stop the queue.
+   *
+   * @param task - An async function to be executed
+   * @returns Promise that resolves when the task completes or rejects if it fails
+   * @throws Propagates any error thrown by the task
+   */
+  async add(task: () => Promise<void>) {
+    return new Promise<void>((resolve, reject) => {
+      this.queue.push(async () => {
+        try {
+          await task();
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
 
-			this.processNext();
-		});
-	}
+      this.processNext();
+    });
+  }
 
-	private async processNext() {
-		if (this.running || this.queue.length === 0) return;
+  private async processNext() {
+    if (this.running || this.queue.length === 0) return;
 
-		this.running = true;
-		const task = this.queue.shift();
+    this.running = true;
+    const task = this.queue.shift();
 
-		try {
-			if (task) {
-				await task();
-			}
-		} finally {
-			this.running = false;
-			this.processNext();
-		}
-	}
+    try {
+      if (task) {
+        await task();
+      }
+    } finally {
+      this.running = false;
+      this.processNext();
+    }
+  }
 }

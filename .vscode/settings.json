@@ -1,123 +1,125 @@
 {
-	"editor.quickSuggestions": {
-		"strings": true
-	},
-	"[javascript][typescript][javascriptreact][typescriptreact]": {
-		"tailwindCSS.validate": true,
-		"editor.codeActionsOnSave": {
-			"quickfix.biome": "always",
-			"source.organizeImports.biome": "always"
-		},
-		"editor.defaultFormatter": "biomejs.biome",
-		"editor.formatOnSave": true
-	},
-	"[json]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[python]": {
-		"editor.codeActionsOnSave": {
-			"source.fixAll.ruff": "always"
-		},
-		"editor.defaultFormatter": "charliermarsh.ruff"
-	},
-	"editor.codeActionsOnSave": {
-		"quickfix.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
-	},
-	"editor.formatOnSave": true,
-	"editor.rulers": [80],
-	"editor.insertSpaces": true,
-	"editor.tabSize": 2,
-	"files.trimTrailingWhitespace": true,
-	"files.insertFinalNewline": true,
-	"files.associations": {
-		"*.json": "jsonc",
-		"*.css": "tailwindcss"
-	},
-	"files.watcherExclude": {
-		"**/routeTree.gen.ts": true
-	},
-	"files.readonlyInclude": {
-		"**/routeTree.gen.ts": true
-	},
-	"ruff.organizeImports": true,
-	"search.exclude": {
-		"ai/": true,
-		"data/": true,
-		"**/routeTree.gen.ts": true
-	},
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"typescript.preferences.importModuleSpecifierEnding": "minimal",
-	"typescript.preferences.quoteStyle": "double",
-	"typescript.preferences.useAliasesForRenames": true,
-	"cSpell.words": [
-		"adbkey",
-		"Amodio",
-		"autoflake",
-		"AUTOINCREMENT",
-		"autorefs",
-		"Balham",
-		"cachetools",
-		"cmdk",
-		"Czkawka",
-		"depcruise",
-		"Docstrings",
-		"exif",
-		"figsize",
-		"followlinks",
-		"fontawesome",
-		"frontmatter",
-		"gamification",
-		"glightbox",
-		"Hatchlor",
-		"indexeddb",
-		"isort",
-		"Journaling",
-		"levelname",
-		"libsql",
-		"Liskov",
-		"logomeka",
-		"logoscripta",
-		"magicast",
-		"Mazzucotelli",
-		"mdast",
-		"Meka",
-		"mkdocs",
-		"mkdocstrings",
-		"mypy",
-		"NLTK",
-		"obsidianmd",
-		"pandoc",
-		"papaparse",
-		"pipx",
-		"plaiceholder",
-		"postprocessors",
-		"preconfigured",
-		"pyenv",
-		"pymdownx",
-		"pyproject",
-		"pythonrsa",
-		"quantiles",
-		"Rclone",
-		"renderable",
-		"repomix",
-		"Roboto",
-		"shadcn",
-		"smastrom",
-		"sonner",
-		"Tauri",
-		"Timothée",
-		"Toggleable",
-		"tracebacks",
-		"trafilatura",
-		"Typer",
-		"unconfigured",
-		"unfetched",
-		"unparse",
-		"virtualenv",
-		"whitegrid"
-	]
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "[javascript][typescript][javascriptreact][typescriptreact]": {
+    "tailwindCSS.validate": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "explicit"
+    },
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.rulers": [80],
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "ruff.organizeImports": true,
+  "search.exclude": {
+    "ai/": true,
+    "data/": true,
+    "**/routeTree.gen.ts": true
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.preferences.useAliasesForRenames": true,
+  "cSpell.words": [
+    "adbkey",
+    "autoflake",
+    "AUTOINCREMENT",
+    "autorefs",
+    "Balham",
+    "cachetools",
+    "cmdk",
+    "danbooru",
+    "depcruise",
+    "Docstrings",
+    "exif",
+    "figsize",
+    "followlinks",
+    "fontawesome",
+    "frontmatter",
+    "gamification",
+    "glightbox",
+    "Hatchlor",
+    "indexeddb",
+    "isort",
+    "Istat",
+    "Journaling",
+    "levelname",
+    "libsql",
+    "Liskov",
+    "logomeka",
+    "logoscripta",
+    "magicast",
+    "mdast",
+    "Meka",
+    "mkdocs",
+    "mkdocstrings",
+    "mypy",
+    "NLTK",
+    "obsidianmd",
+    "pandoc",
+    "papaparse",
+    "pipx",
+    "plaiceholder",
+    "postprocessors",
+    "preconfigured",
+    "pyenv",
+    "pymdownx",
+    "pyproject",
+    "pythonrsa",
+    "quantiles",
+    "Rclone",
+    "rdfs",
+    "renderable",
+    "repomix",
+    "Roboto",
+    "shadcn",
+    "smastrom",
+    "sonner",
+    "subcat",
+    "Tauri",
+    "toggleable",
+    "tracebacks",
+    "trafilatura",
+    "typer",
+    "uncategorized",
+    "unconfigured",
+    "undertagged",
+    "unfetched",
+    "unparse",
+    "virtualenv",
+    "whitegrid"
+  ]
 }

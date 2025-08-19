@@ -1,8 +1,23 @@
+import type { ReactNode } from "react";
+
 interface BaseCellProps {
-	text?: string;
-	lines?: string;
+  value?: ReactNode;
+  lines?: string;
+  noneText?: string;
+  centered?: boolean;
 }
 
-export const BaseCell = ({ text, lines }: BaseCellProps) => (
-	<div {...{ className: `line-clamp-${lines || 1}` }}>{text || "-"}</div>
+export const BaseCell = ({
+  value: node,
+  lines = "1",
+  noneText = "-",
+  centered = false,
+}: BaseCellProps) => (
+  <div className={centered ? "text-center" : ""}>
+    {node ? (
+      <div {...{ className: `line-clamp-${lines}` }}>{node}</div>
+    ) : (
+      <span className="text-muted-foreground italic">{noneText}</span>
+    )}
+  </div>
 );

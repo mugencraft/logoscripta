@@ -1,0 +1,34 @@
+{
+  "output": {
+    "filePath": "ai/codebase.xml.txt",
+    "headerText": "LogoScripta Codebase",
+    "style": "xml",
+    // "removeComments": true,
+    "removeEmptyLines": true,
+    // "compress": true
+    "compress": false,
+    "topFilesLength": 10,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "git": {
+      "sortByChanges": true,
+      "includeDiffs": false
+    }
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "include": [
+    "*config.*",
+    "tailwind.config.ts",
+    "CODING_STANDARDS.md",
+    "components.json",
+    "index.html",
+    "package.json",
+    "BACKLOG.md",
+    "README.md",
+    "docs/features/lora-training.md",
+    "scripts/apply-captions.cjs",
+    "src/ui/theme/globals.css"
+  ]
+}

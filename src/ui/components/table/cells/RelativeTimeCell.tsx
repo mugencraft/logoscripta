@@ -1,40 +1,45 @@
+import { formatDistance, fromUnixTime } from "date-fns";
+
 import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from "@/ui/components/core/tooltip";
-import { formatDistance, fromUnixTime, parseISO } from "date-fns";
 
 interface RelativeTimeProps {
-	date: string | number;
+  date: Date | number;
 }
 
 export const RelativeTimeCell = ({ date }: RelativeTimeProps) => {
-	if (!date) return null;
-	const parsedDate = parseDate(date);
+  if (!date) return <span className="text-muted-foreground italic">-</span>;
+  const parsedDate = parseDate(date);
 
-	const getRelativeTime = () => {
-		return formatDistance(parsedDate, new Date(), { addSuffix: true });
-	};
+  const getRelativeTime = () => {
+    return formatDistance(parsedDate, new Date(), { addSuffix: true });
+  };
 
-	return (
-		<Tooltip>
-			<TooltipTrigger>
-				<span className="text-sm">{getRelativeTime()}</span>
-			</TooltipTrigger>
-			<TooltipContent>
-				<p>{parsedDate.toLocaleDateString()}</p>
-			</TooltipContent>
-		</Tooltip>
-	);
+  return (
+    <Tooltip>
+      <TooltipTrigger>
+        <span className="text-sm">{getRelativeTime()}</span>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{parsedDate.toLocaleDateString()}</p>
+      </TooltipContent>
+    </Tooltip>
+  );
 };
 
-const parseDate = (dateString: string | number) => {
-	// Check if the string is a numeric timestamp
-	const timestamp = Number(dateString);
-	if (!Number.isNaN(timestamp)) {
-		return fromUnixTime(timestamp);
-	}
-	// Otherwise parse as ISO date string
-	return parseISO(dateString as string);
+const parseDate = (date: Date | number) => {
+  if (date instanceof Date) {
+    return date;
+  }
+
+  // Check if the string is a numeric timestamp
+  const timestamp = Number(date);
+  if (!Number.isNaN(timestamp)) {
+    return fromUnixTime(timestamp);
+  }
+
+  return new Date(date);
 };

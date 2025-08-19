@@ -1,4 +1,4 @@
 {
-	"routesDirectory": "./src/interfaces/backend/routes",
-	"generatedRouteTree": "./src/interfaces/backend/routeTree.gen.ts"
+  "routesDirectory": "./src/interfaces/backend/routes",
+  "generatedRouteTree": "./src/interfaces/backend/routeTree.gen.ts"
 }

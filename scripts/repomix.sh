@@ -4,30 +4,30 @@ CONFIG_DIR="scripts/configs"
 function run_repomix() {
   local config=$1
   echo "Running Repomix with config: $config"
-  npx repomix -c "$CONFIG_DIR/repomix-$config.json"
+  pnpm dlx repomix -c "$CONFIG_DIR/repomix-$config.jsonc"
 }
 
 case "$1" in
-  "b")
-      run_repomix "all"
+  "all")
+    run_repomix "all"
     ;;
-  "a")
-     run_repomix "application"
+  "repositories")
+    run_repomix "repositories"
     ;;
-  "c")
-    run_repomix "core"
+  "tagging")
+    run_repomix "tagging"
     ;;
-  "d")
-    run_repomix "domain"
+  "actions")
+    run_repomix "actions"
     ;;
-  "is")
-    run_repomix "infrastructure"
+  "config")
+    run_repomix "config"
     ;;
-  "if")
-    run_repomix "interfaces"
+  "feature")
+    run_repomix "feature"
     ;;
   *)
-    echo "Usage: $0 {b|a|c|d|is|if}"
+    echo "Usage: $0 {all|repositories|tagging|actions|config|feature}"
     exit 1
     ;;
 esac

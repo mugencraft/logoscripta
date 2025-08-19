@@ -1,9 +1,13 @@
 import { format } from "date-fns";
 
 interface DateCellProps {
-	date?: string | undefined;
+  date?: Date | undefined;
 }
 
 export const DateCell = ({ date }: DateCellProps) => {
-	return date ? format(new Date(date), "PP") : "-";
+  return date ? (
+    format(date, "PP")
+  ) : (
+    <span className="text-muted-foreground italic">-</span>
+  );
 };

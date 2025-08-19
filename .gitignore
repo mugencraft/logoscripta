@@ -42,7 +42,5 @@ coverage/
 ai/
 data/
 !test/**/data/
-!/**/domain/data/
 docs/
 logoscripta.json
-digital-humanities

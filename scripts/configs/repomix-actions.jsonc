@@ -1,0 +1,83 @@
+{
+  "output": {
+    "filePath": "ai/codebase.xml.txt",
+    "headerText": "LogoScripta Codebase",
+    "style": "xml",
+    // "removeComments": true,
+    "removeEmptyLines": true,
+    // "compress": true
+    "compress": false,
+    "topFilesLength": 10,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "git": {
+      "sortByChanges": true,
+      "includeDiffs": false
+    }
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "include": [
+    //
+    // CORE
+    "src/core/serialization/*",
+    //
+    // BACKEND
+    //
+    "src/interfaces/backend/app.tsx",
+    "src/interfaces/backend/actions/**/*",
+    // Config
+    // "src/interfaces/backend/config/**/*",
+    // "src/interfaces/backend/config/accessors/*",
+    "src/interfaces/backend/config/columns/*",
+    // "src/interfaces/backend/config/columns/content/*",
+    // "src/interfaces/backend/config/columns/tagging/*",
+    // "src/interfaces/backend/config/columns/github/list-item.tsx",
+    // "src/interfaces/backend/config/columns/commons.tsx",
+    // "src/interfaces/backend/config/faceting/*",
+    // "src/interfaces/backend/config/faceting/getFacetedUniqueValuesCustom.ts",
+    // "src/interfaces/backend/config/filters/*",
+    // "src/interfaces/backend/config/metadata/*",
+    // "src/interfaces/backend/config/sorting/*",
+    // "src/interfaces/backend/config/categories.ts",
+    // "src/interfaces/backend/config/navigation.ts",
+    // Views
+    "src/interfaces/backend/views/**/*",
+    // "src/interfaces/backend/views/content/**/*",
+    // "src/interfaces/backend/views/tagging/**/*",
+    //
+    "src/interfaces/backend/hooks/table/useDataTable.ts",
+    //
+    // UI
+    // "src/ui/**/*"
+    // Base Components
+    "src/ui/components/actions/**/*",
+    // "src/ui/components/layout/ViewContainer.tsx",
+    //
+    // TABLE COMPONENT
+    //
+    // "src/ui/components/table/**/*",
+    "src/ui/components/table/types.ts",
+    "src/ui/components/table/DataTable.tsx",
+    // "src/ui/components/table/cells/*",
+    // "src/ui/components/table/controls/*",
+    "src/ui/components/table/controls/data-export/*",
+    "src/ui/components/table/controls/SelectionControl.tsx",
+    "src/ui/components/table/controls/TableControls.tsx"
+    // "src/ui/components/table/controls/Filters.tsx", // Filters
+    // "src/ui/components/table/controls/ColumnVisibilityControl.tsx",
+    // "src/ui/components/table/controls/column-visibility-helpers.ts"
+    // "src/ui/components/table/headers/*",
+    // "src/ui/components/table/rows/*",
+    // "src/ui/components/table/filters/FacetedFilter.tsx" // Filters
+    // "src/ui/components/core/table.tsx",
+    //
+  ],
+  "ignore": {
+    "customPatterns": [
+      "**/*.test.ts",
+      "src/interfaces/backend/routeTree.gen.ts"
+    ]
+  }
+}

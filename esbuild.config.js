@@ -1,20 +1,20 @@
-import { context } from 'esbuild';
+import { context } from "esbuild";
 
 const config = {
-  entryPoints: ['src/index.ts'],
+  entryPoints: ["src/index.ts"],
   bundle: true,
-  platform: 'node',
-  target: 'node18',
-  format: 'esm',
-  outfile: 'dist/index.js',
+  platform: "node",
+  target: "node18",
+  format: "esm",
+  outfile: "dist/index.js",
   sourcemap: true,
   treeShaking: true,
-  packages: 'external',
-  minify: process.env.NODE_ENV === 'production',
-  logLevel: 'info',
+  packages: "external",
+  minify: process.env.NODE_ENV === "production",
+  logLevel: "info",
 };
 
-if (process.argv.includes('--watch')) {
+if (process.argv.includes("--watch")) {
   const ctx = await context(config);
   await ctx.watch();
 } else {

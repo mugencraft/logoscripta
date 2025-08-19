@@ -1,4 +1,5 @@
 import type { CsvParserOptions } from "@/core/serialization/types";
+
 import { readCsv } from "./csv";
 /**
  * Extracts unique identifiers from CSV file using specified field
@@ -10,21 +11,21 @@ import { readCsv } from "./csv";
  * @returns Array of extracted identifiers
  */
 export async function getIdentifiersFromCsv(
-	sourcePath: string,
-	options: CsvParserOptions,
+  sourcePath: string,
+  options: CsvParserOptions,
 ): Promise<string[]> {
-	const { identifierField, alternativeFields = [], transform } = options;
-	const records = await readCsv(sourcePath);
+  const { identifierField, alternativeFields = [], transform } = options;
+  const records = await readCsv(sourcePath);
 
-	return records
-		.map((row) => {
-			const value =
-				row[identifierField] ||
-				alternativeFields.find((field) => row[field]) ||
-				"";
+  return records
+    .map((row) => {
+      const value =
+        row[identifierField] ||
+        alternativeFields.find((field) => row[field]) ||
+        "";
 
-			const identifier = String(value).trim();
-			return transform ? transform(identifier) : identifier;
-		})
-		.filter(Boolean);
+      const identifier = String(value).trim();
+      return transform ? transform(identifier) : identifier;
+    })
+    .filter(Boolean);
 }

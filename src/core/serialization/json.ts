@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { normalize } from "node:path";
+
 import { saveFile } from "../fs/save";
 import type { SaveOptions } from "../fs/types";
 
@@ -10,8 +11,8 @@ import type { SaveOptions } from "../fs/types";
  * @throws {Error} If file read or JSON parse fails
  */
 export const readJson = async <T>(filePath: string): Promise<T> => {
-	const content = await readFile(normalize(filePath), "utf-8");
-	return JSON.parse(content) as T;
+  const content = await readFile(normalize(filePath), "utf-8");
+  return JSON.parse(content) as T;
 };
 
 /**
@@ -21,10 +22,10 @@ export const readJson = async <T>(filePath: string): Promise<T> => {
  * @param saveOptions - File saving options
  */
 export const saveJson = async <T>(
-	data: T,
-	filePath: string,
-	saveOptions?: SaveOptions,
+  data: T,
+  filePath: string,
+  saveOptions?: SaveOptions,
 ): Promise<void> => {
-	const content = JSON.stringify(data, null, 2);
-	await saveFile(filePath, content, saveOptions);
+  const content = JSON.stringify(data, null, 2);
+  await saveFile(filePath, content, saveOptions);
 };

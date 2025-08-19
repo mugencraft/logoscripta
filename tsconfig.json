@@ -1,64 +1,60 @@
 {
-	"compilerOptions": {
-		"target": "ES2022",
-		"useDefineForClassFields": true,
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
-		"outDir": "dist",
-		"rootDir": ".",
-
-		// React-specific options
-		"jsx": "react-jsx",
-		"jsxImportSource": "react",
-
-		// Type Checking
-		"strict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictBindCallApply": true,
-		"strictPropertyInitialization": true,
-		"noImplicitThis": true,
-		"useUnknownInCatchVariables": true,
-		"alwaysStrict": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUncheckedIndexedAccess": true,
-		"noImplicitOverride": true,
-
-		// Modules
-		"resolveJsonModule": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		},
-
-		// Emit
-		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"removeComments": false,
-		"preserveConstEnums": true,
-
-		// JavaScript Support
-		"allowJs": true,
-		"checkJs": true,
-
-		// Interop Constraints
-		"forceConsistentCasingInFileNames": true,
-		"isolatedModules": true,
-
-		// Language and Environment
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-
-		// Completeness
-		"skipLibCheck": true
-	},
-	"include": ["src", "test", "drizzle.config.ts", "scripts"],
-	"exclude": ["node_modules", "dist"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "outDir": "dist",
+    "rootDir": ".",
+    // React-specific options
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    // Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    // Modules
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    // Emit
+    // "declaration": true, // conflicts with zod, drizzle and trpc
+    // "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    // JavaScript Support
+    "allowJs": true,
+    "checkJs": true,
+    // Interop Constraints
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    // Language and Environment
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    // Completeness
+    "skipLibCheck": true
+  },
+  "include": ["src", "test", "drizzle.config.ts", "scripts"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

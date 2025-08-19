@@ -2,13 +2,14 @@
 
 - Clean Code Hexagon Domain Driven Onion Architecture
 - ETL foundation with type-safe data processing
+- Content Management and Tagging Systems
 - CLI application
 - API server Controller
 - React backend
 - Database ORM integration
 - Testing infrastructure
 
-LogoScripta is a modern TypeScript-based **full-stack** platform that combines an **ETL toolkit** with an *educational framework* for developers at all skill levels, implementing a **GitHub** repository *analysis tool*, and **[Obsidian][obsidian]** *Plugins* and *Theme* lists of repositories.
+LogoScripta is a modern TypeScript-based **full-stack** platform that combines an **ETL toolkit** with an *educational framework* for developers at all skill levels, implementing a **content management system**, **advanced tagging capabilities**, a **GitHub** repository *analysis tool*, and **[Obsidian][obsidian]** *Plugins* and *Theme* lists of repositories.
 
 Built with **domain-driven design** principles and *[clean hexagonal architecture][domain-driven-hexagon]*, LogoScripta demonstrates how to create maintainable, scalable TypeScript applications while solving real-world data challenges.
 By combining [Drizzle ORM][drizzle], [Zod][zod], [tRPC][trpc], [React][react], [Tanstack][tanstack] and [TypeScript][typescript] in a cohesive application, LogoScripta bridges theory and practice in software development.
@@ -18,14 +19,17 @@ By combining [Drizzle ORM][drizzle], [Zod][zod], [tRPC][trpc], [React][react], [
 - [LogoScripta 🚀](#logoscripta-)
   - [#️⃣ Table of Content](#️⃣-table-of-content)
   - [🎯 Key Features](#-key-features)
+    - [For Content Managers and Researchers](#for-content-managers-and-researchers)
+    - [For Data Scientists and ML Engineers](#for-data-scientists-and-ml-engineers)
     - [For Github and Obsidian Enthusiasts](#for-github-and-obsidian-enthusiasts)
     - [For Data Professionals](#for-data-professionals)
     - [For Educators and Students](#for-educators-and-students)
     - [For Full-stack Developers](#for-full-stack-developers)
     - [For TypeScript Developers](#for-typescript-developers)
     - [For TanStack Developers](#for-tanstack-developers)
-  - [🏗️ Architecture](#️-architecture)
+  - [�️ Architecture](#️-architecture)
   - [📁 Project Structure](#-project-structure)
+  - [📁 Project Structure](#-project-structure-1)
   - [⚙️ Configuration](#️-configuration)
   - [🚀 Quick Start](#-quick-start)
     - [Installation](#installation)
@@ -40,12 +44,6 @@ By combining [Drizzle ORM][drizzle], [Zod][zod], [tRPC][trpc], [React][react], [
 ## 🎯 Key Features
 
 LogoScripta demonstrates modern TypeScript development practices through:
-
-- 🔌 **Data Collection and Integration**:
-  - **GitHub** and **Obsidian** API integration with type-safe adapters
-  - **Repositories** analysis advanced data grid
-  - **Lists** of repositories
-  - **Obsidian** Plugins and Themes repository lists
 
 - 🏛️ **Clean, Layered Architecture**
   - **Hexagonal Domain Driven** architecture
@@ -78,112 +76,195 @@ LogoScripta demonstrates modern TypeScript development practices through:
   - **Hot Reloading**: Fast development workflow
   - **Type Safety**: End-to-end type checking
 
+### For Content Managers and Researchers
+
+Create collections of items and add tags from a tag system.
+
+- 📚 **Content Management System**:
+  - **Collections** management with hierarchical organization and tagging
+  - **Content Items** with metadata, relationships, and full-text search
+  - **Import/Export** workflows with validation and progress tracking
+  - **Analytics Dashboard** with statistics and content type breakdowns
+
+- 🏷️ **Advanced Tagging System**:
+  - **Hierarchical tagging** (Systems → Groups → Categories → Tags)
+  - **Tag validation** and relationship management
+
+### For Data Scientists and ML Engineers
+
+Tag images for Lora Training.
+
+- 🤖 **LoRA Training Support**:
+  - **Caption management** for image datasets
+
+- 📊 **Data Analytics**:
+  - **Content distribution analysis** with visual charts
+  - **Tag frequency analysis** and relationship mapping
+  - **Export capabilities** for external analysis tools
+  - **Statistical insights** on content and tagging patterns
+
 ### For Github and Obsidian Enthusiasts
 
-- Track and analyze the entire Obsidian plugin and theme ecosystem
-- Monitor trends, discover new projects
-- Maintain your own curated lists of repositories
-- With rich metadata and visualization
+Track and analyze the entire Obsidian plugin and theme ecosystem. Monitor trends, discover new projects. Maintain your own curated lists of repositories with rich metadata and visualization.
+
+- 🔌 **Data Collection and Integration**:
+  - **GitHub** and **Obsidian** API integration with type-safe adapters
+  - **Repositories** analysis with topic extraction and metadata
+  - **Obsidian plugins and themes** tracking with community statistics
+  - **Real-time synchronization** with upstream data sources
 
 ### For Data Professionals
 
-- Extract, transform, and load data from GitHub and Obsidian APIs
-- Track historical changes with automatic versioning
-- Create custom repository collections with search and filtering
-- Analyze GitHub trends with configurable data visualizations
+- 🔄 **ETL Pipeline Architecture**:
+  - **Change tracking** with snapshot-based versioning
+  - **Data validation** with comprehensive error reporting
+  - **Batch processing** with progress monitoring
+  - **Data transformation** with customizable mapping rules
+
+- 📈 **Analytics and Visualization**:
+  - **Interactive dashboards** with real-time data updates
+  - **Export capabilities** (CSV, JSON) for external analysis
+  - **Filtering and search** across all data dimensions
+  - **Historical trend analysis** with change detection
 
 ### For Educators and Students
 
-- Use as a teaching tool for full-stack TypeScript development
-- Reference real-world implementations of software design principles
-- Modify and extend the platform as a learning exercise
-- Leverage comprehensive documentation and clear code examples
+- 🎓 **Learning-Focused Architecture**:
+  - **Domain-Driven Design** implementation with clear boundaries
+  - **Hexagonal Architecture** showcasing ports and adapters
+  - **SOLID principles** demonstrated throughout the codebase
+  - **Clean Code practices** with comprehensive documentation
+
+- 📖 **Educational Resources**:
+  - **Architectural examples** for layers and patterns
+  - **Code organization** following industry best practices
+  - **Testing strategies** with unit and integration examples
+  - **Development workflows** from CLI to web interfaces
 
 ### For Full-stack Developers
 
-- Learn advanced patterns with a clean domain-driven approach
-- Understand TanStack tools in a comprehensive implementation
-- Explore modern front-end techniques and type-safe backends
+- 🔧 **Modern Development Stack**:
+  - **Type-safe** end-to-end development with TypeScript
+  - **tRPC** for seamless client-server communication
+  - **React** with TanStack Router for modern UI development
+  - **Drizzle ORM** for type-safe database operations
 
 ### For TypeScript Developers
 
-Study a full type-safe implementation from Drizzle DB schema to tRPC APIs to React UI.
+A full type-safe implementation from Drizzle DB schema to tRPC APIs to React UI.
+
+- 🔍 **Code Quality Tools**:
+  - **Biome** for linting and formatting
+  - **Strict TypeScript** configuration
+  - **Type-driven development** with schema validation
+  - **Dependency analysis** with architectural boundaries
 
 ### For TanStack Developers
 
-Experience the complete [TanStack][tanstack] suite working together: [Router][tanstack-router], [Table][tanstack-table], [Form][tanstack-form], [Query][tanstack-query], [Ranger][tanstack-ranger].
+- ⚡ **[TanStack][tanstack] Ecosystem Integration**:
+  - [TanStack Router][tanstack-router] with type-safe routing and nested layouts
+  - [TanStack Table][tanstack-table] with advanced filtering and sorting
+  - [TanStack Form][tanstack-form] with validation and type safety
+  - [TanStack Query][tanstack-query] (via tRPC) for server state management
+  - [TanStack Ranger][tanstack-ranger] for ranger input ui
 
-## 🏗️ Architecture
+## �️ Architecture
 
-LogoScripta follows an onion hexagonal domain driven architecture emphasizing SOLID principles:
+LogoScripta follows **Clean Hexagonal Architecture** principles with **Domain-Driven Design**, organized in five distinct layers:
 
-1. **Core Layer**: Contains foundational utilities and infrastructure components that are domain-agnostic:
-   - Change tracking for version control
-   - File system operations
-   - Logging infrastructure
-   - Serialization utilities for data persistence
+1. **Core Layer**: Framework-agnostic utilities and foundational abstractions:
+   - File system operations and path management
+   - Serialization and data transformation utilities
+   - Change tracking and versioning mechanisms
+   - Logging and error handling infrastructure
    - Shared utilities and helpers
 
-2. **Domain Layer**: The heart of the application, containing:
-   - Business models (Repositories, Lists, Topics, etc.)
-   - Value objects for immutable domain concepts
-   - Domain services for business logic
-   - Port interfaces (Commands and Queries)
+2. **Domain Layer**: Pure business logic and domain rules:
+   - Entity definitions (Content, Tagging, GitHub models)
+   - Domain services for business operations
+   - Port definitions for external dependencies
    - Configuration management
 
-3. **Application Layer**: Orchestrates use cases by:
-   - Implementing application services
-   - Coordinating domain objects
-   - Processing commands from interfaces
-   - Managing integrations through factories
-   - Providing facades for complex operations
-
-4. **Infrastructure Layer**: External integrations and data persistence:
+3. **Infrastructure Layer**: External integrations and data persistence:
    - Database layer with ORM mappings
    - Data Repository implementations
    - Adapter implementations for external services (GitHub, Obsidian)
    - Error handling for external systems
 
-5. **Interfaces Layer**: User-facing interfaces that consume the application:
+4. **Interfaces Layer**: User-facing interfaces that consume the application:
    - CLI commands and processors
    - tRPC API endpoints and handlers
    - React-based web UI and components
    - Data visualization and interaction
 
+5. **UI Layer**:
+   - Shadcn core
+   - Table
+   - Forms
+   - Actions
+   - Import/Export
+   - Layout
+   - Metadata
+   - Annotation
+   - Dashboard
+   - Content
+   - Tagging
+
+## 📁 Project Structure
+
 ## 📁 Project Structure
 
 - 📦 `src/`: Source code
-  - 📂 `application/`: Orchestrates domain logic and external integrations
-    - 📂 `commands/`: Command handlers for business operations
-    - 📂 `integration/`: External service integrators and processors
   - 📂 `core/`: Domain-agnostic utilities and infrastructure
     - 📂 `changes/`: Version control and change tracking mechanisms
     - 📂 `fs/`: File system abstractions and operations
     - 📂 `logging/`: Structured logging facilities
     - 📂 `serialization/`: Data format conversions (CSV, JSON)
-    - 📂 `utils/`: Shared helper functions
+    - 📂 `utils/`: Shared helper functions (array, format, object, parse, queue)
   - 📂 `domain/`: Core business logic and rules
     - 📂 `config/`: Application configuration management
     - 📂 `models/`: Entity definitions and business rules
     - 📂 `ports/`: Interface contracts for infrastructure
     - 📂 `services/`: Pure domain logic and business operations
-    - 📂 `value-objects/`: Immutable domain concepts
+    - 📂 `validation/`: Zod validators for entities, routes and forms
   - 📂 `infrastructure/`: Technical implementations and adapters
-    - 📂 `persistence/`: Database connectivity and ORM mappings
     - 📂 `adapters/`: External API integrations
-      - 📂 `github/`: GitHub API client and transformers
-      - 📂 `obsidian/`: Obsidian community data handlers
+    - 📂 `factories/`: Service builders
+    - 📂 `persistence/`: Database connectivity and ORM mappings
   - 📂 `interfaces/`: User interaction layers
     - 📂 `backend/`: Web UI server-side components
+      - 📂 `actions/`: Buttons and Forms
+      - 📂 `layouts/`: Base Layouts
+      - 📂 `routes/`: File-based routing with TanStack Route
+      - 📂 `tables/`: Table configuration and components
+      - 📂 `views/`: Page components and layouts
+      - 📜 `navigation.tsx/`: Sidebar navigation links
     - 📂 `cli/`: Command-line interface definitions
     - 📂 `server/`: API and service endpoints
+    - 📜 `server-client.tsx/`: tRPC configuration and client setup
   - 📂 `shared/`: Cross-cutting concerns and common types
+    - 📂 `github/`: Shared GitHub types and utilities
+    - 📂 `obsidian/`: Shared Obsidian types and utilities
+    - 📂 `schema/`: Database schema definitions
   - 📂 `ui/`: Presentation layer components
     - 📂 `components/`: Reusable UI building blocks
+      - 📂 `actions/`: Action system and button
+      - 📂 `annotation/`: Annotation and markup
+      - 📂 `content/`: Content management UI
+      - 📂 `core/`: Base UI (shadcn/ui)
+      - 📂 `extra/`: Extended shadcn components
+      - 📂 `forms/`: Form framework built on TanStack Form
+      - 📂 `import-export/`: Import/export workflows
+      - 📂 `layout/`: Layout and navigation
+      - 📂 `metadata/`: Metadata display
+      - 📂 `table/`: Advanced data table
+      - 📂 `tagging/`: Tagging system UI
+    - 📂 `hooks/`: Custom React hooks
     - 📂 `theme/`: Visual styling system
   - 📜 `index.ts`: CLI application entry point
   - 📜 `main.tsx`: Web application entry point
 - 📜 `index.html`: HTML entry point for web application
+- 📂 `scripts/`: Utility scripts for data processing and automation
 - 📦 `test/`: Test suites and fixtures
 
 ## ⚙️ Configuration
