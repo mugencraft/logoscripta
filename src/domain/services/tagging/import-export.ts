@@ -1,8 +1,8 @@
 import z from "zod";
 
 import type {
-  ImportOptions,
   RelationshipType,
+  TaggingImportOptions,
   TagSystemExportResult,
   TagSystemImportResult,
 } from "../../models/tagging/types";
@@ -126,7 +126,7 @@ export class TagSystemImportExportService {
    */
   async importSystem(
     systemData: TagSystemData,
-    options: ImportOptions = {},
+    options: TaggingImportOptions = {},
   ): Promise<TagSystemImportResult> {
     try {
       // Validate the import data

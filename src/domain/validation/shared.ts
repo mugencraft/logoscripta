@@ -7,9 +7,18 @@ import {
   SYSTEM_TYPE_SYMBOL,
 } from "../models/shared";
 
+const importPreviewSchema = z.object({
+  folderName: z.string(),
+  contentType: z.enum(["image", "document"]),
+});
+
+export type ImportPreview = z.infer<typeof importPreviewSchema>;
+
 export const sharedSchema = {
   entityId: z.number().positive(),
   folderName: z.string(),
+  // TODO: move to a better place
+  getImportPreview: importPreviewSchema,
   iconName: z.string().transform((val) => val as IconName),
   color: z
     .string()
@@ -38,6 +47,7 @@ const userMetadataSchema = z.looseObject({
 const importMetadataSchema = z.object({
   source: z.enum(IMPORT_SOURCES),
   folderName: z.string().optional(),
+  originalId: z.string().optional(),
   importedAt: z.coerce.date().optional(),
   lastSyncAt: z.coerce.date().optional(),
   originalUrl: z.string().optional(),

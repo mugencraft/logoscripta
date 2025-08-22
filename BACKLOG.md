@@ -4,7 +4,7 @@
 
 ### Dev
 
-- fix knip once  writCsv, useTagValidation, date-picker and calendar are implemented
+- fix knip once useTagValidation, date-picker and calendar are implemented
 
 ### Server
 

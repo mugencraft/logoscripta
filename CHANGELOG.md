@@ -1,4 +1,78 @@
 # Changelog
+<!-- markdownlint-disable MD024 -->
+
+## v0.2.1 - URL Content
+
+Implement URL content type with client-side import support
+
+### Global
+
+#### repomix
+
+- **CHANGED**: Simplify configuration
+
+#### packages
+
+- **ADDED**: fast-csv for CSV parsing
+
+### core
+
+#### serialization
+
+- **CHANGED**: `readCsv` renamed to `readStream` and migrated from papaparse to fast-csv
+- **REMOVED**: `serialization/types.ts`
+- **MOVED**: `serialization/export.ts` to `ui/components/table/controls`
+
+#### utils
+
+- **MOVED**: `getFirstCharacter` to `utils/format.ts`
+
+### domain
+
+#### services
+
+- **CHANGED**: `FileSystemService`
+  - Renamed `getImportImagesWithCaptions` to `getImportPreview`
+  - Added document preview support
+  - Added `uploadToImport` and `deleteImportFile` methods (not implemented)
+
+#### content
+
+- **ADDED**: URL import types and validation
+- **CHANGED**: `ContentImportExportService`
+  - Renamed `importFromFileSystem` to `importFromServer`
+  - Added `importFromClient` for client-side imports
+- **ADDED**: `services/content/parser.ts` - URL import utilities
+
+#### validation
+
+- **ADDED**: `originalId` field to `importMetadataSchema`
+
+### interfaces
+
+#### backend
+
+- **CHANGED**: `ContentView` - Enhanced import wizard with URL support
+
+### ui
+
+#### core
+
+- **UPDATED**: `command`, `dialog` components
+
+#### content
+
+- **CHANGED**: `ItemPreview` - Added URL content type support
+- **ADDED**: `parseImportData` utility to `content/import/wizard`
+- **CHANGED**: `ImportWizard`
+  - Added back button support
+  - Enhanced to handle different import source types
+
+#### import-export
+
+- **ADDED**: `parseCsvToJson` using papaparse for CSV processing
+- **ADDED**: `FileContentParser` for file upload and text parsing
+- **ADDED**: `ImportResult` component for import completion feedback
 
 ## v0.2.0 - Content and Tagging
 

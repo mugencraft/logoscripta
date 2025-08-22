@@ -11,8 +11,11 @@ case "$1" in
   "all")
     run_repomix "all"
     ;;
-  "repositories")
-    run_repomix "repositories"
+  "github")
+    run_repomix "github"
+    ;;
+  "content")
+    run_repomix "content"
     ;;
   "tagging")
     run_repomix "tagging"
@@ -27,7 +30,7 @@ case "$1" in
     run_repomix "feature"
     ;;
   *)
-    echo "Usage: $0 {all|repositories|tagging|actions|config|feature}"
+    echo "Usage: $0 {all|github|content|tagging|actions|config|feature}"
     exit 1
     ;;
 esac

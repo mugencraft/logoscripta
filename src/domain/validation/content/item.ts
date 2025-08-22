@@ -4,7 +4,7 @@ import {
   contentItemSchema,
   newContentItemSchema,
 } from "../../models/content/item";
-import { ITEM_TYPES } from "../../models/content/types";
+import { CONTENT_TYPES } from "../../models/content/types";
 import { TAG_SOURCES } from "../../models/tagging/types";
 import { createMetadataSchema, sharedSchema } from "../shared";
 
@@ -28,7 +28,7 @@ export const contentItemsRoutesSchema = {
     tags: z.array(entityId).optional(),
     excludeTags: z.array(entityId).optional(),
     source: tagSources.optional(),
-    contentType: z.enum(ITEM_TYPES).optional(),
+    contentType: z.enum(CONTENT_TYPES).optional(),
   }),
 
   getItemsByTags: z.object({
@@ -85,6 +85,7 @@ export const contentItemMetadataSchema = createMetadataSchema("content-item", {
         .object({
           title: z.string().optional(),
           description: z.string().optional(),
+          excerpt: z.string().optional(),
           image: z.string().optional(),
           siteName: z.string().optional(),
           type: z.string().optional(),

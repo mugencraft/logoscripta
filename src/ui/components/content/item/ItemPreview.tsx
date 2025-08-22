@@ -9,24 +9,10 @@ interface ItemPreviewProps {
 
 export function ItemPreview({ item, className = "" }: ItemPreviewProps) {
   const baseClasses = `w-full h-full object-cover rounded ${className}`;
-
-  const getPreviewUrl = (): string | null => {
-    const metadata = item.metadata;
-
-    // For images, try to get the image URL from metadata
-    if (item.contentType === "image") {
-      return metadata?.content?.previewUrl || null;
-    }
-
-    // For videos, try to get thumbnail
-    if (item.contentType === "video") {
-      return metadata.content?.thumbnail || null;
-    }
-
-    return null;
-  };
-
-  const previewUrl = getPreviewUrl();
+  const previewUrl =
+    item.metadata.storage?.previewUrl ||
+    item.metadata.url?.openGraph?.image ||
+    null;
 
   switch (item.contentType) {
     case "image":
@@ -76,7 +62,14 @@ export function ItemPreview({ item, className = "" }: ItemPreviewProps) {
       );
 
     case "url":
-      return (
+      return previewUrl ? (
+        <img
+          src={previewUrl}
+          alt={item.title || item.identifier}
+          className={baseClasses}
+          loading="lazy"
+        />
+      ) : (
         <div
           className={`${baseClasses} flex items-center justify-center bg-gray-100 dark:bg-gray-800`}
         >

@@ -22,7 +22,7 @@
     // Schema
     //
     // "src/shared/**/*",
-    "src/shared/schema/tagging.ts",
+    "src/shared/schema/content.ts",
     //
     // Core
     //
@@ -34,37 +34,37 @@
     //
     "src/domain/models/shared.ts",
     "src/domain/models/errors.ts",
-    "src/domain/models/tagging/**/*",
-    "src/domain/ports/tagging/*",
+    "src/domain/models/content/**/*",
+    "src/domain/ports/content/*",
     "src/domain/services/shared/**/*",
-    "src/domain/services/tagging/**/*",
+    "src/domain/services/content/**/*",
     "src/domain/validation/shared.ts",
-    "src/domain/validation/tagging/*",
+    "src/domain/validation/content/*",
     //
     // Infrastructure
     //
-    "src/infrastructure/persistence/adapters/tagging/*",
+    "src/infrastructure/persistence/adapters/content/*",
     //
     // interfaces
     //
     // BACKEND
     //
     "src/interfaces/backend/app.tsx",
-    "src/interfaces/backend/actions/tagging/**/*",
+    "src/interfaces/backend/actions/content/**/*",
     "src/interfaces/backend/actions/useCrudActions.tsx",
-    "src/interfaces/backend/routes/tagging/**/*",
-    "src/interfaces/backend/tables/columns/tagging/**/*",
+    "src/interfaces/backend/routes/content/**/*",
+    "src/interfaces/backend/tables/columns/content/**/*",
     "src/interfaces/backend/tables/columns/commons.tsx",
     "src/interfaces/backend/tables/useDataTable.ts",
-    "src/interfaces/backend/views/tagging/**/*",
+    "src/interfaces/backend/views/content/**/*",
     //
     // SERVER
-    "src/interfaces/server/routers/tagging/*",
+    "src/interfaces/server/routers/content/*",
     "src/interfaces/server-client.tsx",
     //
     // Ui
     //
-    "src/ui/components/tagging/**/*",
+    "src/ui/components/content/**/*",
     //
     "src/ui/components/actions/**/*",
     "src/ui/components/annotation/**/*",
@@ -102,7 +102,7 @@
   ],
   "ignore": {
     "customPatterns": [
-      "**/*.test.ts",
+      "src/ui/components/extra/multi-select.tsx",
       "src/interfaces/backend/routeTree.gen.ts"
     ]
   }

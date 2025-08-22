@@ -6,7 +6,7 @@ import {
   type Table,
 } from "@tanstack/react-table";
 
-import type { ImageCaptioned } from "@/domain/models/content/types";
+import type { ImportPreviewItem } from "@/domain/models/content/types";
 import type { RepositoryList } from "@/domain/models/github/repository-list";
 
 const STORAGE_KEY = "tag-analysis-selected-tags";
@@ -44,7 +44,7 @@ export function getFacetedUniqueValuesCustom<TData extends RowData>(): (
           const useAnalysisFilter = analysisSelectedTags.size > 0;
 
           for (const row of facetedRowModel.flatRows) {
-            const rowData = row.original as ImageCaptioned;
+            const rowData = row.original as ImportPreviewItem;
             const tags = rowData.tags;
             if (!tags) continue;
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getFirstCharacter } from "@/core/fs/paths";
+import { getFirstCharacter } from "@/core/utils/format";
 
 describe("File System Path Operations", () => {
   describe("getFirstCharacter", () => {

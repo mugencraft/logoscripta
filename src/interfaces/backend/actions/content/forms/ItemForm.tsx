@@ -1,6 +1,6 @@
 import { startCase } from "@/core/utils/format";
 import type { ContentItem } from "@/domain/models/content/item";
-import { ITEM_TYPES } from "@/domain/models/content/types";
+import { CONTENT_TYPES } from "@/domain/models/content/types";
 import { createMetadata } from "@/domain/services/shared/metadata";
 import {
   contentItemFormSchema,
@@ -49,7 +49,7 @@ export function ItemForm({
     },
   });
 
-  const contentTypeOptions = ITEM_TYPES.map((type) => ({
+  const contentTypeOptions = CONTENT_TYPES.map((type) => ({
     value: type,
     label: startCase(type),
   }));

@@ -2,7 +2,7 @@ import { useRouter } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import type { RepositoryListItem } from "@/domain/models/github/repository-list";
-import type { SyncRepositoryOptions } from "@/domain/services/github/commands/list-item";
+import type { SyncRepositoryOptions } from "@/domain/models/github/types";
 import { createMetadata } from "@/domain/services/shared/metadata";
 import { repositoryListItemMetadataSchema } from "@/domain/validation/github/repository-list";
 import { trpc } from "@/interfaces/server-client";

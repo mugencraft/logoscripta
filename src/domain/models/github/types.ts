@@ -1,3 +1,4 @@
+import type { ProcessingOptionsBase } from "../../config/processing";
 import type {
   ArchivedListItemMetadata,
   ObsidianPluginMetadata,
@@ -71,4 +72,32 @@ export interface RepositoryListItemObsidianPlugin
 export interface RepositoryListItemObsidianTheme
   extends RepositoryListItemWithRelations {
   metadata: ObsidianThemeMetadata;
+}
+
+// Sync
+
+/**
+ * Configuration options for syncRepositoryData
+ */
+export interface SyncRepositoryOptions extends ProcessingOptionsBase {
+  /** List item listIDs to sync */
+  listIds?: number[];
+
+  /** List item fullNames to sync */
+  fullNames?: string[];
+
+  /**
+   * Whether to skip integrate new repositories from GitHub when not found locally
+   */
+  skipIntegrateNew?: boolean;
+
+  /**
+   * Whether to skip link items with missing repositoryId
+   */
+  skipLinkMissing?: boolean;
+
+  /**
+   * Whether to skip update item names when repository name has changed
+   */
+  skipUpdateNames?: boolean;
 }

@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useState } from "react";
 
 import { getFilenameWithoutExt } from "@/core/utils/format";
 import type { ContentCollection } from "@/domain/models/content/collection";
+import type { ContentType } from "@/domain/models/content/types";
 
 import { Button } from "@/ui/components/core/button";
 import { Input } from "@/ui/components/core/input";
@@ -16,11 +17,12 @@ import {
 import { Switch } from "@/ui/components/core/switch";
 import { ImportOptionsForm } from "@/ui/components/import-export/ImportOptionsForm";
 
-interface ImportOptionsProps {
-  type: "images" | "captions" | "bookmarks" | "markdown";
+interface StepOptionsProps {
+  contentType: ContentType;
   data: { path?: string } | null;
   collections?: ContentCollection[];
   onNext: (options: ImportOptionsData) => void;
+  onBack: () => void;
 }
 
 export interface ImportOptionsData {
@@ -33,12 +35,31 @@ export interface ImportOptionsData {
   additionalOptions: Record<string, unknown>;
 }
 
-export function ImportOptions({
-  type,
+const importOptionsConfig = [
+  {
+    id: "skipExisting",
+    label: "Skip existing items",
+    defaultValue: true,
+  },
+  {
+    id: "matchByFilename",
+    label: "Match by filename",
+    defaultValue: true,
+  },
+  {
+    id: "preserveStructure",
+    label: "Preserve folder structure (coming soon)",
+    disabled: true,
+  },
+];
+
+export function StepOptions({
+  contentType,
   data,
   collections,
   onNext,
-}: ImportOptionsProps) {
+  onBack,
+}: StepOptionsProps) {
   const defaultName = useMemo(() => {
     if (!data?.path) return "";
     return getFilenameWithoutExt(data.path);
@@ -64,8 +85,8 @@ export function ImportOptions({
   }, [defaultName, options.createNewCollection, options.newCollectionName]);
 
   const getTypeSpecificOptions = () => {
-    switch (type) {
-      case "images":
+    switch (contentType) {
+      case "image":
         return (
           <>
             <div className="flex items-center space-x-2">
@@ -90,56 +111,38 @@ export function ImportOptions({
             </div>
           </>
         );
-      case "captions":
-        return (
-          <div className="space-y-4">
-            <div>
-              <Label>Caption Format</Label>
-              <Select
-                onValueChange={(value) =>
-                  setOptions((prev) => ({
-                    ...prev,
-                    additionalOptions: {
-                      ...prev.additionalOptions,
-                      format: value,
-                    },
-                  }))
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select format" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="json">JSON</SelectItem>
-                  <SelectItem value="csv">CSV</SelectItem>
-                  <SelectItem value="txt">Text Files</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        );
+      // case "captions":
+      //   return (
+      //     <div className="space-y-4">
+      //       <div>
+      //         <Label>Caption Format</Label>
+      //         <Select
+      //           onValueChange={(value) =>
+      //             setOptions((prev) => ({
+      //               ...prev,
+      //               additionalOptions: {
+      //                 ...prev.additionalOptions,
+      //                 format: value,
+      //               },
+      //             }))
+      //           }
+      //         >
+      //           <SelectTrigger>
+      //             <SelectValue placeholder="Select format" />
+      //           </SelectTrigger>
+      //           <SelectContent>
+      //             <SelectItem value="json">JSON</SelectItem>
+      //             <SelectItem value="csv">CSV</SelectItem>
+      //             <SelectItem value="txt">Text Files</SelectItem>
+      //           </SelectContent>
+      //         </Select>
+      //       </div>
+      //     </div>
+      //   );
       default:
         return null;
     }
   };
-
-  const importOptionsConfig = [
-    {
-      id: "skipExisting",
-      label: "Skip existing items",
-      defaultValue: true,
-    },
-    {
-      id: "matchByFilename",
-      label: "Match by filename",
-      defaultValue: true,
-    },
-    {
-      id: "preserveStructure",
-      label: "Preserve folder structure (coming soon)",
-      disabled: true,
-    },
-  ];
 
   const handleOptionChange = (optionId: string, checked: boolean) => {
     setOptions((prev) => ({ ...prev, [optionId]: checked }));
@@ -150,7 +153,7 @@ export function ImportOptions({
       <div>
         <Label className="text-base font-medium">Import Options</Label>
         <p className="text-sm text-muted-foreground">
-          Configure how to import your {type}
+          Configure how to import your {contentType}
         </p>
       </div>
 
@@ -227,7 +230,7 @@ export function ImportOptions({
       {getTypeSpecificOptions()}
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={() => history.back()}>
+        <Button variant="outline" onClick={onBack}>
           Back
         </Button>
         <Button

@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 
-import type { DownloadOptions } from "@/core/serialization/export";
-
 import { Action } from "@/ui/components/actions/Action";
 
 import type { DataTableProps } from "../types";
 import { getExportAction } from "./data-export/actions";
+import type { DownloadOptions } from "./data-export/utils";
 import { FiltersActive } from "./filtering/FiltersActive";
 import { FiltersControl } from "./filtering/FiltersControl";
 import { GlobalFilter } from "./filtering/filters/GlobalFilter";

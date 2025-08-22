@@ -4,7 +4,7 @@ import { ConsoleLogger } from "@/core/logging/logger";
 import type { GitHubProcessorOptions } from "@/domain/config/github";
 import type { ProcessingOptionsBase } from "@/domain/config/processing";
 import { useConfig } from "@/domain/config/useConfig";
-import type { SyncRepositoryOptions } from "@/domain/services/github/commands/list-item";
+import type { SyncRepositoryOptions } from "@/domain/models/github/types";
 import { createListItemProcessor } from "@/infrastructure/factories/list-item";
 
 interface ListsProcessingOptions extends ProcessingOptionsBase {

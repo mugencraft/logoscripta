@@ -1,7 +1,7 @@
 import { ConsoleLogger } from "@/core/logging/logger";
 
-import type { ProcessingOptionsBase } from "../../../config/processing";
 import type { RepositoryListItem } from "../../../models/github/repository-list";
+import type { SyncRepositoryOptions } from "../../../models/github/types";
 import type { RepositoryQueriesPort } from "../../../ports/github/repository/queries";
 import type { RepositoryListQueriesPort } from "../../../ports/github/repository-list/queries";
 import type { RepositoryListService } from "../repository-list";
@@ -14,32 +14,6 @@ interface ValidationResult {
     deletedRepositories: string[]; // Items with repositoryId that doesn't exist
     invalidMetadata: string[];
   };
-}
-
-/**
- * Configuration options for syncRepositoryData
- */
-export interface SyncRepositoryOptions extends ProcessingOptionsBase {
-  /** List item listIDs to sync */
-  listIds?: number[];
-
-  /** List item fullNames to sync */
-  fullNames?: string[];
-
-  /**
-   * Whether to skip integrate new repositories from GitHub when not found locally
-   */
-  skipIntegrateNew?: boolean;
-
-  /**
-   * Whether to skip link items with missing repositoryId
-   */
-  skipLinkMissing?: boolean;
-
-  /**
-   * Whether to skip update item names when repository name has changed
-   */
-  skipUpdateNames?: boolean;
 }
 
 /**

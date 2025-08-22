@@ -1,6 +1,7 @@
 import { join } from "node:path";
 
-import { getFirstCharacter, validatePathSegment } from "../fs/paths";
+import { validatePathSegment } from "../fs/paths";
+import { getFirstCharacter } from "../utils/format";
 import { SnapshotService } from "./snapshot";
 import { ChangeTracker } from "./tracker";
 import type { Change, HistoryOptions, HistoryResult } from "./types";

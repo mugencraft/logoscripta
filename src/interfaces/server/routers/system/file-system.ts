@@ -11,10 +11,13 @@ export const fileSystemRouter = router({
     async ({ ctx }) => await ctx.fileSystemService.getImportFolders(),
   ),
 
-  getImportImagesWithCaptions: publicProcedure
-    .input(sharedSchema.folderName)
+  getImportPreview: publicProcedure
+    .input(sharedSchema.getImportPreview)
     .query(
       async ({ ctx, input }) =>
-        await ctx.fileSystemService.getImportImagesWithCaptions(input),
+        await ctx.fileSystemService.getImportPreview(
+          input.folderName,
+          input.contentType,
+        ),
     ),
 });

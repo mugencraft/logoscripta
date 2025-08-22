@@ -9,7 +9,9 @@ import { useEffect, useMemo, useState } from "react";
 
 import type {
   ContentItemWithStats,
-  ImageCaptioned,
+  ContentType,
+  ImportPreviewHandler,
+  PreviewItem,
 } from "@/domain/models/content/types";
 
 import { Badge } from "@/ui/components/core/badge";
@@ -23,35 +25,26 @@ import {
 import { ScrollArea } from "@/ui/components/core/scroll-area";
 import { ValidationFeedback } from "@/ui/components/import-export/ValidationFeedback";
 
-import type { ImportSourceData } from "./ImportSourceSelector";
+import { parseImportData } from "./parseImportData";
+import type { ImportSourceData } from "./StepSourceSelector";
 
-interface ImportPreviewProps {
-  type: "images" | "captions" | "bookmarks" | "markdown";
+interface StepPreviewProps {
+  contentType: ContentType;
   data: ImportSourceData;
   existingItems?: ContentItemWithStats[];
-  onGetImagesWithCaptions?: (folderName: string) => Promise<ImageCaptioned[]>;
+  onGetImportPreview?: ImportPreviewHandler;
   onConfirm: () => void;
-}
-interface PreviewItem {
-  id: string;
-  name: string;
-  type: string;
-  size?: number;
-  status: "new" | "exists" | "error";
-  preview?: string;
-  metadata?: {
-    caption?: string;
-    tags?: string[];
-  };
+  onBack: () => void;
 }
 
-export function ImportPreview({
-  type,
+export function StepPreview({
+  contentType,
   data,
   existingItems = [],
-  onGetImagesWithCaptions,
+  onGetImportPreview,
   onConfirm,
-}: ImportPreviewProps) {
+  onBack,
+}: StepPreviewProps) {
   const [previewItems, setPreviewItems] = useState<PreviewItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,43 +60,17 @@ export function ImportPreview({
     );
   }, [previewItems]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: existingItems is not needed
-  useEffect(() => {
-    if (
-      type === "images" &&
-      data.sourceType === "folder" &&
-      onGetImagesWithCaptions
-    ) {
-      loadImagePreview();
-    } else {
-      handleOtherTypes();
-    }
-  }, [type, data, onGetImagesWithCaptions, existingItems]);
-
-  const loadImagePreview = async () => {
-    if (!onGetImagesWithCaptions) return;
-
+  const loadPreviewData = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const imagesData = await onGetImagesWithCaptions(data.path);
-      const existingIdentifiers = new Set(
-        existingItems.map((item) => item.identifier),
+      const items = await parseImportData(
+        data,
+        contentType,
+        existingItems,
+        onGetImportPreview,
       );
-
-      const items: PreviewItem[] = imagesData.map((image) => ({
-        id: image.id,
-        name: image.id,
-        type: "image",
-        status: existingIdentifiers.has(image.id) ? "exists" : "new",
-        preview: image.imageUrl,
-        metadata: {
-          caption: image.caption,
-          tags: image.tags,
-        },
-      }));
-
       setPreviewItems(items);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load preview");
@@ -112,18 +79,17 @@ export function ImportPreview({
     }
   };
 
-  const handleOtherTypes = () => {
-    // Placeholder for other import types
-    setPreviewItems([]);
-    setIsLoading(false);
-  };
+  // biome-ignore lint/correctness/useExhaustiveDependencies: loadPreviewData changes on every re-render
+  useEffect(() => {
+    loadPreviewData();
+  }, [contentType, data, onGetImportPreview, existingItems]);
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
-          <p>Analyzing {type}...</p>
+          <p>Analyzing {contentType}...</p>
         </div>
       </div>
     );
@@ -266,7 +232,7 @@ export function ImportPreview({
       </Card>
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={() => history.back()}>
+        <Button variant="outline" onClick={onBack}>
           Back
         </Button>
         <Button

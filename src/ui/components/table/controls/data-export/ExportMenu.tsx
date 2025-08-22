@@ -8,11 +8,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import type { ExportFormat } from "@/core/serialization/export";
-
 import { Button } from "@/ui/components/core/button";
 
 import { useDataExport } from "./useDataExport";
+import type { ExportFormat } from "./utils";
 
 interface ExportMenuProps<TData> {
   data: TData[];

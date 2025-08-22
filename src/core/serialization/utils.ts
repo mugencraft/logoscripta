@@ -1,6 +1,10 @@
-import type { CsvParserOptions } from "@/core/serialization/types";
+import { readStream } from "./csv";
 
-import { readCsv } from "./csv";
+interface CsvIdentifiersOptions {
+  identifierField: string;
+  alternativeFields?: string[];
+  transform?: (value: string) => string;
+}
 /**
  * Extracts unique identifiers from CSV file using specified field
  * @param sourcePath - Path to CSV file
@@ -12,10 +16,10 @@ import { readCsv } from "./csv";
  */
 export async function getIdentifiersFromCsv(
   sourcePath: string,
-  options: CsvParserOptions,
+  options: CsvIdentifiersOptions,
 ): Promise<string[]> {
   const { identifierField, alternativeFields = [], transform } = options;
-  const records = await readCsv(sourcePath);
+  const records = await readStream(sourcePath);
 
   return records
     .map((row) => {

@@ -1,6 +1,9 @@
 import { startCase } from "@/core/utils/format";
 import type { ContentCollection } from "@/domain/models/content/collection";
-import { COLLECTION_LAYOUTS, ITEM_TYPES } from "@/domain/models/content/types";
+import {
+  COLLECTION_LAYOUTS,
+  CONTENT_TYPES,
+} from "@/domain/models/content/types";
 import { createMetadata } from "@/domain/services/shared/metadata";
 import {
   contentCollectionFormSchema,
@@ -47,7 +50,7 @@ export function CollectionForm({
     },
   });
 
-  const typeOptions = ITEM_TYPES.map((type) => ({
+  const typeOptions = CONTENT_TYPES.map((type) => ({
     value: type,
     label: startCase(type),
   }));

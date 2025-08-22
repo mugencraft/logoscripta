@@ -5,7 +5,6 @@ const config: KnipConfig = {
   // Ignore patterns
   ignore: [
     "src/interfaces/backend/routeTree.gen.ts",
-    "src/core/serialization/csv.ts",
     "src/domain/validation/shared.ts",
     "test/helpers/setup.ts",
     "test/helpers/time.ts",

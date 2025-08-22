@@ -1,10 +1,11 @@
 import type { Table } from "@tanstack/react-table";
 import { Download } from "lucide-react";
 
-import type { DownloadOptions } from "@/core/serialization/export";
+import type { ActionConfig } from "@/ui/components/actions/types";
 
-import type { ActionConfig } from "../../../actions/types";
 import { ExportMenu } from "./ExportMenu";
+import type { DownloadOptions } from "./utils";
+
 export const getExportAction = <TData,>(
   table: Table<TData>,
   defaultOptions: DownloadOptions = {},

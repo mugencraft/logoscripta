@@ -1,6 +1,6 @@
 {
   "name": "logoscripta",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An ETL toolkit and educational platform for data collection, transformation, and visualization, designed for digital humanities researchers and aspiring developers",
   "license": "MIT",
   "keywords": [
@@ -121,6 +121,7 @@
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.4",
     "drizzle-zod": "^0.8.3",
+    "fast-csv": "^5.0.5",
     "fast-glob": "^3.3.3",
     "lucide-react": "^0.539.0",
     "ora": "^8.2.0",

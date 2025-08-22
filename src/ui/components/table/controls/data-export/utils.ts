@@ -1,7 +1,5 @@
 import Papa from "papaparse";
 
-import type { CsvOptions } from "./types";
-
 export type ExportFormat = "csv" | "json" | "markdown";
 
 export interface DownloadOptions {
@@ -11,16 +9,25 @@ export interface DownloadOptions {
   includeColumns?: string[];
 }
 
-interface MarkdownOptions {
-  headers?: Record<string, string>;
-  includeColumns?: string[];
-  includeHeaders?: boolean;
+interface CsvOptions {
+  delimiter?: string;
+  encoding?: string;
+  forceQsv?: boolean;
+  noHeaders?: boolean;
+  skipEmptyLines?: boolean;
+  dynamicTyping?: boolean;
 }
 
 interface SerializeOptions {
   csvOptions?: CsvOptions;
   headers?: Record<string, string>;
   includeColumns?: string[];
+}
+
+interface MarkdownOptions {
+  headers?: Record<string, string>;
+  includeColumns?: string[];
+  includeHeaders?: boolean;
 }
 
 /**

@@ -1,31 +1,98 @@
+import type {
+  ClientImportInput,
+  ContentImportOptions,
+  ServerImportInput,
+} from "../../validation/content/import-export";
 import type { Tag } from "../tagging/tag";
 import type { TagSource } from "../tagging/types";
 import type { ContentCollection } from "./collection";
-import type { ContentItem } from "./item";
+import type { ContentItem, NewContentItem } from "./item";
 import type { ContentItemTag } from "./item-tag";
 
-export interface ImageCaptioned {
+export interface ImportPreviewItem {
   id: string;
-  imageUrl: string;
-  caption: string;
-  tags: string[];
+  name: string;
+  type: ContentType;
+  previewUrl?: string;
+  caption?: string;
+  tags?: string[];
+  metadata?: Record<string, unknown>;
 }
 
 // Enums
 
-export const COLLECTION_LAYOUTS = ["grid", "list", "timeline"] as const;
+export const CONTENT_TYPES = ["image", "url", "document", "video"] as const;
+export type ContentType = (typeof CONTENT_TYPES)[number];
 
-export const COLLECTION_TYPES = [
-  "image",
-  "url",
-  "document",
-  "video",
-  "mixed",
-] as const;
+export const COLLECTION_TYPES = [...CONTENT_TYPES, "mixed"] as const;
 export type CollectionType = (typeof COLLECTION_TYPES)[number];
 
-export const ITEM_TYPES = ["image", "url", "document", "video"] as const;
-export type ItemType = (typeof ITEM_TYPES)[number];
+export const COLLECTION_LAYOUTS = ["grid", "list", "timeline"] as const;
+
+// Import Types
+
+export type ImportSourceType = "filesystem" | "text-content" | "file-upload";
+
+export interface ServerImportConfig {
+  input: ServerImportInput;
+  options: ContentImportOptions;
+}
+
+export interface ClientImportConfig {
+  input: ClientImportInput;
+  options: ContentImportOptions;
+}
+
+export type ImportConfig = ServerImportConfig | ClientImportConfig;
+
+export type ImportPreviewHandler = (
+  folderName: string,
+  contentType: "image" | "document",
+) => Promise<ImportPreviewItem[]>;
+
+export interface PreviewItem {
+  id: string;
+  name: string;
+  type: string;
+  size?: number;
+  status: "new" | "exists" | "error";
+  preview?: string;
+  metadata?: {
+    caption?: string;
+    tags?: string[];
+  };
+}
+
+export interface ImportStats extends Record<string, number | string[]> {
+  itemsCreated: number;
+  itemsUpdated: number;
+  errors: string[];
+}
+
+export type ImportProgressUpdate =
+  | { type: "created"; collection: ContentCollection }
+  | { type: "started"; total: number; files: string[] }
+  | {
+      type: "progress";
+      item: ContentItem;
+      progress: number;
+      total: number;
+    }
+  | {
+      type: "error";
+      filename: string;
+      error: string;
+      progress: number;
+      total: number;
+    }
+  | {
+      type: "completed";
+      collection: ContentCollection;
+      stats: ImportStats;
+    }
+  | { type: "error"; error: string };
+
+export type ParsedImportItem = Omit<NewContentItem, "collectionId">;
 
 // Extended
 
@@ -62,7 +129,7 @@ export interface ContentSearchFilters {
   tags?: number[];
   excludeTags?: number[];
   source?: TagSource;
-  contentType?: ItemType;
+  contentType?: ContentType;
 }
 
 export interface ContentStatistics {

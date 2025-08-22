@@ -22,7 +22,7 @@
     // Schema
     //
     // "src/shared/**/*",
-    "src/shared/schema/tagging.ts",
+    "src/shared/schema/github.ts",
     //
     // Core
     //
@@ -34,37 +34,37 @@
     //
     "src/domain/models/shared.ts",
     "src/domain/models/errors.ts",
-    "src/domain/models/tagging/**/*",
-    "src/domain/ports/tagging/*",
+    "src/domain/models/github/**/*",
+    "src/domain/ports/github/*",
     "src/domain/services/shared/**/*",
-    "src/domain/services/tagging/**/*",
+    "src/domain/services/github/**/*",
     "src/domain/validation/shared.ts",
-    "src/domain/validation/tagging/*",
+    "src/domain/validation/github/*",
     //
     // Infrastructure
     //
-    "src/infrastructure/persistence/adapters/tagging/*",
+    "src/infrastructure/persistence/adapters/github/*",
     //
     // interfaces
     //
     // BACKEND
     //
     "src/interfaces/backend/app.tsx",
-    "src/interfaces/backend/actions/tagging/**/*",
+    "src/interfaces/backend/actions/github/**/*",
     "src/interfaces/backend/actions/useCrudActions.tsx",
-    "src/interfaces/backend/routes/tagging/**/*",
-    "src/interfaces/backend/tables/columns/tagging/**/*",
+    "src/interfaces/backend/routes/github/**/*",
+    "src/interfaces/backend/tables/columns/github/**/*",
     "src/interfaces/backend/tables/columns/commons.tsx",
     "src/interfaces/backend/tables/useDataTable.ts",
-    "src/interfaces/backend/views/tagging/**/*",
+    "src/interfaces/backend/views/github/**/*",
     //
     // SERVER
-    "src/interfaces/server/routers/tagging/*",
+    "src/interfaces/server/routers/github/*",
     "src/interfaces/server-client.tsx",
     //
     // Ui
     //
-    "src/ui/components/tagging/**/*",
+    "src/ui/components/github/**/*",
     //
     "src/ui/components/actions/**/*",
     "src/ui/components/annotation/**/*",

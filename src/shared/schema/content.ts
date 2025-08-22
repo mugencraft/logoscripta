@@ -8,7 +8,7 @@ import {
   text,
 } from "drizzle-orm/sqlite-core";
 
-import { COLLECTION_TYPES, ITEM_TYPES } from "@/domain/models/content/types";
+import { COLLECTION_TYPES, CONTENT_TYPES } from "@/domain/models/content/types";
 import { TAG_SOURCES } from "@/domain/models/tagging/types";
 import type { ContentCollectionMetadata } from "@/domain/validation/content/collection";
 import type { ContentItemMetadata } from "@/domain/validation/content/item";
@@ -43,7 +43,7 @@ export const contentItems = sqliteTable(
       .references(() => contentCollections.id, { onDelete: "cascade" }),
     identifier: text("identifier").notNull(), // filename, URL, or unique ID
     title: text("title"),
-    contentType: text("content_type", { enum: ITEM_TYPES }).notNull(),
+    contentType: text("content_type", { enum: CONTENT_TYPES }).notNull(),
     rawTags: text("raw_tags"), // Original comma separated tags
     metadata: text("metadata", { mode: "json" })
       .$type<ContentItemMetadata>()

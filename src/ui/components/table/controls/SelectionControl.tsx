@@ -1,13 +1,12 @@
 import type { Table } from "@tanstack/react-table";
 
-import type { DownloadOptions } from "@/core/serialization/export";
-
 import { Action } from "@/ui/components/actions/Action";
 import { ActionButtons } from "@/ui/components/actions/ActionButtons";
 import { cn } from "@/ui/utils";
 
 import type { SelectionConfiguration } from "../types";
 import { getExportAction } from "./data-export/actions";
+import type { DownloadOptions } from "./data-export/utils";
 
 interface SelectionControlProps<TData, TTableData extends TData = TData> {
   table: Table<TTableData>;

@@ -158,7 +158,7 @@ export interface TagSystemImportResult {
   resolvedSystemName: string; // Actual name used (might be different if renamed)
 }
 
-export interface ImportOptions {
+export interface TaggingImportOptions {
   overwrite?: boolean;
   renameIfExists?: boolean;
 }

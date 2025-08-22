@@ -17,9 +17,3 @@ export const IMPORT_SOURCES = [
   "api",
   "url",
 ] as const;
-
-export const RELATIONSHIP_TYPES = [
-  "alternative",
-  "dependency",
-  "inspiration",
-] as const;

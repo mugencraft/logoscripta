@@ -46,6 +46,15 @@ export const sanitizeFolderName = (folderName: string): string => {
   return sanitized;
 };
 
+/**
+ * Extracts and normalizes the first character of a string for use in path generation.
+ * Returns '_' for strings starting with non-alphabetic characters.
+ */
+export function getFirstCharacter(str: string): string {
+  const normalized = str.toLowerCase().trim();
+  return /^[a-z]/i.test(normalized) && normalized[0] ? normalized[0] : "_";
+}
+
 const upperFirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export const startCase = (str: string) =>

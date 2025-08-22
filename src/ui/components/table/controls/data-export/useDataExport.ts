@@ -5,7 +5,7 @@ import {
   type DownloadOptions,
   downloadData,
   type ExportFormat,
-} from "@/core/serialization/export";
+} from "./utils";
 
 interface UseDataExportOptions<T> {
   data: T[];
