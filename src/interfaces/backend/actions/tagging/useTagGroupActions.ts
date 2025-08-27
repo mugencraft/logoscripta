@@ -1,11 +1,16 @@
 import type { NewTagGroup, TagGroup } from "@/domain/models/tagging/group";
 import { trpc } from "@/interfaces/server-client";
 
-import type { ActionCallbacks } from "@/ui/components/actions/types";
+import {
+  type CrudActionsConfig,
+  type EntityConfig,
+  useCrudActions,
+} from "../useCrudActions";
 
-import { useCrudActions } from "../useCrudActions";
-
-export function useTagGroupActions(callbacks: ActionCallbacks = {}) {
+export function useTagGroupActions({
+  isDetailView,
+  callbacks = {},
+}: CrudActionsConfig) {
   const mutations = {
     create: trpc.tagging.groups.create.useMutation(),
     update: trpc.tagging.groups.update.useMutation(),
@@ -16,10 +21,9 @@ export function useTagGroupActions(callbacks: ActionCallbacks = {}) {
     getDisplayName: (group: TagGroup) => `Group "${group.name}"`,
     routes: {
       list: "/tagging/groups",
-      detail: "/tagging/groups/$groupId",
-      idName: "groupId",
+      shouldRedirect: isDetailView,
     },
-  };
+  } satisfies EntityConfig<TagGroup>;
 
   const options = {
     beforeCreate: async (data: NewTagGroup) => {

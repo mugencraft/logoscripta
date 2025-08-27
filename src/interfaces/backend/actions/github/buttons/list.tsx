@@ -1,13 +1,13 @@
 import { BookPlus, Pencil, RefreshCw, Trash } from "lucide-react";
 
 import type { RepositoryListWithItemsAndRelations } from "@/domain/models/github/types";
-import { useRepositoryToggleActions } from "@/interfaces/backend/actions/github/useRepositoryToggleActions";
 
 import type { ActionConfig } from "@/ui/components/actions/types";
 
 import { ListForm } from "../forms/ListForm";
 import { RepositoryAdd } from "../forms/RepositoryAdd";
 import { useGithubActions } from "../useGithubActions";
+import { useRepositoryToggleActions } from "../useRepositoryToggleActions";
 
 export const getListActions =
   (): ActionConfig<RepositoryListWithItemsAndRelations>[] => {

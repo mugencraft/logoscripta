@@ -20,19 +20,23 @@ import { useTagGroupActions } from "../../useTagGroupActions";
 
 interface TagGroupVisualizerManagerProps {
   group: TagGroup;
-  onUpdate?: () => void;
+  onSuccess?: () => void;
 }
 
 export function TagGroupVisualizerManager({
   group,
-  onUpdate,
+  onSuccess,
 }: TagGroupVisualizerManagerProps) {
   const { data: groupWithCategories, isLoading } =
     trpc.tagging.groups.getWithCategories.useQuery(group.id);
 
   const { data: assetImages = [] } = trpc.system.getAssetImages.useQuery();
 
-  const { handleUpdate } = useTagGroupActions({ onSuccess: onUpdate });
+  const { handleUpdate } = useTagGroupActions({
+    callbacks: {
+      onSuccess,
+    },
+  });
 
   const saveVisualizerConfig = useCallback(
     async (config: TagsVisualizerConfig) => {

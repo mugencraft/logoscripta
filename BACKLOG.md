@@ -5,6 +5,7 @@
 ### Dev
 
 - fix knip once useTagValidation, date-picker and calendar are implemented
+- dependency cruiser: add @/interfaces/backend error (app imports should not be used)
 
 ### Server
 
@@ -119,5 +120,6 @@ ui:
 - implement CategoryPanel as metadata.user field
 - improve components organization (entity related, features, extra)
 - improve models/**/types.ts
+- check config.paths and FOLDER_PATHS, should we remove config.paths and only use FOLDER_PATHS?
 
 ## UI Upgrade Shadcn + use Sidebar

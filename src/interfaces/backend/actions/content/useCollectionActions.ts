@@ -4,11 +4,16 @@ import type {
 } from "@/domain/models/content/collection";
 import { trpc } from "@/interfaces/server-client";
 
-import type { ActionCallbacks } from "@/ui/components/actions/types";
+import {
+  type CrudActionsConfig,
+  type EntityConfig,
+  useCrudActions,
+} from "../useCrudActions";
 
-import { useCrudActions } from "../useCrudActions";
-
-export function useCollectionActions(callbacks: ActionCallbacks = {}) {
+export function useCollectionActions({
+  isDetailView,
+  callbacks = {},
+}: CrudActionsConfig) {
   const mutations = {
     create: trpc.content.collections.create.useMutation(),
     update: trpc.content.collections.update.useMutation(),
@@ -20,10 +25,9 @@ export function useCollectionActions(callbacks: ActionCallbacks = {}) {
       `Collection "${collection.name}"`,
     routes: {
       list: "/content/collections",
-      detail: "/content/collections/$collectionId",
-      idName: "collectionId",
+      shouldRedirect: isDetailView,
     },
-  };
+  } satisfies EntityConfig<ContentCollection>;
 
   const options = {
     beforeDelete: async (collection: ContentCollection) => {

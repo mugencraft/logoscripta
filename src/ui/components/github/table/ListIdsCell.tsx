@@ -1,4 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import {
+  Link,
+  type LinkProps,
+  type RegisteredRouter,
+} from "@tanstack/react-router";
 import type { Column } from "@tanstack/react-table";
 import { SquareArrowOutUpRight } from "lucide-react";
 
@@ -11,17 +15,18 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/ui/components/core/tooltip";
-
-import { toggleFilterValue } from "../controls/filtering/filters/toggleFilterValue";
+import { toggleFilterValue } from "@/ui/components/table/controls/filtering/filters/toggleFilterValue";
 
 interface ListIdsCellProps<TData> {
-  lists?: RepositoryList[];
   column: Column<TData, string[]>;
+  link: LinkProps<RegisteredRouter["routeTree"]>;
+  lists?: RepositoryList[];
 }
 
 export const ListIdsCell = <TData,>({
-  lists,
   column,
+  link,
+  lists,
 }: ListIdsCellProps<TData>) => {
   if (!lists) return null;
 
@@ -61,8 +66,8 @@ export const ListIdsCell = <TData,>({
               >
                 {list.name}
                 <Link
-                  to="/github/lists/$listId"
-                  params={{ listId: list.id.toString() }}
+                  to={link.to}
+                  params={link.params}
                   className="text-sm cursor-alias"
                 >
                   <SquareArrowOutUpRight />

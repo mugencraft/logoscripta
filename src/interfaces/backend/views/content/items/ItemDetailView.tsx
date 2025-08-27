@@ -8,7 +8,6 @@ import type { TagSystemWithGroups } from "@/domain/models/tagging/types";
 import { trpcBase } from "@/interfaces/server-client";
 
 import { ItemDetails } from "@/ui/components/content/item/details/ItemDetails";
-import { useItemsNavigator } from "@/ui/components/content/item/details/useItemsNavigator";
 import { Label } from "@/ui/components/core/label";
 import {
   Select,
@@ -19,21 +18,23 @@ import {
 } from "@/ui/components/core/select";
 import { ViewContainer } from "@/ui/components/layout/ViewContainer";
 import { TagSystemManager } from "@/ui/components/tagging/manager/TagSystemManager";
-import { useKeyboardNavigation } from "@/ui/hooks/useKeyboardNavigation";
+
+// import { useKeyboardNavigation } from "@/ui/hooks/useKeyboardNavigation";
 
 import { useItemTaggingActions } from "../../../actions/content/useItemTaggingActions";
+import { useItemsNavigator } from "./useItemsNavigator";
 
 interface ItemDetailViewProps {
+  tagSystems: TagSystem[];
   item: ContentItemWithTags;
   itemIds: number[]; // for navigation
-  tagSystems: TagSystem[];
   linkToCollection: boolean; // for navigate to collection or items
 }
 
 export function ItemDetailView({
+  tagSystems,
   item,
   itemIds,
-  tagSystems,
   linkToCollection,
 }: ItemDetailViewProps) {
   const initialSystemId = item.tags?.[0]?.tag.systemId;
@@ -43,12 +44,11 @@ export function ItemDetailView({
   const [activeSystemStructure, setActiveSystemStructure] =
     useState<TagSystemWithGroups | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { navigateToItem, canNavigate, currentIndex, totalItems } =
-    useItemsNavigator({
-      itemIds,
-      currentItemId: item.id,
-      collectionId: linkToCollection ? item.collectionId : undefined,
-    });
+  const { canNavigate, currentIndex, totalItems } = useItemsNavigator({
+    itemIds,
+    currentItemId: item.id,
+    collectionId: linkToCollection ? item.collectionId : undefined,
+  });
 
   const { toggleRawTag, toggleSystemTag } = useItemTaggingActions();
 
@@ -88,11 +88,12 @@ export function ItemDetailView({
     }
   }, [activeSystemId]);
 
-  useKeyboardNavigation({
-    onLeft: () => canNavigate && navigateToItem("prev"),
-    onRight: () => canNavigate && navigateToItem("next"),
-    deps: [navigateToItem, canNavigate],
-  });
+  // TODO: check the use of useKeyboardNavigation in useItemsNavigator and remove this if it works
+  // useKeyboardNavigation({
+  //   onLeft: () => canNavigate && navigateToItem("prev"),
+  //   onRight: () => canNavigate && navigateToItem("next"),
+  //   deps: [navigateToItem, canNavigate],
+  // });
 
   const title = linkToCollection
     ? `${item.collection.name} › ${item.title || item.identifier}`

@@ -1,6 +1,7 @@
 import { Command } from "commander";
 
 import { configCommands } from "./commands/config";
+import { geoCommand } from "./commands/geo";
 import { githubCommands } from "./commands/github";
 import { obsidianCommands } from "./commands/obsidian";
 
@@ -13,6 +14,7 @@ export const createCLI = () => {
   program.addCommand(configCommands());
   program.addCommand(githubCommands());
   program.addCommand(obsidianCommands());
+  program.addCommand(geoCommand());
 
   return program;
 };

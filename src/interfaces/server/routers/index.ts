@@ -4,6 +4,7 @@ import { contentImportExportRouter } from "./content/import-export";
 import { contentItemRouter } from "./content/items";
 import { listRouter } from "./github/lists";
 import { repositoryRouter } from "./github/repositories";
+import { locationRouter } from "./location";
 import { fileSystemRouter } from "./system/file-system";
 import { taggingCategoryRouter } from "./tagging/categories";
 import { taggingGroupRouter } from "./tagging/groups";
@@ -27,4 +28,5 @@ export const appRouter = router({
     collections: contentCollectionRouter,
     importExport: contentImportExportRouter,
   },
+  location: locationRouter,
 });

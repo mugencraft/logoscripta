@@ -1,9 +1,10 @@
 import { RefreshCw } from "lucide-react";
 
 import type { Repository } from "@/domain/models/github/repository";
-import { useRepositoryToggleActions } from "@/interfaces/backend/actions/github/useRepositoryToggleActions";
 
 import type { ActionConfig } from "@/ui/components/actions/types";
+
+import { useRepositoryToggleActions } from "../useRepositoryToggleActions";
 
 export const getRepositoryActions = (): ActionConfig<Repository>[] => {
   const { handleSaveRepository, handleSyncRepositoryData } =

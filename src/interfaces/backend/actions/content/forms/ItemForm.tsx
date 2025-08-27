@@ -6,11 +6,12 @@ import {
   contentItemFormSchema,
   contentItemMetadataSchema,
 } from "@/domain/validation/content/item";
-import { useItemActions } from "@/interfaces/backend/actions/content/useItemActions";
 
 import { Button } from "@/ui/components/core/button";
 import type { BaseFormProps } from "@/ui/components/forms/types";
 import { useAppForm } from "@/ui/components/forms/useAppForm";
+
+import { useItemActions } from "../../../actions/content/useItemActions";
 
 export function ItemForm({
   mode,
@@ -19,7 +20,9 @@ export function ItemForm({
   onCancel,
 }: BaseFormProps<ContentItem>) {
   const { handleCreate, handleUpdate } = useItemActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const form = useAppForm({

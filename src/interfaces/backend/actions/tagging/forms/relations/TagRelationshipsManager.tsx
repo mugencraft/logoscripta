@@ -49,8 +49,9 @@ export function TagRelationshipsManager({
     systemId: tag.systemId,
   });
 
-  const { handleCreateRelationship, handleDeleteRelationship } =
-    useTagActions();
+  const { handleCreateRelationship, handleDeleteRelationship } = useTagActions(
+    {},
+  );
 
   const resetForm = () => {
     setIsAddingRelationship(false);

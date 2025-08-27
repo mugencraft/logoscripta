@@ -7,8 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/ui/components/core/tooltip";
-
-import { toggleFilterValue } from "../controls/filtering/filters/toggleFilterValue";
+import { toggleFilterValue } from "@/ui/components/table/controls/filtering/filters/toggleFilterValue";
 
 interface TopicsCellProps<TData> {
   topics?: string[];

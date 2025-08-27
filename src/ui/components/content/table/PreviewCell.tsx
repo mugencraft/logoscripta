@@ -1,6 +1,6 @@
 import type { ContentItem } from "@/domain/models/content/item";
 
-import { ItemPreview } from "@/ui/components/content/item/ItemPreview";
+import { ItemPreview } from "../item/ItemPreview";
 
 interface PreviewCellProps {
   item: ContentItem;

@@ -11,7 +11,7 @@ export const Header = () => {
       <div className="flex justify-between items-center h-full px-4">
         <div className="flex items-center gap-4">
           <h1 className="font-bold transition-all duration-300 text-lg">
-            <Link to="/">Repository Lists</Link>
+            <Link to="/">Dashboard</Link>
           </h1>
 
           <div className="transition-opacity duration-300">{headerContent}</div>

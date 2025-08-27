@@ -7,8 +7,10 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { TagGroupForm } from "../forms/TagGroupForm";
 import { useTagGroupActions } from "../useTagGroupActions";
 
-export const getTagGroupsActions = (): ActionConfig<TagGroup>[] => {
-  const { handleDelete } = useTagGroupActions();
+export const getTagGroupsActions = (
+  isDetailView?: boolean,
+): ActionConfig<TagGroup>[] => {
+  const { handleDelete } = useTagGroupActions({ isDetailView });
   return [
     {
       id: "create-group",

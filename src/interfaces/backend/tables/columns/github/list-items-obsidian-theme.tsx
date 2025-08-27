@@ -3,10 +3,10 @@ import { Bug, Eye, GitFork, GitMerge, Star } from "lucide-react";
 import type { RepositoryListItemObsidianTheme } from "@/domain/models/github/types";
 
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
+import { GithubCell } from "@/ui/components/github/table/GithubCell";
 import { BaseCell } from "@/ui/components/table/cells/BaseCell";
 import { BooleanCell } from "@/ui/components/table/cells/BooleanCell";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
-import { GithubCell } from "@/ui/components/table/cells/GithubCell";
 import { ImageCell } from "@/ui/components/table/cells/ImageCell";
 import type { GetTableConfiguration } from "@/ui/components/table/types";
 

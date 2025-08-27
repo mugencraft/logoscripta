@@ -7,8 +7,10 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { CollectionForm } from "../forms/CollectionForm";
 import { useCollectionActions } from "../useCollectionActions";
 
-export const getCollectionsActions = (): ActionConfig<ContentCollection>[] => {
-  const { handleDelete } = useCollectionActions();
+export const getCollectionsActions = (
+  isDetailView = false,
+): ActionConfig<ContentCollection>[] => {
+  const { handleDelete } = useCollectionActions({ isDetailView });
   return [
     {
       id: "create-collection",

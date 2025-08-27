@@ -5,13 +5,18 @@ import type {
   ActionCallbacks,
   ActionHandler,
 } from "@/ui/components/actions/types";
+import type { LinkPropsType } from "@/ui/components/layout/types";
 
-interface EntityConfig<TEntity> {
+export interface CrudActionsConfig {
+  isDetailView?: boolean;
+  callbacks?: ActionCallbacks;
+}
+
+export interface EntityConfig<TEntity> {
   getDisplayName: (entity: TEntity) => string;
   routes?: {
-    list: string;
-    detail: string;
-    idName: string;
+    list: LinkPropsType["to"];
+    shouldRedirect?: boolean;
   };
 }
 
@@ -204,15 +209,8 @@ export function useCrudActions<
       onSuccess?.();
 
       // Navigate if configured
-      if (config.routes) {
-        const currentRoute = router.matchRoute({
-          to: config.routes.detail,
-          params: { [config.routes.idName]: data.id.toString() },
-        });
-
-        if (currentRoute) {
-          await router.navigate({ to: config.routes.list });
-        }
+      if (config.routes?.shouldRedirect) {
+        await router.navigate({ to: config.routes.list });
       }
 
       return { success: true };

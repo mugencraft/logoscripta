@@ -6,7 +6,6 @@ import {
   tagGroupFormSchema,
   tagGroupMetadataSchema,
 } from "@/domain/validation/tagging/group";
-import { TagGroupVisualizerManager } from "@/interfaces/backend/actions/tagging/forms/visualizer/TagGroupVisualizerManager";
 import { trpc } from "@/interfaces/server-client";
 
 import { Button } from "@/ui/components/core/button";
@@ -21,6 +20,7 @@ import type { BaseFormProps } from "@/ui/components/forms/types";
 import { useAppForm } from "@/ui/components/forms/useAppForm";
 
 import { useTagGroupActions } from "../useTagGroupActions";
+import { TagGroupVisualizerManager } from "./visualizer/TagGroupVisualizerManager";
 
 export function TagGroupForm({
   mode,
@@ -29,7 +29,9 @@ export function TagGroupForm({
   onCancel,
 }: BaseFormProps<TagGroup>) {
   const { handleCreate, handleUpdate } = useTagGroupActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const { data: systems } = trpc.tagging.systems.getAll.useQuery();

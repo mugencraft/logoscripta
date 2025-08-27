@@ -7,8 +7,8 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { TagForm } from "../forms/TagForm";
 import { useTagActions } from "../useTagActions";
 
-export const getTagsActions = (): ActionConfig<Tag>[] => {
-  const { handleDelete } = useTagActions();
+export const getTagsActions = (isDetailView?: boolean): ActionConfig<Tag>[] => {
+  const { handleDelete } = useTagActions({ isDetailView });
   return [
     {
       id: "create-tag",

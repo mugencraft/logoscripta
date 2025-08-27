@@ -40,7 +40,9 @@ export function TagCategoryAssociationsManager({
   const { data: systemCategories = [] } =
     trpc.tagging.categories.getAll.useQuery(tag.systemId);
 
-  const { handleCreateAssociation, handleDeleteAssociation } = useTagActions();
+  const { handleCreateAssociation, handleDeleteAssociation } = useTagActions(
+    {},
+  );
 
   const resetForm = () => {
     setIsAddingAssociation(false);

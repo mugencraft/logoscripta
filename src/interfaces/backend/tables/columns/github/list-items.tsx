@@ -4,10 +4,10 @@ import type { RepositoryListItem } from "@/domain/models/github/repository-list"
 import type { RepositoryListItemWithRelations } from "@/domain/models/github/types";
 
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
+import { GithubCell } from "@/ui/components/github/table/GithubCell";
 import { BaseCell } from "@/ui/components/table/cells/BaseCell";
 import { BooleanCell } from "@/ui/components/table/cells/BooleanCell";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
-import { GithubCell } from "@/ui/components/table/cells/GithubCell";
 import type { GetTableConfiguration } from "@/ui/components/table/types";
 
 import {

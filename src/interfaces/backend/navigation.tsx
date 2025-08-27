@@ -2,14 +2,53 @@ import {
   Archive,
   Database,
   FolderKanban,
+  Globe,
   Home,
   List,
+  MapIcon,
+  MapPin,
   PackageSearch,
   Tag,
   Users,
 } from "lucide-react";
 
 import type { NavGroup } from "@/ui/components/layout/Sidebar";
+
+const locationNavGroup: NavGroup = {
+  title: "Location",
+  items: [
+    {
+      link: { to: "/location", activeOptions: { exact: true } },
+      label: "Location",
+      icon: <MapIcon className="w-5 h-5" />,
+    },
+    {
+      link: { to: "/location/countries", activeOptions: { exact: true } },
+      label: "Countries",
+      icon: <Globe className="w-5 h-5" />,
+    },
+    {
+      link: { to: "/location/regions", activeOptions: { exact: true } },
+      label: "Regions",
+      icon: <MapIcon className="w-5 h-5" />,
+    },
+    {
+      link: { to: "/location/provinces", activeOptions: { exact: true } },
+      label: "Provinces",
+      icon: <MapIcon className="w-5 h-5" />,
+    },
+    {
+      link: { to: "/location/communes", activeOptions: { exact: true } },
+      label: "Communes",
+      icon: <MapIcon className="w-5 h-5" />,
+    },
+    {
+      link: { to: "/location/pois", activeOptions: { exact: true } },
+      label: "Points of Interest",
+      icon: <MapPin className="w-5 h-5" />,
+    },
+  ],
+};
 
 export const navigation: NavGroup[] = [
   {
@@ -84,6 +123,7 @@ export const navigation: NavGroup[] = [
       },
     ],
   },
+  locationNavGroup,
   {
     title: "Github Repos",
     items: [
@@ -117,7 +157,6 @@ export const navigation: NavGroup[] = [
         link: {
           to: "/github/lists/$listId",
           activeOptions: { exact: true },
-          // @ts-expect-error params are detected
           params: { listId: "archived" },
         },
         label: "Archived",

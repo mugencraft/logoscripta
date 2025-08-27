@@ -24,7 +24,9 @@ export function TagForm({
 }: BaseFormProps<Tag>) {
   const router = useRouter();
   const { handleCreate, handleUpdate } = useTagActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const { data: systems } = trpc.tagging.systems.getAll.useQuery();

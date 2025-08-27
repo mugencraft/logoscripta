@@ -21,7 +21,9 @@ export function TagCategoryForm({
   onCancel,
 }: BaseFormProps<TagCategory>) {
   const { handleCreate, handleUpdate } = useTagCategoryActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const { data: systems } = trpc.tagging.systems.getAll.useQuery();

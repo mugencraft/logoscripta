@@ -1,6 +1,193 @@
 # Changelog
 <!-- markdownlint-disable MD024 -->
 
+## v0.3.0 - Location Handling
+
+Implement Country, Region, Province, Commune and POI handling with locations sync and POI import support
+
+### global
+
+#### repomix
+
+- **CHANGED**: Simplify configuration
+
+#### packages
+
+- **ADDED**: @tanstack/zod-adapter, fast-xml-parser, jszip
+
+### core
+
+#### serialization
+
+- **ADDED**: `XlsxParser`
+
+#### utils
+
+- **ADDED**: `fetch.ts` with `fetchWithRetry`
+
+### domain
+
+#### config
+
+- **ADDED**: `geo` to `FOLDER_PATHS`
+
+#### models
+
+- **ADDED**: locations entities and types
+
+#### services
+
+- **ADDED**: `GeoSyncService` to sync administrative data
+- **ADDED**: `LocationImportExportService` to import POIs
+
+#### validation
+
+- **ADDED**: locations validators
+
+### infrastructure
+
+#### adapters
+
+##### geo
+
+- **ADDED**: `RestCountriesAdapter` to sync Countries from <https://restcountries.com>
+- **ADDED**: `EurostatAdapter` to sync administrative data from Eurostat NUTS API (not used)
+- **ADDED**: `ISTATAdapter` to sync administrative data
+
+#### factories
+
+**ADDED**: `createAdapter`  and `fetchAllSources` to sync administrative data
+
+#### persistence
+
+##### location
+
+- **ADDED**: `LocationCommandsAdapter`
+- **ADDED**: `LocationQueriesAdapter`
+
+### interfaces
+
+#### backend
+
+- **ADDED**:  location navigation
+
+##### actions
+
+- **FIXED**: wrong import aliases in content and github
+- **CHANGED**:  `useCrudActions`
+ 	- **FIXED**: `EntityConfig` routes
+ 	- **ADDED**: `CrudActionsConfig` interface
+
+###### location
+
+- **ADDED**:  `getImportExportActions`
+- **ADDED**:  `getPOIActions`
+- **ADDED**:  `getSyncActions`
+- **ADDED**:  `POIForm`
+- **ADDED**:  `CommuneCombobox` for commune selection
+- **ADDED**:  `CommuneCommandItem`
+- **ADDED**:  `useImportExportActions`
+- **ADDED**:  `usePOIActions`
+- **ADDED**:  `CommuneCommandItem`
+
+##### routes
+
+- **ADDED**:  location routes
+
+##### table
+
+- **ADDED**:  location configs
+
+##### views
+
+###### content
+
+- **CHANGED**: move `useItemsNavigator` here
+
+###### location
+
+- **ADDED**:  location views
+
+#### cli
+
+- **ADDED**:  location sync commands `countries`, `eurostat`, `istat`, `all`
+
+#### server
+
+- **ADDED**:  location routes
+
+### shared
+
+#### geo
+
+- **ADDED**:  types
+
+#### schema
+
+- **ADDED**:  location schema
+
+### ui
+
+#### core
+
+- **ADDED**: `Breadcrumb`
+
+#### content
+
+- **MOVED**: `PreviewCell` from table
+
+#### github
+
+- **MOVED**: `GithubCell`, `ListIdsCell`, `OwnerCell`, `TopicsCell` from table
+- **CHANGED**: `ListIdsCell` add link prop
+
+#### layout
+
+- **ADDED**: `EntityBreadcrumb`
+- **FIXED**: `Header` root link name
+- **CHANGED**: simplify `SidebarNavigation` types
+
+#### location
+
+**ADDED**: `AdministrativeNavigation`
+
+##### commune
+
+- **ADDED**: `CommuneCodes`
+- **ADDED**: `CommunePoiManagement`
+- **ADDED**: `CommuneStatisticsDashboard`
+
+##### country
+
+- **ADDED**: `CountryInformation`
+- **ADDED**: `CountryNavigation`
+- **ADDED**: `CountryOverview`
+
+##### poi
+
+- **ADDED**: `PoiActions`
+- **ADDED**: `PoiDetails`
+- **ADDED**: `PoiHistorical`
+
+##### province
+
+- **ADDED**: `ProvinceCommunes`
+- **ADDED**: `ProvinceInformation`
+- **ADDED**: `ProvinceStatistics`
+
+##### region
+
+- **ADDED**: `RegionDetails`
+- **ADDED**: `RegionOverview`
+- **ADDED**: `RegionProvinces`
+
+##### sync
+
+- **ADDED**: `CountriesPreviewCard`
+- **ADDED**: `ItalyPreviewCard`
+- **ADDED**: `LocationSync`
+-
+
 ## v0.2.1 - URL Content
 
 Implement URL content type with client-side import support

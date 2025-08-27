@@ -1,0 +1,34 @@
+{
+  "output": {
+    "filePath": "ai/codebase.xml.txt",
+    "headerText": "LogoScripta Codebase",
+    "style": "xml",
+    // "removeComments": true,
+    "removeEmptyLines": true,
+    // "compress": true
+    "compress": false,
+    "topFilesLength": 10,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "git": {
+      "sortByChanges": true,
+      "includeDiffs": false
+    }
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "include": [
+    // "src/**/*",
+    "package.json",
+    "README.md",
+    "src/core/**/*",
+    "src/domain/config/**/*",
+    "src/infrastructure/adapters/**/*",
+    "src/infrastructure/factories/**/*",
+    "src/interfaces/backend/cli/**/*"
+  ],
+  "ignore": {
+    "customPatterns": ["src/interfaces/backend/routeTree.gen.ts"]
+  }
+}

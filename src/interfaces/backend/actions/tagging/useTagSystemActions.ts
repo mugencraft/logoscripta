@@ -1,11 +1,16 @@
 import type { NewTagSystem, TagSystem } from "@/domain/models/tagging/system";
 import { trpc } from "@/interfaces/server-client";
 
-import type { ActionCallbacks } from "@/ui/components/actions/types";
+import {
+  type CrudActionsConfig,
+  type EntityConfig,
+  useCrudActions,
+} from "../useCrudActions";
 
-import { useCrudActions } from "../useCrudActions";
-
-export function useTagSystemActions(callbacks: ActionCallbacks = {}) {
+export function useTagSystemActions({
+  isDetailView,
+  callbacks = {},
+}: CrudActionsConfig) {
   const mutations = {
     create: trpc.tagging.systems.create.useMutation(),
     update: trpc.tagging.systems.update.useMutation(),
@@ -16,10 +21,9 @@ export function useTagSystemActions(callbacks: ActionCallbacks = {}) {
     getDisplayName: (system: TagSystem) => `System "${system.name}"`,
     routes: {
       list: "/tagging/systems",
-      detail: "/tagging/systems/$systemId",
-      idName: "systemId",
+      shouldRedirect: isDetailView,
     },
-  };
+  } satisfies EntityConfig<TagSystem>;
 
   const options = {
     messages: {

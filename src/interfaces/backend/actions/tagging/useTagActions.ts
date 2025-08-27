@@ -9,11 +9,16 @@ import type {
 } from "@/domain/models/tagging/tag";
 import { trpc } from "@/interfaces/server-client";
 
-import type { ActionCallbacks } from "@/ui/components/actions/types";
+import {
+  type CrudActionsConfig,
+  type EntityConfig,
+  useCrudActions,
+} from "../useCrudActions";
 
-import { useCrudActions } from "../useCrudActions";
-
-export function useTagActions(callbacks: ActionCallbacks = {}) {
+export function useTagActions({
+  isDetailView,
+  callbacks = {},
+}: CrudActionsConfig) {
   const router = useRouter();
   const mutations = {
     create: trpc.tagging.tags.create.useMutation(),
@@ -37,10 +42,9 @@ export function useTagActions(callbacks: ActionCallbacks = {}) {
     getDisplayName: (tag: Tag) => `Tag "${tag.name}"`,
     routes: {
       list: "/tagging/tags",
-      detail: "/tagging/tags/$tagId",
-      idName: "tagId",
+      shouldRedirect: isDetailView,
     },
-  };
+  } satisfies EntityConfig<Tag>;
 
   const options = {
     beforeCreate: async (data: NewTag) => {

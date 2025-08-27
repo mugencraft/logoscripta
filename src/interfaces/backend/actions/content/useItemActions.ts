@@ -1,11 +1,16 @@
 import type { ContentItem, NewContentItem } from "@/domain/models/content/item";
 import { trpc } from "@/interfaces/server-client";
 
-import type { ActionCallbacks } from "@/ui/components/actions/types";
+import {
+  type CrudActionsConfig,
+  type EntityConfig,
+  useCrudActions,
+} from "../useCrudActions";
 
-import { useCrudActions } from "../useCrudActions";
-
-export function useItemActions(callbacks: ActionCallbacks = {}) {
+export function useItemActions({
+  isDetailView,
+  callbacks = {},
+}: CrudActionsConfig) {
   const mutations = {
     create: trpc.content.items.create.useMutation(),
     update: trpc.content.items.update.useMutation(),
@@ -17,10 +22,9 @@ export function useItemActions(callbacks: ActionCallbacks = {}) {
       `Item "${item.title || item.identifier}"`,
     routes: {
       list: "/content/items",
-      detail: "/content/items/$itemId",
-      idName: "itemId",
+      shouldRedirect: isDetailView,
     },
-  };
+  } satisfies EntityConfig<ContentItem>;
 
   const options = {
     beforeCreate: async (data: NewContentItem) => {

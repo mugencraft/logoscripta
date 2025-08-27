@@ -1,0 +1,49 @@
+{
+  "output": {
+    "filePath": "ai/codebase.xml.txt",
+    "headerText": "LogoScripta Codebase",
+    "style": "xml",
+    // "removeComments": true,
+    "removeEmptyLines": true,
+    // "compress": true
+    "compress": false,
+    "topFilesLength": 10,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "git": {
+      "sortByChanges": true,
+      "includeDiffs": false
+    }
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "include": [
+    "package.json",
+    "README.md",
+    "src/shared/schema/**/*",
+    "src/core/**/*",
+    "src/domain/models/location/**/*",
+    "src/domain/ports/location/**/*",
+    "src/domain/validation/location/**/*",
+    "src/domain/services/location/**/*",
+    "src/domain/services/content/parser.ts",
+    "src/domain/services/shared/metadata.ts",
+    "src/infrastructure/adapters/geo/**/*",
+    "src/infrastructure/factories/geo*",
+    "src/infrastructure/persistence/adapters/location/**/*",
+    "src/interfaces/backend/cli/geo/**/*",
+    "src/interfaces/server/routers/location/**/*",
+    "src/interfaces/server/context.ts",
+    "src/interfaces/backend/routes/location/**/*",
+    "src/interfaces/backend/actions/location/**/*",
+    "src/interfaces/backend/tables/columns/location/**/*",
+    "src/interfaces/backend/views/location/**/*",
+    "src/interfaces/backend/navigation.tsx",
+    "src/ui/components/location/**/*"
+    // "src/ui/components/import-export/**/*"
+  ],
+  "ignore": {
+    "customPatterns": ["src/interfaces/backend/routeTree.gen.ts"]
+  }
+}

@@ -1,3 +1,4 @@
+import type { LinkProps, RegisteredRouter } from "@tanstack/react-router";
 import {
   Archive,
   Ban,
@@ -17,18 +18,18 @@ import type {
 } from "@/domain/models/github/types";
 
 import { IconTooltip } from "@/ui/components/extra/icon-tooltip";
+import { GithubCell } from "@/ui/components/github/table/GithubCell";
+import { ListIdsCell } from "@/ui/components/github/table/ListIdsCell";
+import { OwnerCell } from "@/ui/components/github/table/OwnerCell";
+import { TopicsCell } from "@/ui/components/github/table/TopicsCell";
 import { ArchivedCell } from "@/ui/components/table/cells/ArchivedCell";
 import { BaseCell } from "@/ui/components/table/cells/BaseCell";
 import { BooleanCell } from "@/ui/components/table/cells/BooleanCell";
 import { DateCell } from "@/ui/components/table/cells/DateCell";
 import { DigitCell } from "@/ui/components/table/cells/DigitCell";
-import { GithubCell } from "@/ui/components/table/cells/GithubCell";
 import { LanguageCell } from "@/ui/components/table/cells/LanguageCell";
-import { ListIdsCell } from "@/ui/components/table/cells/ListIdsCell";
-import { OwnerCell } from "@/ui/components/table/cells/OwnerCell";
 import { RelativeTimeCell } from "@/ui/components/table/cells/RelativeTimeCell";
 import { SizeCell } from "@/ui/components/table/cells/SizeCell";
-import { TopicsCell } from "@/ui/components/table/cells/TopicsCell";
 import { UrlCell } from "@/ui/components/table/cells/UrlCell";
 import type { GetTableConfiguration } from "@/ui/components/table/types";
 
@@ -41,6 +42,13 @@ import {
   getControlColumnGroup,
   getSelectionDef,
 } from "../commons";
+
+const listLink = (
+  listId: string,
+): LinkProps<RegisteredRouter["routeTree"]> => ({
+  to: "/github/lists/$listId",
+  params: { listId },
+});
 
 export const getRepositoriesTable: GetTableConfiguration<
   Repository,
@@ -124,7 +132,11 @@ export const getRepositoriesTable: GetTableConfiguration<
           id: "listIds",
           accessorFn: getListItems,
           cell: (info) => (
-            <ListIdsCell lists={info.getValue()} column={info.column} />
+            <ListIdsCell
+              lists={info.getValue()}
+              column={info.column}
+              link={listLink(String(info.row.original.id))}
+            />
           ),
           filterFn: "listIdsFilter",
           enableGlobalFilter: false,

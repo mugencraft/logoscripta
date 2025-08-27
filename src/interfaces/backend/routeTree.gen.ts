@@ -11,7 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TaggingIndexRouteImport } from './routes/tagging/index'
+import { Route as LocationIndexRouteImport } from './routes/location/index'
 import { Route as ContentIndexRouteImport } from './routes/content/index'
+import { Route as LocationRegionsRouteImport } from './routes/location/regions'
+import { Route as LocationProvincesRouteImport } from './routes/location/provinces'
+import { Route as LocationPoisRouteImport } from './routes/location/pois'
+import { Route as LocationCountriesRouteImport } from './routes/location/countries'
+import { Route as LocationCommunesRouteImport } from './routes/location/communes'
 import { Route as GithubTopicsRouteImport } from './routes/github/topics'
 import { Route as GithubReposRouteImport } from './routes/github/repos'
 import { Route as GithubOwnersRouteImport } from './routes/github/owners'
@@ -26,6 +32,11 @@ import { Route as TaggingTagsTagIdRouteImport } from './routes/tagging/tags/$tag
 import { Route as TaggingSystemsSystemIdRouteImport } from './routes/tagging/systems/$systemId'
 import { Route as TaggingGroupsGroupIdRouteImport } from './routes/tagging/groups/$groupId'
 import { Route as TaggingCategoriesCategoryIdRouteImport } from './routes/tagging/categories/$categoryId'
+import { Route as LocationRegionsRegionCodeRouteImport } from './routes/location/regions.$regionCode'
+import { Route as LocationProvincesProvinceCodeRouteImport } from './routes/location/provinces.$provinceCode'
+import { Route as LocationPoisPoiIdRouteImport } from './routes/location/pois.$poiId'
+import { Route as LocationCountriesCountryCodeRouteImport } from './routes/location/countries.$countryCode'
+import { Route as LocationCommunesCommuneCodeRouteImport } from './routes/location/communes.$communeCode'
 import { Route as GithubListsListIdRouteImport } from './routes/github/lists/$listId'
 import { Route as ContentItemsItemIdRouteImport } from './routes/content/items/$itemId'
 import { Route as ContentCollectionsCollectionIdRouteImport } from './routes/content/collections/$collectionId'
@@ -43,9 +54,39 @@ const TaggingIndexRoute = TaggingIndexRouteImport.update({
   path: '/tagging/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationIndexRoute = LocationIndexRouteImport.update({
+  id: '/location/',
+  path: '/location/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContentIndexRoute = ContentIndexRouteImport.update({
   id: '/content/',
   path: '/content/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationRegionsRoute = LocationRegionsRouteImport.update({
+  id: '/location/regions',
+  path: '/location/regions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationProvincesRoute = LocationProvincesRouteImport.update({
+  id: '/location/provinces',
+  path: '/location/provinces',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationPoisRoute = LocationPoisRouteImport.update({
+  id: '/location/pois',
+  path: '/location/pois',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationCountriesRoute = LocationCountriesRouteImport.update({
+  id: '/location/countries',
+  path: '/location/countries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationCommunesRoute = LocationCommunesRouteImport.update({
+  id: '/location/communes',
+  path: '/location/communes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GithubTopicsRoute = GithubTopicsRouteImport.update({
@@ -119,6 +160,35 @@ const TaggingCategoriesCategoryIdRoute =
     path: '/tagging/categories/$categoryId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LocationRegionsRegionCodeRoute =
+  LocationRegionsRegionCodeRouteImport.update({
+    id: '/$regionCode',
+    path: '/$regionCode',
+    getParentRoute: () => LocationRegionsRoute,
+  } as any)
+const LocationProvincesProvinceCodeRoute =
+  LocationProvincesProvinceCodeRouteImport.update({
+    id: '/$provinceCode',
+    path: '/$provinceCode',
+    getParentRoute: () => LocationProvincesRoute,
+  } as any)
+const LocationPoisPoiIdRoute = LocationPoisPoiIdRouteImport.update({
+  id: '/$poiId',
+  path: '/$poiId',
+  getParentRoute: () => LocationPoisRoute,
+} as any)
+const LocationCountriesCountryCodeRoute =
+  LocationCountriesCountryCodeRouteImport.update({
+    id: '/$countryCode',
+    path: '/$countryCode',
+    getParentRoute: () => LocationCountriesRoute,
+  } as any)
+const LocationCommunesCommuneCodeRoute =
+  LocationCommunesCommuneCodeRouteImport.update({
+    id: '/$communeCode',
+    path: '/$communeCode',
+    getParentRoute: () => LocationCommunesRoute,
+  } as any)
 const GithubListsListIdRoute = GithubListsListIdRouteImport.update({
   id: '/github/lists/$listId',
   path: '/github/lists/$listId',
@@ -159,11 +229,22 @@ export interface FileRoutesByFullPath {
   '/github/owners': typeof GithubOwnersRoute
   '/github/repos': typeof GithubReposRoute
   '/github/topics': typeof GithubTopicsRoute
+  '/location/communes': typeof LocationCommunesRouteWithChildren
+  '/location/countries': typeof LocationCountriesRouteWithChildren
+  '/location/pois': typeof LocationPoisRouteWithChildren
+  '/location/provinces': typeof LocationProvincesRouteWithChildren
+  '/location/regions': typeof LocationRegionsRouteWithChildren
   '/content': typeof ContentIndexRoute
+  '/location': typeof LocationIndexRoute
   '/tagging': typeof TaggingIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/location/communes/$communeCode': typeof LocationCommunesCommuneCodeRoute
+  '/location/countries/$countryCode': typeof LocationCountriesCountryCodeRoute
+  '/location/pois/$poiId': typeof LocationPoisPoiIdRoute
+  '/location/provinces/$provinceCode': typeof LocationProvincesProvinceCodeRoute
+  '/location/regions/$regionCode': typeof LocationRegionsRegionCodeRoute
   '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
@@ -184,11 +265,22 @@ export interface FileRoutesByTo {
   '/github/owners': typeof GithubOwnersRoute
   '/github/repos': typeof GithubReposRoute
   '/github/topics': typeof GithubTopicsRoute
+  '/location/communes': typeof LocationCommunesRouteWithChildren
+  '/location/countries': typeof LocationCountriesRouteWithChildren
+  '/location/pois': typeof LocationPoisRouteWithChildren
+  '/location/provinces': typeof LocationProvincesRouteWithChildren
+  '/location/regions': typeof LocationRegionsRouteWithChildren
   '/content': typeof ContentIndexRoute
+  '/location': typeof LocationIndexRoute
   '/tagging': typeof TaggingIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/location/communes/$communeCode': typeof LocationCommunesCommuneCodeRoute
+  '/location/countries/$countryCode': typeof LocationCountriesCountryCodeRoute
+  '/location/pois/$poiId': typeof LocationPoisPoiIdRoute
+  '/location/provinces/$provinceCode': typeof LocationProvincesProvinceCodeRoute
+  '/location/regions/$regionCode': typeof LocationRegionsRegionCodeRoute
   '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
@@ -210,11 +302,22 @@ export interface FileRoutesById {
   '/github/owners': typeof GithubOwnersRoute
   '/github/repos': typeof GithubReposRoute
   '/github/topics': typeof GithubTopicsRoute
+  '/location/communes': typeof LocationCommunesRouteWithChildren
+  '/location/countries': typeof LocationCountriesRouteWithChildren
+  '/location/pois': typeof LocationPoisRouteWithChildren
+  '/location/provinces': typeof LocationProvincesRouteWithChildren
+  '/location/regions': typeof LocationRegionsRouteWithChildren
   '/content/': typeof ContentIndexRoute
+  '/location/': typeof LocationIndexRoute
   '/tagging/': typeof TaggingIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
+  '/location/communes/$communeCode': typeof LocationCommunesCommuneCodeRoute
+  '/location/countries/$countryCode': typeof LocationCountriesCountryCodeRoute
+  '/location/pois/$poiId': typeof LocationPoisPoiIdRoute
+  '/location/provinces/$provinceCode': typeof LocationProvincesProvinceCodeRoute
+  '/location/regions/$regionCode': typeof LocationRegionsRegionCodeRoute
   '/tagging/categories/$categoryId': typeof TaggingCategoriesCategoryIdRoute
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
@@ -237,11 +340,22 @@ export interface FileRouteTypes {
     | '/github/owners'
     | '/github/repos'
     | '/github/topics'
+    | '/location/communes'
+    | '/location/countries'
+    | '/location/pois'
+    | '/location/provinces'
+    | '/location/regions'
     | '/content'
+    | '/location'
     | '/tagging'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
+    | '/location/communes/$communeCode'
+    | '/location/countries/$countryCode'
+    | '/location/pois/$poiId'
+    | '/location/provinces/$provinceCode'
+    | '/location/regions/$regionCode'
     | '/tagging/categories/$categoryId'
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
@@ -262,11 +376,22 @@ export interface FileRouteTypes {
     | '/github/owners'
     | '/github/repos'
     | '/github/topics'
+    | '/location/communes'
+    | '/location/countries'
+    | '/location/pois'
+    | '/location/provinces'
+    | '/location/regions'
     | '/content'
+    | '/location'
     | '/tagging'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
+    | '/location/communes/$communeCode'
+    | '/location/countries/$countryCode'
+    | '/location/pois/$poiId'
+    | '/location/provinces/$provinceCode'
+    | '/location/regions/$regionCode'
     | '/tagging/categories/$categoryId'
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
@@ -287,11 +412,22 @@ export interface FileRouteTypes {
     | '/github/owners'
     | '/github/repos'
     | '/github/topics'
+    | '/location/communes'
+    | '/location/countries'
+    | '/location/pois'
+    | '/location/provinces'
+    | '/location/regions'
     | '/content/'
+    | '/location/'
     | '/tagging/'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
+    | '/location/communes/$communeCode'
+    | '/location/countries/$countryCode'
+    | '/location/pois/$poiId'
+    | '/location/provinces/$provinceCode'
+    | '/location/regions/$regionCode'
     | '/tagging/categories/$categoryId'
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
@@ -313,7 +449,13 @@ export interface RootRouteChildren {
   GithubOwnersRoute: typeof GithubOwnersRoute
   GithubReposRoute: typeof GithubReposRoute
   GithubTopicsRoute: typeof GithubTopicsRoute
+  LocationCommunesRoute: typeof LocationCommunesRouteWithChildren
+  LocationCountriesRoute: typeof LocationCountriesRouteWithChildren
+  LocationPoisRoute: typeof LocationPoisRouteWithChildren
+  LocationProvincesRoute: typeof LocationProvincesRouteWithChildren
+  LocationRegionsRoute: typeof LocationRegionsRouteWithChildren
   ContentIndexRoute: typeof ContentIndexRoute
+  LocationIndexRoute: typeof LocationIndexRoute
   TaggingIndexRoute: typeof TaggingIndexRoute
   ContentCollectionsCollectionIdRoute: typeof ContentCollectionsCollectionIdRoute
   ContentItemsItemIdRoute: typeof ContentItemsItemIdRoute
@@ -350,11 +492,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TaggingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/location/': {
+      id: '/location/'
+      path: '/location'
+      fullPath: '/location'
+      preLoaderRoute: typeof LocationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/content/': {
       id: '/content/'
       path: '/content'
       fullPath: '/content'
       preLoaderRoute: typeof ContentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location/regions': {
+      id: '/location/regions'
+      path: '/location/regions'
+      fullPath: '/location/regions'
+      preLoaderRoute: typeof LocationRegionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location/provinces': {
+      id: '/location/provinces'
+      path: '/location/provinces'
+      fullPath: '/location/provinces'
+      preLoaderRoute: typeof LocationProvincesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location/pois': {
+      id: '/location/pois'
+      path: '/location/pois'
+      fullPath: '/location/pois'
+      preLoaderRoute: typeof LocationPoisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location/countries': {
+      id: '/location/countries'
+      path: '/location/countries'
+      fullPath: '/location/countries'
+      preLoaderRoute: typeof LocationCountriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location/communes': {
+      id: '/location/communes'
+      path: '/location/communes'
+      fullPath: '/location/communes'
+      preLoaderRoute: typeof LocationCommunesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/github/topics': {
@@ -455,6 +639,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TaggingCategoriesCategoryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/location/regions/$regionCode': {
+      id: '/location/regions/$regionCode'
+      path: '/$regionCode'
+      fullPath: '/location/regions/$regionCode'
+      preLoaderRoute: typeof LocationRegionsRegionCodeRouteImport
+      parentRoute: typeof LocationRegionsRoute
+    }
+    '/location/provinces/$provinceCode': {
+      id: '/location/provinces/$provinceCode'
+      path: '/$provinceCode'
+      fullPath: '/location/provinces/$provinceCode'
+      preLoaderRoute: typeof LocationProvincesProvinceCodeRouteImport
+      parentRoute: typeof LocationProvincesRoute
+    }
+    '/location/pois/$poiId': {
+      id: '/location/pois/$poiId'
+      path: '/$poiId'
+      fullPath: '/location/pois/$poiId'
+      preLoaderRoute: typeof LocationPoisPoiIdRouteImport
+      parentRoute: typeof LocationPoisRoute
+    }
+    '/location/countries/$countryCode': {
+      id: '/location/countries/$countryCode'
+      path: '/$countryCode'
+      fullPath: '/location/countries/$countryCode'
+      preLoaderRoute: typeof LocationCountriesCountryCodeRouteImport
+      parentRoute: typeof LocationCountriesRoute
+    }
+    '/location/communes/$communeCode': {
+      id: '/location/communes/$communeCode'
+      path: '/$communeCode'
+      fullPath: '/location/communes/$communeCode'
+      preLoaderRoute: typeof LocationCommunesCommuneCodeRouteImport
+      parentRoute: typeof LocationCommunesRoute
+    }
     '/github/lists/$listId': {
       id: '/github/lists/$listId'
       path: '/github/lists/$listId'
@@ -500,12 +719,75 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LocationCommunesRouteChildren {
+  LocationCommunesCommuneCodeRoute: typeof LocationCommunesCommuneCodeRoute
+}
+
+const LocationCommunesRouteChildren: LocationCommunesRouteChildren = {
+  LocationCommunesCommuneCodeRoute: LocationCommunesCommuneCodeRoute,
+}
+
+const LocationCommunesRouteWithChildren =
+  LocationCommunesRoute._addFileChildren(LocationCommunesRouteChildren)
+
+interface LocationCountriesRouteChildren {
+  LocationCountriesCountryCodeRoute: typeof LocationCountriesCountryCodeRoute
+}
+
+const LocationCountriesRouteChildren: LocationCountriesRouteChildren = {
+  LocationCountriesCountryCodeRoute: LocationCountriesCountryCodeRoute,
+}
+
+const LocationCountriesRouteWithChildren =
+  LocationCountriesRoute._addFileChildren(LocationCountriesRouteChildren)
+
+interface LocationPoisRouteChildren {
+  LocationPoisPoiIdRoute: typeof LocationPoisPoiIdRoute
+}
+
+const LocationPoisRouteChildren: LocationPoisRouteChildren = {
+  LocationPoisPoiIdRoute: LocationPoisPoiIdRoute,
+}
+
+const LocationPoisRouteWithChildren = LocationPoisRoute._addFileChildren(
+  LocationPoisRouteChildren,
+)
+
+interface LocationProvincesRouteChildren {
+  LocationProvincesProvinceCodeRoute: typeof LocationProvincesProvinceCodeRoute
+}
+
+const LocationProvincesRouteChildren: LocationProvincesRouteChildren = {
+  LocationProvincesProvinceCodeRoute: LocationProvincesProvinceCodeRoute,
+}
+
+const LocationProvincesRouteWithChildren =
+  LocationProvincesRoute._addFileChildren(LocationProvincesRouteChildren)
+
+interface LocationRegionsRouteChildren {
+  LocationRegionsRegionCodeRoute: typeof LocationRegionsRegionCodeRoute
+}
+
+const LocationRegionsRouteChildren: LocationRegionsRouteChildren = {
+  LocationRegionsRegionCodeRoute: LocationRegionsRegionCodeRoute,
+}
+
+const LocationRegionsRouteWithChildren = LocationRegionsRoute._addFileChildren(
+  LocationRegionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GithubOwnersRoute: GithubOwnersRoute,
   GithubReposRoute: GithubReposRoute,
   GithubTopicsRoute: GithubTopicsRoute,
+  LocationCommunesRoute: LocationCommunesRouteWithChildren,
+  LocationCountriesRoute: LocationCountriesRouteWithChildren,
+  LocationPoisRoute: LocationPoisRouteWithChildren,
+  LocationProvincesRoute: LocationProvincesRouteWithChildren,
+  LocationRegionsRoute: LocationRegionsRouteWithChildren,
   ContentIndexRoute: ContentIndexRoute,
+  LocationIndexRoute: LocationIndexRoute,
   TaggingIndexRoute: TaggingIndexRoute,
   ContentCollectionsCollectionIdRoute: ContentCollectionsCollectionIdRoute,
   ContentItemsItemIdRoute: ContentItemsItemIdRoute,

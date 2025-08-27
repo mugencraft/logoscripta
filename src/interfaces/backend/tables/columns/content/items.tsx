@@ -4,8 +4,8 @@ import type { ContentItem } from "@/domain/models/content/item";
 import type { ContentItemWithStats } from "@/domain/models/content/types";
 
 import type { ActionConfig } from "@/ui/components/actions/types";
+import { PreviewCell } from "@/ui/components/content/table/PreviewCell";
 import { Badge } from "@/ui/components/core/badge";
-import { PreviewCell } from "@/ui/components/table/cells/PreviewCell";
 import type { TableConfiguration } from "@/ui/components/table/types";
 
 import { getItemDetailLink } from "../../../views/content/items/utils";

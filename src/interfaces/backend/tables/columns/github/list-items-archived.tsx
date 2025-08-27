@@ -1,7 +1,7 @@
 import type { RepositoryListItemArchived } from "@/domain/models/github/types";
 
+import { GithubCell } from "@/ui/components/github/table/GithubCell";
 import { DateCell } from "@/ui/components/table/cells/DateCell";
-import { GithubCell } from "@/ui/components/table/cells/GithubCell";
 import type { GetTableConfiguration } from "@/ui/components/table/types";
 
 import {

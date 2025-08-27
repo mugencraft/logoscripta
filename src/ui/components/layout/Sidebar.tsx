@@ -1,58 +1,31 @@
 import {
   Link,
+  type LinkProps,
   type RegisteredRouter,
-  type ValidateLinkOptions,
 } from "@tanstack/react-router";
 import type React from "react";
 
 import { ScrollArea } from "@/ui/components/core/scroll-area";
 import { cn } from "@/ui/utils";
 
-/**
- * Navigation group interface with proper generic constraints
- * @template TRouter - The router type, defaults to RegisteredRouter
- * @template TOptions - The link options type for validation
- */
-export interface NavGroup<
-  TRouter extends RegisteredRouter = RegisteredRouter,
-  TOptions = unknown,
-> {
-  /** Group title displayed in the sidebar */
+interface SidebarNavigationProps {
+  groups: NavGroup[];
+  isCollapsed?: boolean;
+}
+
+export interface NavGroup {
   title: string;
-  /** Array of navigation items for this group */
-  items: NavItem<TRouter, TOptions>[];
-  /** Whether the group is in collapsed state */
+  items: NavItem[];
   isCollapsed?: boolean;
 }
 
-/**
- * Navigation item interface with validated link options
- * @template TRouter - The router type, defaults to RegisteredRouter
- * @template TOptions - The link options type for validation
- */
-interface NavItem<
-  TRouter extends RegisteredRouter = RegisteredRouter,
-  TOptions = unknown,
-> {
-  /** Type-safe link configuration validated against router */
-  link: ValidateLinkOptions<TRouter, TOptions>;
-  /** Display label for the navigation item */
+interface NavItem {
+  link: LinkProps<RegisteredRouter["routeTree"]>;
   label: string;
-  /** React icon component for the navigation item */
   icon: React.ReactNode;
-  /** Whether the item is in collapsed state */
   isCollapsed?: boolean;
 }
 
-/**
- * Navigation group component with proper overloads
- * Renders a group of navigation items with optional title
- */
-export function NavGroup<TRouter extends RegisteredRouter, TOptions>({
-  title,
-  items,
-  isCollapsed,
-}: NavGroup<TRouter, TOptions>): React.ReactNode;
 export function NavGroup({
   title,
   items,
@@ -80,16 +53,6 @@ export function NavGroup({
   );
 }
 
-/**
- * Navigation item component with proper overloads
- * Renders a single navigation link with icon and label
- */
-export function NavItemElement<TRouter extends RegisteredRouter, TOptions>({
-  label,
-  link,
-  icon,
-  isCollapsed,
-}: NavItem<TRouter, TOptions>): React.ReactNode;
 export function NavItemElement({
   label,
   link,
@@ -118,29 +81,6 @@ export function NavItemElement({
   );
 }
 
-/**
- * Sidebar navigation props interface
- * @template TRouter - The router type, defaults to RegisteredRouter
- * @template TOptions - The link options type for validation
- */
-interface SidebarNavigationProps<
-  TRouter extends RegisteredRouter = RegisteredRouter,
-  TOptions = unknown,
-> {
-  /** Array of navigation groups to display */
-  groups: NavGroup<TRouter, TOptions>[];
-  /** Whether the sidebar is in collapsed state */
-  isCollapsed?: boolean;
-}
-
-/**
- * Main sidebar navigation component with proper overloads
- * Provides navigation to all application sections with type-safe routing
- */
-export function SidebarNavigation<TRouter extends RegisteredRouter, TOptions>({
-  groups,
-  isCollapsed,
-}: SidebarNavigationProps<TRouter, TOptions>): React.ReactNode;
 export function SidebarNavigation({
   groups,
   isCollapsed,

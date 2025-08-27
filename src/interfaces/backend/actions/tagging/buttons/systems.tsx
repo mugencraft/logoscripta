@@ -7,8 +7,10 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { TagSystemForm } from "../forms/TagSystemForm";
 import { useTagSystemActions } from "../useTagSystemActions";
 
-export const getTagSystemActions = (): ActionConfig<TagSystem>[] => {
-  const { handleDelete } = useTagSystemActions();
+export const getTagSystemActions = (
+  isDetailView?: boolean,
+): ActionConfig<TagSystem>[] => {
+  const { handleDelete } = useTagSystemActions({ isDetailView });
   return [
     {
       id: "create-system",

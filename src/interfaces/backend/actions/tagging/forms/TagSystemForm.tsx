@@ -18,7 +18,9 @@ export function TagSystemForm({
   onCancel,
 }: BaseFormProps<TagSystem>) {
   const { handleCreate, handleUpdate } = useTagSystemActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const form = useAppForm({

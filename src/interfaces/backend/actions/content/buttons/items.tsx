@@ -7,8 +7,10 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { ItemForm } from "../forms/ItemForm";
 import { useItemActions } from "../useItemActions";
 
-export const getItemsActions = (): ActionConfig<ContentItem>[] => {
-  const { handleDelete } = useItemActions();
+export const getItemsActions = (
+  isDetailView?: boolean,
+): ActionConfig<ContentItem>[] => {
+  const { handleDelete } = useItemActions({ isDetailView });
   return [
     {
       id: "create-item",

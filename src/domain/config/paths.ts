@@ -5,6 +5,7 @@ export const FOLDER_PATHS = {
   import: "./data/import",
   images: "./data/images",
   assets: "./data/assets",
+  geo: "./data/geo",
 } as const;
 
 export const FOLDER_URLS = {

@@ -1,11 +1,13 @@
 // Config
 import type { ProcessingOptions } from "@/domain/config/processing";
 import { useConfig } from "@/domain/config/useConfig";
-import { ContentImportExportService } from "@/domain/services/content/import-export";
 // Services
+import { ContentImportExportService } from "@/domain/services/content/import-export";
 import type { GithubCommands } from "@/domain/services/github/commands/github";
 import type { ListItemCommands } from "@/domain/services/github/commands/list-item";
 import { RepositoryListService } from "@/domain/services/github/repository-list";
+import { GeoSyncService } from "@/domain/services/location/geo";
+import { LocationImportExportService } from "@/domain/services/location/import-export";
 import { FileSystemService } from "@/domain/services/shared/file-system";
 import { TagSystemImportExportService } from "@/domain/services/tagging/import-export";
 import { TagSystemService } from "@/domain/services/tagging/tag";
@@ -18,6 +20,8 @@ import { ContentQueriesAdapter } from "@/infrastructure/persistence/adapters/con
 import { RepositoryQueriesAdapter } from "@/infrastructure/persistence/adapters/github/repository/queries";
 import { RepositoryListCommandsAdapter } from "@/infrastructure/persistence/adapters/github/repository-list/command";
 import { RepositoryListQueriesAdapter } from "@/infrastructure/persistence/adapters/github/repository-list/queries";
+import { LocationCommandsAdapter } from "@/infrastructure/persistence/adapters/location/commands";
+import { LocationQueriesAdapter } from "@/infrastructure/persistence/adapters/location/queries";
 import { TaggingCommandsAdapter } from "@/infrastructure/persistence/adapters/tagging/commands";
 import { TagSystemQueriesAdapter } from "@/infrastructure/persistence/adapters/tagging/queries";
 
@@ -45,6 +49,12 @@ export interface TRPCContext {
 
   // Tag inference
   tagValidationService: TagValidationService;
+
+  // Location
+  geoSyncService: GeoSyncService;
+  locationImportExport: LocationImportExportService;
+  locationQueries: LocationQueriesAdapter;
+  locationCommands: LocationCommandsAdapter;
 }
 
 export async function createContext(): Promise<TRPCContext> {
@@ -97,6 +107,17 @@ export async function createContext(): Promise<TRPCContext> {
     contentQueries,
   );
 
+  // Initialize location adapters
+  const locationQueries = new LocationQueriesAdapter();
+  const locationCommands = new LocationCommandsAdapter();
+
+  const geoSyncService = new GeoSyncService(locationCommands, locationQueries);
+
+  const locationImportExport = new LocationImportExportService(
+    locationCommands,
+    locationQueries,
+  );
+
   return {
     options,
     fileSystemService,
@@ -113,5 +134,9 @@ export async function createContext(): Promise<TRPCContext> {
     contentCommands,
     contentImportExport,
     tagValidationService,
+    geoSyncService,
+    locationImportExport,
+    locationQueries,
+    locationCommands,
   };
 }

@@ -7,8 +7,10 @@ import type { ActionConfig } from "@/ui/components/actions/types";
 import { TagCategoryForm } from "../forms/TagCategoryForm";
 import { useTagCategoryActions } from "../useTagCategoryActions";
 
-export const getTagCategoriesActions = (): ActionConfig<TagCategory>[] => {
-  const { handleDelete } = useTagCategoryActions();
+export const getTagCategoriesActions = (
+  isDetailView?: boolean,
+): ActionConfig<TagCategory>[] => {
+  const { handleDelete } = useTagCategoryActions({ isDetailView });
   return [
     {
       id: "create-category",

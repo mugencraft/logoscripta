@@ -9,11 +9,12 @@ import {
   contentCollectionFormSchema,
   contentCollectionMetadataSchema,
 } from "@/domain/validation/content/collection";
-import { useCollectionActions } from "@/interfaces/backend/actions/content/useCollectionActions";
 
 import { Button } from "@/ui/components/core/button";
 import type { BaseFormProps } from "@/ui/components/forms/types";
 import { useAppForm } from "@/ui/components/forms/useAppForm";
+
+import { useCollectionActions } from "../../../actions/content/useCollectionActions";
 
 export function CollectionForm({
   mode,
@@ -22,7 +23,9 @@ export function CollectionForm({
   onCancel,
 }: BaseFormProps<ContentCollection>) {
   const { handleCreate, handleUpdate } = useCollectionActions({
-    onSuccess,
+    callbacks: {
+      onSuccess,
+    },
   });
 
   const form = useAppForm({
