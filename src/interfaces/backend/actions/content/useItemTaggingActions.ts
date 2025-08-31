@@ -4,7 +4,7 @@ import { parseTagsFromText } from "@/core/utils/parse";
 import type { ContentItem } from "@/domain/models/content/item";
 import type { ContentItemTag } from "@/domain/models/content/item-tag";
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 import type { Tag } from "@/domain/models/tagging/tag";
@@ -61,7 +61,7 @@ export const useItemTaggingActions = (): ItemTagOperations => {
       }
     },
 
-    toggleSystemTag: async (item: ContentItemWithTags, tag: Tag) => {
+    toggleSystemTag: async (item: ContentItemWithRelations, tag: Tag) => {
       try {
         const hasTag = item.tags?.some((itemTag) => itemTag.tag.id === tag.id);
 
@@ -71,7 +71,7 @@ export const useItemTaggingActions = (): ItemTagOperations => {
             tagId: tag.id,
           });
 
-          const updatedItem: ContentItemWithTags = {
+          const updatedItem: ContentItemWithRelations = {
             ...item,
             tags:
               item.tags?.filter((itemTag) => itemTag.tag.id !== tag.id) || [],

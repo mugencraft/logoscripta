@@ -63,13 +63,22 @@ export function getItemsTable({
                       {item.title}
                     </div>
                   )}
-                  <Link
-                    to={"/content/collections/$collectionId"}
-                    params={{ collectionId: String(item.collectionId) }}
-                    className="text-xs text-green-600 dark:text-green-400 hover:underline"
-                  >
-                    Collection: {item.collectionId}
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to={"/content/collections/$collectionId"}
+                      params={{ collectionId: String(item.collectionId) }}
+                      className="text-xs text-green-600 dark:text-green-400 hover:underline"
+                    >
+                      Collection: {item.collectionId}
+                    </Link>
+                    <Link
+                      to={"/content/items/$itemId/assignment"}
+                      params={{ itemId: String(item.id) }}
+                      className="text-xs text-green-600 dark:text-green-400 hover:underline"
+                    >
+                      Assignments ({item.totalTopics || 0})
+                    </Link>
+                  </div>
                 </div>
               );
             },
@@ -112,6 +121,19 @@ export function getItemsTable({
         ],
       },
       {
+        header: "Topics",
+        columns: [
+          {
+            header: "Topics",
+            accessorKey: "totalTopics",
+            enableSorting: true,
+            cell: (info) => (
+              <div className="text-center font-mono">{info.getValue()}</div>
+            ),
+          },
+        ],
+      },
+      {
         header: "Timestamps",
         enableResizing: false,
         columns: getSystemTimestampColumns(),
@@ -128,6 +150,7 @@ export function getItemsTable({
           rawTags: true,
           tags: true,
           tagCount: true,
+          totalTopics: true,
           updatedAt: true,
         },
       },
@@ -150,6 +173,7 @@ export function getItemsTable({
           contentType: true,
           tags: true,
           tagCount: true,
+          totalTopics: true,
           createdAt: true,
           updatedAt: true,
         },

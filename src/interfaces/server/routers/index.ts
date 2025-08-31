@@ -11,6 +11,7 @@ import { taggingGroupRouter } from "./tagging/groups";
 import { taggingImportExportRouter } from "./tagging/import-export";
 import { taggingSystemRouter } from "./tagging/systems";
 import { taggingTagRouter } from "./tagging/tags";
+import { taxonomyRouter } from "./taxonomy";
 
 export const appRouter = router({
   repository: repositoryRouter,
@@ -29,4 +30,5 @@ export const appRouter = router({
     importExport: contentImportExportRouter,
   },
   location: locationRouter,
+  taxonomy: taxonomyRouter,
 });

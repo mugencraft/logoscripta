@@ -12,8 +12,8 @@ import {
 import type {
   CollectionStatistics,
   ContentCollectionWithStats,
+  ContentItemWithRelations,
   ContentItemWithStats,
-  ContentItemWithTags,
   ContentSearchFilters,
   ContentStatistics,
 } from "@/domain/models/content/types";
@@ -23,18 +23,20 @@ import {
   contentCollections,
   contentItems,
   contentItemTags,
+  contentTaxonomyTopics,
   tagSystems,
   tags,
 } from "@/shared/schema";
 
 import { db } from "../../db";
 
-const withItemTags = {
+const withItemRelations = {
   with: {
     collection: true,
     tags: {
       with: { tag: true },
     },
+    topics: { with: { topic: true } },
   },
 } as const;
 
@@ -65,7 +67,7 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
       (await db.query.contentCollections.findFirst({
         where: eq(contentCollections.id, id),
         with: {
-          items: withItemTags,
+          items: withItemRelations,
         },
       })) || null
     );
@@ -82,6 +84,11 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
 					SELECT COUNT(*)
 					FROM ${contentItemTags}
 					WHERE ${contentItemTags.contentItemId} = ${contentItems.id}
+				)`,
+        totalTopics: sql<number>`(
+					SELECT COUNT(*)
+					FROM ${contentTaxonomyTopics}
+					WHERE ${contentTaxonomyTopics.contentId} = ${contentItems.id}
 				)`,
       })
       .from(contentItems);
@@ -101,27 +108,38 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
   }
 
   async getItemsForCollection(collectionId: number) {
-    return (await db.query.contentItems.findMany({
+    const items = await db.query.contentItems.findMany({
       where: eq(contentItems.collectionId, collectionId),
       orderBy: [asc(contentItems.identifier)],
-      with: withItemTags.with,
-    })) as ContentItemWithTags[];
+      with: withItemRelations.with,
+    });
+
+    return items;
   }
 
   async getItem(itemId: number) {
-    return (
-      (await db.query.contentItems.findFirst({
-        where: eq(contentItems.id, itemId),
-        with: withItemTags.with,
-      })) || null
-    );
+    const item = await db.query.contentItems.findFirst({
+      where: eq(contentItems.id, itemId),
+      with: withItemRelations.with,
+    });
+    if (!item) {
+      throw new Error(`Content item not found: ${itemId}`);
+    }
+
+    return item;
   }
 
-  async getItemWithTags(itemId: number) {
-    return ((await db.query.contentItems.findFirst({
+  async getItemWithRelations(itemId: number) {
+    const item = await db.query.contentItems.findFirst({
       where: eq(contentItems.id, itemId),
-      with: withItemTags.with,
-    })) || null) as ContentItemWithTags | null;
+      with: withItemRelations.with,
+    });
+
+    if (!item) {
+      throw new Error(`Content item not found: ${itemId}`);
+    }
+
+    return item;
   }
 
   // TODO: check this, who is using it?
@@ -167,14 +185,14 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
         },
       },
       orderBy: [asc(contentItems.identifier)],
-    })) as ContentItemWithTags[];
+    })) as ContentItemWithRelations[];
   }
 
   // SEARCH
 
   async searchItems(
     filters: ContentSearchFilters,
-  ): Promise<ContentItemWithTags[]> {
+  ): Promise<ContentItemWithRelations[]> {
     const conditions = [eq(contentItems.collectionId, filters.collectionId)];
 
     // Basic content filtering
@@ -196,7 +214,7 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
           },
         },
         orderBy: [asc(contentItems.identifier)],
-      })) as ContentItemWithTags[];
+      })) as ContentItemWithRelations[];
     }
 
     // Complex tag filtering - more efficient approach
@@ -228,7 +246,7 @@ export class ContentQueriesAdapter implements ContentQueriesPort {
         },
       },
       orderBy: [asc(contentItems.identifier)],
-    })) as ContentItemWithTags[];
+    })) as ContentItemWithRelations[];
   }
 
   // Helper methods for better organization

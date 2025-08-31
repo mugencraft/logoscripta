@@ -14,6 +14,17 @@ import {
 
 import type { NavGroup } from "@/ui/components/layout/Sidebar";
 
+const taxonomyNavGroup: NavGroup = {
+  title: "Taxonomy",
+  items: [
+    {
+      link: { to: "/taxonomy", activeOptions: { exact: true } },
+      label: "Taxonomy",
+      icon: <FolderKanban className="w-5 h-5" />,
+    },
+  ],
+};
+
 const locationNavGroup: NavGroup = {
   title: "Location",
   items: [
@@ -123,6 +134,7 @@ export const navigation: NavGroup[] = [
       },
     ],
   },
+  taxonomyNavGroup,
   locationNavGroup,
   {
     title: "Github Repos",

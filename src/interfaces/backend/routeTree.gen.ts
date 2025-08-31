@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TaxonomyIndexRouteImport } from './routes/taxonomy/index'
 import { Route as TaggingIndexRouteImport } from './routes/tagging/index'
 import { Route as LocationIndexRouteImport } from './routes/location/index'
 import { Route as ContentIndexRouteImport } from './routes/content/index'
@@ -28,6 +29,7 @@ import { Route as TaggingCategoriesIndexRouteImport } from './routes/tagging/cat
 import { Route as GithubListsIndexRouteImport } from './routes/github/lists/index'
 import { Route as ContentItemsIndexRouteImport } from './routes/content/items/index'
 import { Route as ContentCollectionsIndexRouteImport } from './routes/content/collections/index'
+import { Route as TaxonomySystemsSystemIdRouteImport } from './routes/taxonomy/systems/$systemId'
 import { Route as TaggingTagsTagIdRouteImport } from './routes/tagging/tags/$tagId'
 import { Route as TaggingSystemsSystemIdRouteImport } from './routes/tagging/systems/$systemId'
 import { Route as TaggingGroupsGroupIdRouteImport } from './routes/tagging/groups/$groupId'
@@ -40,13 +42,20 @@ import { Route as LocationCommunesCommuneCodeRouteImport } from './routes/locati
 import { Route as GithubListsListIdRouteImport } from './routes/github/lists/$listId'
 import { Route as ContentItemsItemIdRouteImport } from './routes/content/items/$itemId'
 import { Route as ContentCollectionsCollectionIdRouteImport } from './routes/content/collections/$collectionId'
+import { Route as ContentItemsItemIdAssignmentRouteImport } from './routes/content/items_/$itemId.assignment'
 import { Route as ContentCollectionsCollectionIdItemsRouteImport } from './routes/content/collections_/$collectionId.items'
 import { Route as ContentCollectionsCollectionIdAnalysisRouteImport } from './routes/content/collections_/$collectionId.analysis'
+import { Route as TaxonomySystemsSystemIdTopicsTopicIdRouteImport } from './routes/taxonomy/systems_/$systemId.topics_.$topicId'
 import { Route as ContentCollectionsCollectionIdItemsItemIdRouteImport } from './routes/content/collections_/$collectionId.items_.$itemId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaxonomyIndexRoute = TaxonomyIndexRouteImport.update({
+  id: '/taxonomy/',
+  path: '/taxonomy/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TaggingIndexRoute = TaggingIndexRouteImport.update({
@@ -139,6 +148,11 @@ const ContentCollectionsIndexRoute = ContentCollectionsIndexRouteImport.update({
   path: '/content/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TaxonomySystemsSystemIdRoute = TaxonomySystemsSystemIdRouteImport.update({
+  id: '/taxonomy/systems/$systemId',
+  path: '/taxonomy/systems/$systemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TaggingTagsTagIdRoute = TaggingTagsTagIdRouteImport.update({
   id: '/tagging/tags/$tagId',
   path: '/tagging/tags/$tagId',
@@ -205,6 +219,12 @@ const ContentCollectionsCollectionIdRoute =
     path: '/content/collections/$collectionId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ContentItemsItemIdAssignmentRoute =
+  ContentItemsItemIdAssignmentRouteImport.update({
+    id: '/content/items_/$itemId/assignment',
+    path: '/content/items/$itemId/assignment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContentCollectionsCollectionIdItemsRoute =
   ContentCollectionsCollectionIdItemsRouteImport.update({
     id: '/content/collections_/$collectionId/items',
@@ -215,6 +235,12 @@ const ContentCollectionsCollectionIdAnalysisRoute =
   ContentCollectionsCollectionIdAnalysisRouteImport.update({
     id: '/content/collections_/$collectionId/analysis',
     path: '/content/collections/$collectionId/analysis',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TaxonomySystemsSystemIdTopicsTopicIdRoute =
+  TaxonomySystemsSystemIdTopicsTopicIdRouteImport.update({
+    id: '/taxonomy/systems_/$systemId/topics_/$topicId',
+    path: '/taxonomy/systems/$systemId/topics/$topicId',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ContentCollectionsCollectionIdItemsItemIdRoute =
@@ -237,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/content': typeof ContentIndexRoute
   '/location': typeof LocationIndexRoute
   '/tagging': typeof TaggingIndexRoute
+  '/taxonomy': typeof TaxonomyIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
@@ -249,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
   '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/taxonomy/systems/$systemId': typeof TaxonomySystemsSystemIdRoute
   '/content/collections': typeof ContentCollectionsIndexRoute
   '/content/items': typeof ContentItemsIndexRoute
   '/github/lists': typeof GithubListsIndexRoute
@@ -258,7 +286,9 @@ export interface FileRoutesByFullPath {
   '/tagging/tags': typeof TaggingTagsIndexRoute
   '/content/collections/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
   '/content/collections/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/items/$itemId/assignment': typeof ContentItemsItemIdAssignmentRoute
   '/content/collections/$collectionId/items/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+  '/taxonomy/systems/$systemId/topics/$topicId': typeof TaxonomySystemsSystemIdTopicsTopicIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -273,6 +303,7 @@ export interface FileRoutesByTo {
   '/content': typeof ContentIndexRoute
   '/location': typeof LocationIndexRoute
   '/tagging': typeof TaggingIndexRoute
+  '/taxonomy': typeof TaxonomyIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
@@ -285,6 +316,7 @@ export interface FileRoutesByTo {
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
   '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/taxonomy/systems/$systemId': typeof TaxonomySystemsSystemIdRoute
   '/content/collections': typeof ContentCollectionsIndexRoute
   '/content/items': typeof ContentItemsIndexRoute
   '/github/lists': typeof GithubListsIndexRoute
@@ -294,7 +326,9 @@ export interface FileRoutesByTo {
   '/tagging/tags': typeof TaggingTagsIndexRoute
   '/content/collections/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
   '/content/collections/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/items/$itemId/assignment': typeof ContentItemsItemIdAssignmentRoute
   '/content/collections/$collectionId/items/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+  '/taxonomy/systems/$systemId/topics/$topicId': typeof TaxonomySystemsSystemIdTopicsTopicIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -310,6 +344,7 @@ export interface FileRoutesById {
   '/content/': typeof ContentIndexRoute
   '/location/': typeof LocationIndexRoute
   '/tagging/': typeof TaggingIndexRoute
+  '/taxonomy/': typeof TaxonomyIndexRoute
   '/content/collections/$collectionId': typeof ContentCollectionsCollectionIdRoute
   '/content/items/$itemId': typeof ContentItemsItemIdRoute
   '/github/lists/$listId': typeof GithubListsListIdRoute
@@ -322,6 +357,7 @@ export interface FileRoutesById {
   '/tagging/groups/$groupId': typeof TaggingGroupsGroupIdRoute
   '/tagging/systems/$systemId': typeof TaggingSystemsSystemIdRoute
   '/tagging/tags/$tagId': typeof TaggingTagsTagIdRoute
+  '/taxonomy/systems/$systemId': typeof TaxonomySystemsSystemIdRoute
   '/content/collections/': typeof ContentCollectionsIndexRoute
   '/content/items/': typeof ContentItemsIndexRoute
   '/github/lists/': typeof GithubListsIndexRoute
@@ -331,7 +367,9 @@ export interface FileRoutesById {
   '/tagging/tags/': typeof TaggingTagsIndexRoute
   '/content/collections_/$collectionId/analysis': typeof ContentCollectionsCollectionIdAnalysisRoute
   '/content/collections_/$collectionId/items': typeof ContentCollectionsCollectionIdItemsRoute
+  '/content/items_/$itemId/assignment': typeof ContentItemsItemIdAssignmentRoute
   '/content/collections_/$collectionId/items_/$itemId': typeof ContentCollectionsCollectionIdItemsItemIdRoute
+  '/taxonomy/systems_/$systemId/topics_/$topicId': typeof TaxonomySystemsSystemIdTopicsTopicIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -348,6 +386,7 @@ export interface FileRouteTypes {
     | '/content'
     | '/location'
     | '/tagging'
+    | '/taxonomy'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
@@ -360,6 +399,7 @@ export interface FileRouteTypes {
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
     | '/tagging/tags/$tagId'
+    | '/taxonomy/systems/$systemId'
     | '/content/collections'
     | '/content/items'
     | '/github/lists'
@@ -369,7 +409,9 @@ export interface FileRouteTypes {
     | '/tagging/tags'
     | '/content/collections/$collectionId/analysis'
     | '/content/collections/$collectionId/items'
+    | '/content/items/$itemId/assignment'
     | '/content/collections/$collectionId/items/$itemId'
+    | '/taxonomy/systems/$systemId/topics/$topicId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -384,6 +426,7 @@ export interface FileRouteTypes {
     | '/content'
     | '/location'
     | '/tagging'
+    | '/taxonomy'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
@@ -396,6 +439,7 @@ export interface FileRouteTypes {
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
     | '/tagging/tags/$tagId'
+    | '/taxonomy/systems/$systemId'
     | '/content/collections'
     | '/content/items'
     | '/github/lists'
@@ -405,7 +449,9 @@ export interface FileRouteTypes {
     | '/tagging/tags'
     | '/content/collections/$collectionId/analysis'
     | '/content/collections/$collectionId/items'
+    | '/content/items/$itemId/assignment'
     | '/content/collections/$collectionId/items/$itemId'
+    | '/taxonomy/systems/$systemId/topics/$topicId'
   id:
     | '__root__'
     | '/'
@@ -420,6 +466,7 @@ export interface FileRouteTypes {
     | '/content/'
     | '/location/'
     | '/tagging/'
+    | '/taxonomy/'
     | '/content/collections/$collectionId'
     | '/content/items/$itemId'
     | '/github/lists/$listId'
@@ -432,6 +479,7 @@ export interface FileRouteTypes {
     | '/tagging/groups/$groupId'
     | '/tagging/systems/$systemId'
     | '/tagging/tags/$tagId'
+    | '/taxonomy/systems/$systemId'
     | '/content/collections/'
     | '/content/items/'
     | '/github/lists/'
@@ -441,7 +489,9 @@ export interface FileRouteTypes {
     | '/tagging/tags/'
     | '/content/collections_/$collectionId/analysis'
     | '/content/collections_/$collectionId/items'
+    | '/content/items_/$itemId/assignment'
     | '/content/collections_/$collectionId/items_/$itemId'
+    | '/taxonomy/systems_/$systemId/topics_/$topicId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -457,6 +507,7 @@ export interface RootRouteChildren {
   ContentIndexRoute: typeof ContentIndexRoute
   LocationIndexRoute: typeof LocationIndexRoute
   TaggingIndexRoute: typeof TaggingIndexRoute
+  TaxonomyIndexRoute: typeof TaxonomyIndexRoute
   ContentCollectionsCollectionIdRoute: typeof ContentCollectionsCollectionIdRoute
   ContentItemsItemIdRoute: typeof ContentItemsItemIdRoute
   GithubListsListIdRoute: typeof GithubListsListIdRoute
@@ -464,6 +515,7 @@ export interface RootRouteChildren {
   TaggingGroupsGroupIdRoute: typeof TaggingGroupsGroupIdRoute
   TaggingSystemsSystemIdRoute: typeof TaggingSystemsSystemIdRoute
   TaggingTagsTagIdRoute: typeof TaggingTagsTagIdRoute
+  TaxonomySystemsSystemIdRoute: typeof TaxonomySystemsSystemIdRoute
   ContentCollectionsIndexRoute: typeof ContentCollectionsIndexRoute
   ContentItemsIndexRoute: typeof ContentItemsIndexRoute
   GithubListsIndexRoute: typeof GithubListsIndexRoute
@@ -473,7 +525,9 @@ export interface RootRouteChildren {
   TaggingTagsIndexRoute: typeof TaggingTagsIndexRoute
   ContentCollectionsCollectionIdAnalysisRoute: typeof ContentCollectionsCollectionIdAnalysisRoute
   ContentCollectionsCollectionIdItemsRoute: typeof ContentCollectionsCollectionIdItemsRoute
+  ContentItemsItemIdAssignmentRoute: typeof ContentItemsItemIdAssignmentRoute
   ContentCollectionsCollectionIdItemsItemIdRoute: typeof ContentCollectionsCollectionIdItemsItemIdRoute
+  TaxonomySystemsSystemIdTopicsTopicIdRoute: typeof TaxonomySystemsSystemIdTopicsTopicIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -483,6 +537,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/taxonomy/': {
+      id: '/taxonomy/'
+      path: '/taxonomy'
+      fullPath: '/taxonomy'
+      preLoaderRoute: typeof TaxonomyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tagging/': {
@@ -611,6 +672,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentCollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/taxonomy/systems/$systemId': {
+      id: '/taxonomy/systems/$systemId'
+      path: '/taxonomy/systems/$systemId'
+      fullPath: '/taxonomy/systems/$systemId'
+      preLoaderRoute: typeof TaxonomySystemsSystemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tagging/tags/$tagId': {
       id: '/tagging/tags/$tagId'
       path: '/tagging/tags/$tagId'
@@ -695,6 +763,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentCollectionsCollectionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/content/items_/$itemId/assignment': {
+      id: '/content/items_/$itemId/assignment'
+      path: '/content/items/$itemId/assignment'
+      fullPath: '/content/items/$itemId/assignment'
+      preLoaderRoute: typeof ContentItemsItemIdAssignmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/content/collections_/$collectionId/items': {
       id: '/content/collections_/$collectionId/items'
       path: '/content/collections/$collectionId/items'
@@ -707,6 +782,13 @@ declare module '@tanstack/react-router' {
       path: '/content/collections/$collectionId/analysis'
       fullPath: '/content/collections/$collectionId/analysis'
       preLoaderRoute: typeof ContentCollectionsCollectionIdAnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/taxonomy/systems_/$systemId/topics_/$topicId': {
+      id: '/taxonomy/systems_/$systemId/topics_/$topicId'
+      path: '/taxonomy/systems/$systemId/topics/$topicId'
+      fullPath: '/taxonomy/systems/$systemId/topics/$topicId'
+      preLoaderRoute: typeof TaxonomySystemsSystemIdTopicsTopicIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/content/collections_/$collectionId/items_/$itemId': {
@@ -789,6 +871,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContentIndexRoute: ContentIndexRoute,
   LocationIndexRoute: LocationIndexRoute,
   TaggingIndexRoute: TaggingIndexRoute,
+  TaxonomyIndexRoute: TaxonomyIndexRoute,
   ContentCollectionsCollectionIdRoute: ContentCollectionsCollectionIdRoute,
   ContentItemsItemIdRoute: ContentItemsItemIdRoute,
   GithubListsListIdRoute: GithubListsListIdRoute,
@@ -796,6 +879,7 @@ const rootRouteChildren: RootRouteChildren = {
   TaggingGroupsGroupIdRoute: TaggingGroupsGroupIdRoute,
   TaggingSystemsSystemIdRoute: TaggingSystemsSystemIdRoute,
   TaggingTagsTagIdRoute: TaggingTagsTagIdRoute,
+  TaxonomySystemsSystemIdRoute: TaxonomySystemsSystemIdRoute,
   ContentCollectionsIndexRoute: ContentCollectionsIndexRoute,
   ContentItemsIndexRoute: ContentItemsIndexRoute,
   GithubListsIndexRoute: GithubListsIndexRoute,
@@ -807,8 +891,11 @@ const rootRouteChildren: RootRouteChildren = {
     ContentCollectionsCollectionIdAnalysisRoute,
   ContentCollectionsCollectionIdItemsRoute:
     ContentCollectionsCollectionIdItemsRoute,
+  ContentItemsItemIdAssignmentRoute: ContentItemsItemIdAssignmentRoute,
   ContentCollectionsCollectionIdItemsItemIdRoute:
     ContentCollectionsCollectionIdItemsItemIdRoute,
+  TaxonomySystemsSystemIdTopicsTopicIdRoute:
+    TaxonomySystemsSystemIdTopicsTopicIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

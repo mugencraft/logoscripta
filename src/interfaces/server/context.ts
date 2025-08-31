@@ -24,6 +24,8 @@ import { LocationCommandsAdapter } from "@/infrastructure/persistence/adapters/l
 import { LocationQueriesAdapter } from "@/infrastructure/persistence/adapters/location/queries";
 import { TaggingCommandsAdapter } from "@/infrastructure/persistence/adapters/tagging/commands";
 import { TagSystemQueriesAdapter } from "@/infrastructure/persistence/adapters/tagging/queries";
+import { TaxonomyCommandsAdapter } from "@/infrastructure/persistence/adapters/taxonomy/commands";
+import { TaxonomyQueriesAdapter } from "@/infrastructure/persistence/adapters/taxonomy/queries";
 
 export interface TRPCContext {
   options: ProcessingOptions;
@@ -55,6 +57,10 @@ export interface TRPCContext {
   locationImportExport: LocationImportExportService;
   locationQueries: LocationQueriesAdapter;
   locationCommands: LocationCommandsAdapter;
+
+  // Taxonomy
+  taxonomyQueries: TaxonomyQueriesAdapter;
+  taxonomyCommands: TaxonomyCommandsAdapter;
 }
 
 export async function createContext(): Promise<TRPCContext> {
@@ -118,6 +124,10 @@ export async function createContext(): Promise<TRPCContext> {
     locationQueries,
   );
 
+  // Taxonomy
+  const taxonomyQueries = new TaxonomyQueriesAdapter();
+  const taxonomyCommands = new TaxonomyCommandsAdapter();
+
   return {
     options,
     fileSystemService,
@@ -138,5 +148,7 @@ export async function createContext(): Promise<TRPCContext> {
     locationImportExport,
     locationQueries,
     locationCommands,
+    taxonomyQueries,
+    taxonomyCommands,
   };
 }

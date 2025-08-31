@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-import type { ContentItemWithTags } from "@/domain/models/content/types";
+import type { ContentItemWithRelations } from "@/domain/models/content/types";
 
 import { Badge } from "@/ui/components/core/badge";
 import { Button } from "@/ui/components/core/button";
@@ -9,7 +9,7 @@ export const ItemTags = ({
   item,
   onToggleTag,
 }: {
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   onToggleTag?: (tagName: string) => void;
 }) => {
   const tagCount = item.tags?.length || 0;

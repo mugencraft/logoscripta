@@ -156,6 +156,7 @@ export const CheckboxField = ({ label }: FormFieldProps) => {
 export const NumberField = ({
   label,
   placeholder = "Enter number",
+  description,
   min,
   max,
   step = 1,
@@ -177,6 +178,9 @@ export const NumberField = ({
       fieldName={field.name}
       errors={field.state.meta.errors}
     >
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
       <Input
         type="number"
         id={field.name}

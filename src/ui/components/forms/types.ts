@@ -9,6 +9,7 @@ type FormFieldType = "text" | "textarea" | "number" | "select" | "checkbox";
 
 export interface FormFieldProps {
   label: string;
+  description?: string;
   placeholder?: string;
   type?: FormFieldType;
   required?: boolean;

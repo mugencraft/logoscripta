@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { parseTagsFromText } from "@/core/utils/parse";
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 import type { Tag } from "@/domain/models/tagging/tag";
@@ -11,7 +11,7 @@ import type { TagSystemWithGroups } from "@/domain/models/tagging/types";
 import { RawTagSection } from "./RawTagSection";
 
 interface RawTagsAnalysisProps {
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   system: TagSystemWithGroups;
   selectedSystemTags: Tag[];
   toggleSystemTag: ItemTagOperations["toggleSystemTag"];

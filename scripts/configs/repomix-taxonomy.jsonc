@@ -1,0 +1,56 @@
+{
+  "output": {
+    "filePath": "ai/codebase.xml.txt",
+    "headerText": "LogoScripta Codebase",
+    "style": "xml",
+    // "removeComments": true,
+    "removeEmptyLines": true,
+    // "compress": true
+    "compress": false,
+    "topFilesLength": 10,
+    "fileSummary": true,
+    "directoryStructure": true,
+    "git": {
+      "sortByChanges": true,
+      "includeDiffs": false
+    }
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  },
+  "include": [
+    // "package.json",
+    // "README.md",
+    "src/shared/schema/**/*",
+    // "src/core/**/*",
+    "src/domain/models/taxonomy/**/*",
+    "src/domain/models/content/**/*",
+    "src/domain/ports/taxonomy/**/*",
+    "src/domain/ports/content/**/*",
+    "src/domain/validation/taxonomy/**/*",
+    "src/domain/services/taxonomy/**/*",
+    "src/domain/services/content/taxonomy-integration.ts",
+    "src/domain/services/shared/metadata.ts",
+    "src/infrastructure/persistence/adapters/taxonomy/**/*",
+    "src/infrastructure/persistence/adapters/content/**/*",
+    "src/interfaces/server/routers/taxonomy/**/*",
+    "src/interfaces/server/routers/content/**/*",
+    "src/interfaces/server/context.ts",
+    "src/interfaces/backend/routes/taxonomy/**/*",
+    "src/interfaces/backend/routes/tagging/**/*",
+    "src/interfaces/backend/routes/content/**/*",
+    "src/interfaces/backend/actions/taxonomy/**/*",
+    "src/interfaces/backend/actions/content/**/*",
+    "src/interfaces/backend/tables/columns/content/**/*",
+    "src/interfaces/backend/tables/columns/taxonomy/**/*",
+    "src/interfaces/backend/views/taxonomy/**/*",
+    "src/interfaces/backend/views/content/**/*",
+    "src/interfaces/backend/navigation.tsx",
+    "src/ui/components/taxonomy/**/*",
+    "src/ui/components/content/**/*"
+    // "src/ui/components/import-export/**/*"
+  ],
+  "ignore": {
+    "customPatterns": ["src/interfaces/backend/routeTree.gen.ts"]
+  }
+}

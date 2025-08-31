@@ -33,7 +33,7 @@ const tagMappingSchema = z.object({
     height: z.number().min(0).max(100),
   }),
   style: z.object({
-    color: z.string(),
+    color,
     label: z.string(),
   }),
 });

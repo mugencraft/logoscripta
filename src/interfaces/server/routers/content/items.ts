@@ -49,11 +49,11 @@ export const contentItemRouter = router({
       return { success: true };
     }),
 
-  getWithTags: publicProcedure
+  getWithRelations: publicProcedure
     .input(sharedSchema.entityId)
     .query(
       async ({ ctx, input: itemId }) =>
-        await ctx.contentQueries.getItemWithTags(itemId),
+        await ctx.contentQueries.getItemWithRelations(itemId),
     ),
 
   // ============= SEARCH AND FILTERING =============

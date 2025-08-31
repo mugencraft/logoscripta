@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 
@@ -11,7 +11,7 @@ import { ItemMetadata } from "./ItemMetadata";
 import { ItemTags } from "./ItemTags";
 
 interface ItemDetailsProps {
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   linkToCollection?: boolean;
   toggleRawTag: ItemTagOperations["toggleRawTag"];
 }

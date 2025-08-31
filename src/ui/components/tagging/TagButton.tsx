@@ -1,6 +1,6 @@
 import { AlertTriangle, Check, Info, Lightbulb } from "lucide-react";
 
-import type { ContentItemWithTags } from "@/domain/models/content/types";
+import type { ContentItemWithRelations } from "@/domain/models/content/types";
 import type { Tag } from "@/domain/models/tagging/tag";
 
 import { Badge } from "@/ui/components/core/badge";
@@ -14,7 +14,7 @@ import { cn } from "@/ui/utils";
 
 interface TagButtonProps {
   tag: Tag;
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   isSelected: boolean;
   isInRawTags: boolean;
   hasConflict?: boolean;

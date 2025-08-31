@@ -84,7 +84,6 @@ export const getControlColumnGroup = <TData, TTableData = TData>(
                 />
               ),
               enableResizing: false,
-              size: 100,
             },
           ] satisfies ColumnDef<TTableData>[])
         : []),

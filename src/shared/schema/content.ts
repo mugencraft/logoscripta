@@ -19,6 +19,7 @@ import {
   tagSystems,
   tags,
 } from "./tagging";
+import { contentTaxonomyTopics } from "./taxonomy";
 
 export const contentCollections = sqliteTable(
   "content_collections",
@@ -101,6 +102,7 @@ export const contentItemsRelations = relations(
       references: [contentCollections.id],
     }),
     tags: many(contentItemTags),
+    topics: many(contentTaxonomyTopics),
   }),
 );
 

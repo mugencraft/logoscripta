@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 import type { TagSystemWithGroups } from "@/domain/models/tagging/types";
@@ -17,7 +17,7 @@ import { TagGroupManager } from "../groups/TagGroupManager";
 import { RawTagsAnalysis } from "./RawTagsAnalysis";
 
 interface TagSystemManagerProps {
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   system: TagSystemWithGroups;
   toggleSystemTag: ItemTagOperations["toggleSystemTag"];
 }

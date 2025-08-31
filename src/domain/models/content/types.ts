@@ -1,3 +1,5 @@
+import type { ContentTaxonomyTopicWithTopic } from "@/domain/models/taxonomy/types";
+
 import type {
   ClientImportInput,
   ContentImportOptions,
@@ -105,6 +107,7 @@ export type ContentCollectionWithStats = ContentCollection & {
 
 export type ContentItemWithStats = ContentItem & {
   totalTags: number;
+  totalTopics: number;
   collectionName: string;
 };
 
@@ -113,9 +116,10 @@ export type ContentItemWithStats = ContentItem & {
 // used in ContentImportExportService
 export type ContentItemTagWithTag = ContentItemTag & { tag: Tag };
 
-export type ContentItemWithTags = ContentItem & {
+export type ContentItemWithRelations = ContentItem & {
   collection: ContentCollection;
-  tags?: ContentItemTagWithTag[];
+  tags: ContentItemTagWithTag[];
+  topics: ContentTaxonomyTopicWithTopic[];
 };
 
 export type ContentCollectionWithItems = ContentCollection & {
@@ -128,6 +132,8 @@ export interface ContentSearchFilters {
   collectionId: number;
   tags?: number[];
   excludeTags?: number[];
+  topics?: number[];
+  excludeTopics?: number[];
   source?: TagSource;
   contentType?: ContentType;
 }
@@ -166,11 +172,11 @@ export interface ItemTagOperations {
     tagName: string,
   ) => Promise<{ success: boolean; data: ContentItem | null }>;
   toggleSystemTag: (
-    item: ContentItemWithTags,
+    item: ContentItemWithRelations,
     tag: Tag,
-  ) => Promise<{ success: boolean; data: ContentItemWithTags | null }>;
+  ) => Promise<{ success: boolean; data: ContentItemWithRelations | null }>;
   bulkUpdateTags: (
-    item: ContentItemWithTags,
+    item: ContentItemWithRelations,
     operations: TagOperation[],
   ) => Promise<{ success: boolean }>;
 }

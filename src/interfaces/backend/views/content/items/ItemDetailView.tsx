@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import type { ContentItem } from "@/domain/models/content/item";
-import type { ContentItemWithTags } from "@/domain/models/content/types";
+import type { ContentItemWithRelations } from "@/domain/models/content/types";
 import type { TagSystem } from "@/domain/models/tagging/system";
 import type { Tag } from "@/domain/models/tagging/tag";
 import type { TagSystemWithGroups } from "@/domain/models/tagging/types";
@@ -26,7 +26,7 @@ import { useItemsNavigator } from "./useItemsNavigator";
 
 interface ItemDetailViewProps {
   tagSystems: TagSystem[];
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   itemIds: number[]; // for navigation
   linkToCollection: boolean; // for navigate to collection or items
 }
@@ -62,7 +62,10 @@ export function ItemDetailView({
     return Promise.resolve({ success: true, data: item });
   };
 
-  const handleSystemTagToggle = async (item: ContentItemWithTags, tag: Tag) => {
+  const handleSystemTagToggle = async (
+    item: ContentItemWithRelations,
+    tag: Tag,
+  ) => {
     if (tag) {
       const result = await toggleSystemTag(item, tag);
       if (result.success && result.data) {

@@ -19,15 +19,9 @@
     "encoding": "o200k_base"
   },
   "include": [
-    "src/core/serialization/export.ts",
-    "src/domain/models/content/**/*",
-    "src/domain/models/tagging/**/*",
-    "src/domain/services/content/import-export.ts",
-    "src/domain/services/tagging/import-export.ts",
-    "src/ui/components/content/import/*",
-    "src/ui/components/extra/import-export/*",
-    "src/ui/components/table/controls/data-export/*",
-    "src/interfaces/backend/views/tagging/TaggingView.tsx",
-    "src/interfaces/backend/views/content/ContentView.tsx"
+    "README.md",
+    "src/domain/**/*",
+    "src/shared/schema/**/*",
+    "src/infrastructure/persistence/adapters/**/*"
   ]
 }

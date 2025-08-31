@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 import type { Tag } from "@/domain/models/tagging/tag";
@@ -20,7 +20,7 @@ interface TagSectionProps {
   tags: Tag[] | string[];
   groupedTags?: Record<string, Tag[]>;
   variant: "success" | "warning" | "muted";
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   toggleSystemTag?: ItemTagOperations["toggleSystemTag"];
   toggleRawTag?: ItemTagOperations["toggleRawTag"];
   bulkAction?: () => Promise<void>;

@@ -1,4 +1,4 @@
-import type { ContentItemWithTags } from "@/domain/models/content/types";
+import type { ContentItemWithRelations } from "@/domain/models/content/types";
 
 import type {
   CollectionStatistics,
@@ -10,17 +10,19 @@ export interface ContentQueriesPort {
 
   // contentItems
 
-  getItemWithTags(itemId: number): Promise<ContentItemWithTags | null>;
+  getItemWithRelations(itemId: number): Promise<ContentItemWithRelations>;
 
   getItemsForCollection(
     collectionId: number,
-  ): Promise<ContentItemWithTags[] | null>;
+  ): Promise<ContentItemWithRelations[]>;
 
-  searchItems(filters: ContentSearchFilters): Promise<ContentItemWithTags[]>;
+  searchItems(
+    filters: ContentSearchFilters,
+  ): Promise<ContentItemWithRelations[]>;
 
   getItemsByTags(
     collectionId: number,
     tagIds: number[],
     systemId?: number,
-  ): Promise<ContentItemWithTags[]>;
+  ): Promise<ContentItemWithRelations[]>;
 }

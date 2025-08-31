@@ -1,5 +1,5 @@
 import type {
-  ContentItemWithTags,
+  ContentItemWithRelations,
   ItemTagOperations,
 } from "@/domain/models/content/types";
 import type { TagGroup } from "@/domain/models/tagging/group";
@@ -11,7 +11,7 @@ import type {
 
 // Base interface for tag operations
 interface BaseTaggingProps {
-  item: ContentItemWithTags;
+  item: ContentItemWithRelations;
   systemId: number;
   selectedSystemTags: Tag[];
   toggleSystemTag: ItemTagOperations["toggleSystemTag"];

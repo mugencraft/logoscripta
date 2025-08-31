@@ -2,7 +2,12 @@ import { Button } from "@/ui/components/core/button";
 
 import { useFormContext } from "../context";
 
-export const SubmitButton = ({ mode }: { mode: "create" | "edit" }) => {
+interface SubmitButtonProps {
+  mode: "create" | "edit";
+  disabled?: boolean;
+}
+
+export const SubmitButton = ({ mode, disabled }: SubmitButtonProps) => {
   const form = useFormContext();
   return (
     <form.Subscribe
@@ -11,7 +16,7 @@ export const SubmitButton = ({ mode }: { mode: "create" | "edit" }) => {
       {([canSubmit, isDirty, isSubmitting]) => (
         <Button
           type="submit"
-          disabled={isDisabled(canSubmit, isDirty, isSubmitting)}
+          disabled={disabled || isDisabled(canSubmit, isDirty, isSubmitting)}
         >
           {isSubmitting ? "Saving..." : mode === "create" ? "Create" : "Update"}
         </Button>
